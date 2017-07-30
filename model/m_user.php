@@ -45,9 +45,9 @@
 
 			$this->insert("nml2016_user",$data);	
 		}
-		public function update_user($data,$usn){
-			$where = array('user_username' => $usn);
-			$this->update("nml2016_user",$data,$where);	
+		public function update_member($data,$usn){
+			$where = array('username' => $usn);
+			$this->update("member_db",$data,$where);	
 		}
 		public function delete_user($usn){
 			$where = array('user_username' => $usn);

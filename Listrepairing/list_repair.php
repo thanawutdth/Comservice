@@ -1,6 +1,26 @@
-
 <?
 include('../meta.php');
+require_once("../model/m_user.php");
+require_once("../model/m_fix.php");
+$m_user = new M_user;
+$m_fix = new M_fix;
+$user_dat=$m_user->get_user_member($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+
+$fix_db = $m_fix->get_all();
+
+print_r($fix_db->result);
+print_r($fix_db->rowCount);
+
+
 ?>  
     <tr>
       <td width="949" colspan="2" align="center">
@@ -63,44 +83,28 @@ include('../meta.php');
         </tr>
         </tbody>
 <?php
-include("connect.php");
-$result = mysql_query("SELECT * FROM `fix_db` ");
-while ($row = mysql_fetch_array($result))
+foreach ($fix_db->result as $key => $value)
 { ?>
         <tr bgcolor="#FFFFFF">
-          <td><? echo $row["fix_id"];?></td>
-          <td width="69"><? echo $row["name"];?></td>  
-          <td width="93"><? echo $row["date"];?></td>
-          <td width="103"><? echo $row["Building"];?></td>
-          <td width="103"><? echo $row["type"];?></td>
-          <td width="193"><? echo $row["detail"];?></td>
-          <td width="89"><? echo $row["phone"];?></td>
-          <td width="42" ><? echo $row[""];?><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
-          <td width="88"><? echo $row["infer"];?></td>
-          <td width="103"><? echo $row["technician"];?></td>
+          <td><? echo $value["fix_id"];?></td>
+          <td width="69"><? echo $value["name"];?></td>  
+          <td width="93"><? echo $value["date"];?></td>
+          <td width="103"><? echo $value["sector"];?></td>
+          <td width="103"><? echo $value["type"];?></td>
+          <td width="193"><? echo $value["detail"];?></td>
+          <td width="89"><? echo $value["phone"];?></td>
+          <td width="42" ><? echo $value[""];?><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
+          <td width="88"><? echo $value["infer"];?></td>
+          <td width="103"><? echo $value["technician"];?></td>
         </tr>
       <? }?>
         </table></div>
-        <p>
-          <? mysql_close();?>
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-        </p>
-      <p>&nbsp;</p></td>
+     </td>
     </tr>
 </table>
 
-<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
+
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
-<script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script src="<?=site_url()?>js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>
 </html>

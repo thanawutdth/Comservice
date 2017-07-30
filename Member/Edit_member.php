@@ -2,6 +2,24 @@
 include('../meta.php');
 require_once("../model/m_user.php");
 $m_user = new M_user;
+if(isset($_POST['flname'])){
+		$insertdata = array(
+		"name" =>$_POST['flname'],
+		"password" =>$_POST['password'],
+		"lastname" =>$_POST['lastname'],
+		"phone" =>$_POST['phone'],
+		"email" =>$_POST['email'],
+		"address" =>$_POST['address'],
+		"sector" =>$_POST['sector']);
+		
+		$m_user->update_member($insertdata,$_SESSION['username']);
+		?>
+        <script type="text/javascript">
+			alert("บันทึกข้อมูลเรียบร้อย");
+            window.open("<?echo site_url('Member/firstpage_member.php');?>","_self");            
+        </script>
+    <?
+	}
 $user_dat=$m_user->get_user_member($_SESSION['username']);
 $err_msg="";
 if (isset($user_dat['username'])) {
@@ -21,7 +39,7 @@ if (isset($user_dat['username'])) {
         <?include('../sidebar_logged.php');?>
       </td>
   
-    <form id="Member" name="addMember" method="post" action="/project2/addMember.php">  
+    <form id="Member" name="addMember" method="post" action="<?=site_url()?>Member/Edit_member.php">  
     <td width="657" rowspan="9" valign="top"><fieldset>
       <legend><h3><span style="color:#2288BB">ข้อมูลส่วนตัว</span></h3></legend>
       
@@ -30,7 +48,7 @@ if (isset($user_dat['username'])) {
           <tr>
             <th width="232" height="49" scope="col" align="center"><label>ชื่อผู้ใช้งาน</label>&nbsp;</th>
             <th width="234" scope="col" align="left"><label for="textfield"></label>
-              <input type="text" name="username" id="username" placeholder="ชื่่อผู้ใช้งาน" value="<? echo $user_dat['username'];?>" ></th>
+              <input disabled type="text" name="username" id="username" placeholder="ชื่่อผู้ใช้งาน" value="<? echo $user_dat['username'];?>" ></th>
             </tr>
           <tr>
             <td height="19" align="center"><strong>พาสเวิร์ด&nbsp;</strong></td>
@@ -48,7 +66,7 @@ if (isset($user_dat['username'])) {
           <tr>
             <td align="center"><label><strong>เบอร์โทรศัพท์</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input type="tel" name="tel" id="tel" placeholder="เบอร์โทรศัพท์" value="<? echo $user_dat['phone'];?>"></td>
+            <td><input type="tel" name="phone" id="tel" placeholder="เบอร์โทรศัพท์" value="<? echo $user_dat['phone'];?>"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>อีเมลล์</strong></label>

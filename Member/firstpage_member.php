@@ -1,6 +1,20 @@
 <?
 include('../meta.php');
+require_once("../model/m_user.php");
+$m_user = new M_user;
+$user_dat=$m_user->get_user_member($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+
 ?>  
+  
     <tr align="left" valign="top">
       <td height="253" align="left"><?include('../sidebar_logged.php');?></td>
       <td width="655" align="center" valign="top" bgcolor="#FFFFFF"><table width="658" height="469" border="0">

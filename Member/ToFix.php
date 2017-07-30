@@ -1,12 +1,46 @@
 <?
 include('../meta.php');
+require_once("../model/m_user.php");
+require_once("../model/m_fix.php");
+$m_user = new M_user;
+$m_fix = new M_fix;
+
+
+$user_dat=$m_user->get_user_member($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+if(isset($_POST['name'])){
+		$insertdata = array(
+		"name" =>$_POST['name'],
+		"lastname" =>$_POST['lastname'],
+		"date" =>$_POST['date'],
+		"sector" =>$_POST['sector'],
+		"type" =>$_POST['type'],
+		"detail" =>$_POST['detail'],
+		"phone" =>$_POST['phone']);
+		
+		$m_fix->insert_fix($insertdata);
+		?>
+        <script type="text/javascript">
+			alert("บันทึกข้อมูลเรียบร้อย");
+         window.open("<?echo site_url('Listrepairing/list_repair.php');?>","_self");            
+        </script>
+    <?
+	}
 ?>  
 
         <tr align="left" valign="top">
           <td height="239" align="center" valign="top"><?include('../sidebar_logged.php');?></td>
           <td width="697" rowspan="2" align="center" valign="top">
           
-            <form id="Fix" name="addFixr" method="post" action="comservice/addFix.php">
+            <form id="Fix" name="addFixr" method="post" action="<?=site_url()?>Member/ToFix.php">
          <div ><table width="468" height="502" border="0" align="center"   >
              <tbody >
                <tr >
@@ -23,40 +57,40 @@ include('../meta.php');
                </tr>
                <tr>
                  <td height="24" align="center" valign="middle"><strong>หน่วยงาน</strong></td>
-                 <td align="left" valign="middle"><select name="building" id="select2">
-                   <option>--เลือกหน่วยงาน--</option>
-                   <option>อบจ.มค.</option>
-                   <option>โรงเรียนเมืองเตาวิทยาคม</option>
-                   <option>โรงเรียนท่าขอนยางพิทยาคม</option>
-                   <option>โรงเรียนหนองบัวปิยนิมิตร</option>
-                   <option>โรงเรียนมะค่าพิทยาคม</option>
-                   <option>โรงเรียนหนองเหล็กศึกษา</option>
-                   <option>โรงเรียนนาสีนวนพิทยาสรรค์</option>
-                   <option>โรงเรียนหนองโพธิ์วิทยาคม</option>
-                   <option>โรงเรียนนาข่าวิทยาคม</option>
-                   <option>โรงเรียนมัธยมดงยาง</option>
-                   <option>โรงเรียนเกิ้งวิทยานุกูล</option>
-                   <option>โรงเรียนขามป้อมพิทยาคม</option>
-                   <option>โรงเรียนเลิงแฝกประชาบำรุง</option>
-                   <option>โรงเรียนโคกก่อพิทยาคม</option>
-                   <option>โรงเรียนดอนเงินพิทยาคาร</option>
-                   <option>โรงเรียนหนองโกวิชาประสิทธิ์</option>
-                   <option>โรงเรียนเสือโก้กวิทยาสรรค์</option>
-                   <option>โรงเรียนเวียงสะอาดพิทยาคม</option>
-                   <option>โรงเรียนงัวบาวิทยาคม</option>
-                   <option>โรงเรียนศรีสุขพิทยาคม</option>
-                   <option>โรงเรียนหัวเรือพิทยาคม</option>
-                 </select></td>
+                 <td align="left" valign="middle"><select  name="sector" id="sector"   >
+                <option value="หน่วยงานในสังกัด">หน่วยงานในสังกัด</option>
+                <option value="โรงเรียนเมืองเตาวิทยาคม">โรงเรียนเมืองเตาวิทยาคม</option>
+                <option value="โรงเรียนท่าขอนยางพิทยาคม">โรงเรียนท่าขอนยางพิทยาคม</option>
+                <option value="โรงเรียนหนองบัวปิยนิมิตร">โรงเรียนหนองบัวปิยนิมิตร</option>
+                <option value="โรงเรียนมะค่าพิทยาคม ">โรงเรียนมะค่าพิทยาคม </option>
+                <option value="โรงเรียนหนองเหล็กศึกษา">โรงเรียนหนองเหล็กศึกษา</option>
+                <option value="โรงเรียนนาสีนวนพิทยาสรรค์">โรงเรียนนาสีนวนพิทยาสรรค์</option>
+                <option value="โรงเรียนหนองโพธิ์วิทยาคม">โรงเรียนหนองโพธิ์วิทยาคม</option>
+                <option value="โรงเรียนนาข่าวิทยาคม">โรงเรียนนาข่าวิทยาคม</option>
+                <option value="โรงเรียนมัธยมดงยาง">โรงเรียนมัธยมดงยาง</option>
+                <option value="โรงเรียนเกิ้งวิทยานุกูล">โรงเรียนเกิ้งวิทยานุกูล</option>
+                <option value="โรงเรียนขามป้อมพิทยาคม">โรงเรียนขามป้อมพิทยาคม</option>
+                <option value="โรงเรียนเลิงแฝกประชาบำรุง">โรงเรียนเลิงแฝกประชาบำรุง</option>
+                <option value="โรงเรียนโคกก่อพิทยาคม">โรงเรียนโคกก่อพิทยาคม</option>
+                <option value="โรงเรียนดอนเงินพิทยาคาร">โรงเรียนดอนเงินพิทยาคาร</option>
+                <option value="โรงเรียนหนองโกวิชาประสิทธิ์">โรงเรียนหนองโกวิชาประสิทธิ์</option>
+                <option value="โรงเรียนเสือโก้กวิทยาสรรค์ ">โรงเรียนเสือโก้กวิทยาสรรค์ </option>
+                <option value="โรงเรียนเวียงสะอาดพิทยาคม">โรงเรียนเวียงสะอาดพิทยาคม</option>
+                <option value="โรงเรียนงัวบาวิทยาคม">โรงเรียนงัวบาวิทยาคม</option>
+                <option value="โรงเรียนศรีสุขพิทยาคม">โรงเรียนศรีสุขพิทยาคม</option>
+                <option value="โรงเรียนหัวเรือพิทยาคม">โรงเรียนหัวเรือพิทยาคม</option>
+                <option value="องค์การบริหารส่วนจังหวัดมหาสารคาม">องค์การบริหารส่วนจังหวัดมหาสารคาม</option>
+              </select></td>
                </tr>
                <tr>
                  <td height="24" align="center" valign="middle"><strong>ชนิด</strong></td>
                  <td align="left" valign="middle"><p>
                    <select name="type" id="select">
-                     <option>เลือกชนิดอุปกรณ์</option>
-                     <option>เครื่องปริ้น</option>
-                     <option>หน้าจอ</option>
-                     <option>เมาส์</option>
-                     <option>คีย์บอร์ด</option>
+                     <option value="เลือกชนิดอุปกรณ์">เลือกชนิดอุปกรณ์</option>
+                     <option value="เครื่องปริ้น">เครื่องปริ้น</option>
+                     <option value="หน้าจอ">หน้าจอ</option>
+                     <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
+                  
                    </select>
                  </p>
                    
