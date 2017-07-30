@@ -1,0 +1,7 @@
+CREATE OR REPLACE VIEW viewdatabase AS
+
+SELECT   admin_id,admin_db.username,admin_db.password,admin_db.name,admin_db.position FROM admin_db
+
+UNION
+
+SELECT   member_id,member_db.username,member_db.password,member_db.name,member_db.position FROM member_db

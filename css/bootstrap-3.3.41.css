@@ -55,8 +55,7 @@ abbr[title] {
 }
 b,
 strong {
-	font-weight: bold;
-	font-size: 16px;
+  font-weight: bold;
 }
 dfn {
   font-style: italic;
@@ -6189,10 +6188,10 @@ button.close {
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-left,
 .carousel-control .glyphicon-chevron-right {
-  position: absolute;
-  top: 50%;
-  z-index: 5;
-  display: inline-block;
+	position: absolute;
+	top: 24px;
+	z-index: 5;
+	display: inline-block;
 }
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
@@ -6201,8 +6200,8 @@ button.close {
 }
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-right {
-  right: 50%;
-  margin-right: -10px;
+	right: 21px;
+	margin-right: -10px;
 }
 .carousel-control .icon-prev,
 .carousel-control .icon-next {

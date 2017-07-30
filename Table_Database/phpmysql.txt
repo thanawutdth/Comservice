@@ -1,0 +1,107 @@
+-- phpMyAdmin SQL Dump
+-- version 2.10.3
+-- http://www.phpmyadmin.net
+-- 
+-- โฮสต์: localhost
+-- เวลาในการสร้าง: 
+-- รุ่นของเซิร์ฟเวอร์: 5.0.51
+-- รุ่นของ PHP: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+-- 
+-- ฐานข้อมูล: `project2`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- โครงสร้างตาราง `admin_db`
+-- 
+
+CREATE TABLE `admin_db` (
+  `admin_id` int(11) NOT NULL auto_increment,
+  `username` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `name` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `lastname` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `phone` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `email` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `position` int(5) NOT NULL,
+  PRIMARY KEY  (`admin_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+-- 
+-- dump ตาราง `admin_db`
+-- 
+
+INSERT INTO `admin_db` VALUES (1, 'admin', '1234', 'Thanawut', 'Decchan', '0886723932', 'welove_9@hotmail.com', 1);
+INSERT INTO `admin_db` VALUES (3, 'nubee', '1234', 'นายช่าง', 'คอมพิวเตอร์', '0885723932', 'armbee@hotmail.com', 2);
+
+-- --------------------------------------------------------
+
+-- 
+-- โครงสร้างตาราง `fix_db`
+-- 
+
+CREATE TABLE `fix_db` (
+  `fix_id` int(11) NOT NULL,
+  `name` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `lastname` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `type` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `detail` varchar(1000) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`fix_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 
+-- dump ตาราง `fix_db`
+-- 
+
+INSERT INTO `fix_db` VALUES (0, 'สุทธิพงษ์', 'ชัยชนะ', '2017-07-23', 'อุกปรณ์ไขควง', 'หมึกไม่ออก จางๆ');
+
+-- --------------------------------------------------------
+
+-- 
+-- โครงสร้างตาราง `member_db`
+-- 
+
+CREATE TABLE `member_db` (
+  `member_id` int(11) NOT NULL auto_increment,
+  `username` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `name` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `lastname` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `phone` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `email` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `address` varchar(1000) collate utf8_unicode_ci NOT NULL,
+  `sector` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `position` int(1) NOT NULL default '3',
+  PRIMARY KEY  (`member_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+-- 
+-- dump ตาราง `member_db`
+-- 
+
+INSERT INTO `member_db` VALUES (2, 'somchai', '1234', 'somchit', 'gommara', '0827837543', 'nubeemc@hotmail.com', 'talad\r\ntalad ', 'โรงเรียนหัวเรือพิทยาคม', 3);
+
+-- --------------------------------------------------------
+
+-- 
+-- Stand-in structure for view `viewcheck`
+-- 
+CREATE TABLE `viewcheck` (
+`admin_id` int(11)
+,`username` varchar(100)
+,`password` varchar(100)
+,`position` int(11)
+);
+-- --------------------------------------------------------
+
+-- 
+-- Structure for view `viewcheck`
+-- 
+DROP TABLE IF EXISTS `viewcheck`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `project2`.`viewcheck` AS select `project2`.`admin_db`.`admin_id` AS `admin_id`,`project2`.`admin_db`.`username` AS `username`,`project2`.`admin_db`.`password` AS `password`,`project2`.`admin_db`.`position` AS `position` from `project2`.`admin_db` union select `project2`.`member_db`.`member_id` AS `member_id`,`project2`.`member_db`.`username` AS `username`,`project2`.`member_db`.`password` AS `password`,`project2`.`member_db`.`position` AS `position` from `project2`.`member_db`;

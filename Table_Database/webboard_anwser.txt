@@ -1,0 +1,14 @@
+INSERT INTO  `project2`.`webboard_ans` (
+`id_ans` ,
+`id_question` ,
+`name` ,
+`message` ,
+`email` ,
+`date_a`
+)
+VALUES (
+'',  '',  'Thanawut',  'ขั้นตอนวิธี
+1.......
+2........
+3.........',  'nubeemc@gmail.com',  '12-23-34'
+);

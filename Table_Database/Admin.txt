@@ -1,0 +1,27 @@
+CREATE TABLE  `Admin_db` (
+ `admin_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+ `username` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+ `password` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+ `name` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+ `lastname` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+ `phone` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+ `email` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+////////////////////////////////////////////////////////////////////
+
+
+
+Code Insert
+
+INSERT INTO  `Project2`.`admin_db` (
+`admin_id` ,
+`username` ,
+`password` ,
+`name` ,
+`lastname` ,
+`phone` ,
+`email`
+)
+VALUES (
+NULL ,  'Thanawut01',  '1234',  'Thanawut',  'Decchan',  '0886723932',  'welove_9@hotmail.com'
+);

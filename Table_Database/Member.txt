@@ -1,0 +1,15 @@
+INSERT INTO  `project2`.`member_db` (
+`member_id` ,
+`username` ,
+`password` ,
+`name` ,
+`lastname` ,
+`phone` ,
+`email` ,
+`address` ,
+`sector` ,
+`position`
+)
+VALUES (
+NULL ,  'user',  '1234',  'sonson',  'bonbon',  '0886723932',  'welove_9@hotmail.com',  '1223 gg ff dd ',  'มหาสารคาม',  '3'
+);

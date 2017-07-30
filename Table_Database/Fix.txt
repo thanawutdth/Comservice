@@ -1,0 +1,16 @@
+INSERT INTO  `project2`.`fix_db` (
+`fix_id` ,
+`name` ,
+`lastname` ,
+`date` ,
+`Building` ,
+`type` ,
+`detail` ,
+`phone` ,
+`status` ,
+`infer` ,
+`technician`
+)
+VALUES (
+NULL ,  'สุทธิพงษ์',  'สวยงาม',  '2017-07-19',  'vvv',  'อุกปรณ์ไขควง',  'หมึกไม่ออก จางๆ',  '0886723932',  'vvvvv',  'vvvv',  'vvvv'
+);

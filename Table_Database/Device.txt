@@ -1,0 +1,10 @@
+INSERT INTO  `project2`.`Device` (
+`divice_id` ,
+`name` ,
+`lastname` ,
+`type` ,
+`date`
+)
+VALUES (
+NULL ,  'สุทธิพงษ์',  'สวยงาม',  'อุกปรณ์ไขควง',  '2017-07-19'
+);

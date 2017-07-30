@@ -1,0 +1,12 @@
+INSERT INTO  `project2`.`webboard_quiz` (
+`id_question` ,
+`title` ,
+`name` ,
+`message` ,
+`email` ,
+`date_q` ,
+`count_q`
+)
+VALUES (
+'',  'สอบถามการลงวินโดวส์ครับ',  'นายกุ๊กไก่',  'ช่วยอธิบายการลงวินโดวส์เป็นขั้นตอนอย่างละเอียดด้วยครับ',  'welove_9@hotmail.com',  '1',  '1'
+);
