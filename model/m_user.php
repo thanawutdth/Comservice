@@ -31,6 +31,7 @@
 			}
 			return $result->result[0];
 		}
+	
 		public function get_user_res(){
 			$this->where("user_position","RES");
 			$result=$this->get("nml2016_user");

@@ -31,7 +31,7 @@ if(isset($_POST['name'])){
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-         window.open("<?echo site_url('Listrepairing/list_repair.php');?>","_self");            
+         window.open("<?echo site_url('Member/list_repair.php');?>","_self");            
         </script>
     <?
 	}

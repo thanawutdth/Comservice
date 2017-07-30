@@ -1,10 +1,26 @@
 <?
 include('../meta.php');
-?> 
-    
-  
-    
-    
+require_once("../model/m_user.php");
+require_once("../model/m_fix.php");
+$m_user = new M_user;
+$m_fix = new M_fix;
+$user_dat=$m_user->get_user_member($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+
+$fix_db = $m_fix->get_all();
+
+
+
+
+?>  
     <tr>
       <td width="949" colspan="2" align="center">
         <table width="200" border="0">
@@ -14,15 +30,15 @@ include('../meta.php');
                 <table width="200" border="0">
                   <tbody>
                     <tr>
-                      <td width="3%"><a href="/project2/Member/firstpage_member.php">
-                        <input type="image" name="imageField" id="imageField" src="/project2/Image/icon left bar/Back.png">
+                      <td width="3%"><a href="<?=site_url()?>index.php">
+                        <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
-                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
+                      <td width="20%" height="43" style="color: #000000"><h3>BACK TO HOME</h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการแจ้งซ่อม</h1></span></td>
                       <td width="25%"><table width="200" border="0">
                         <tbody>
                             <tr>
-                              <td width="13%"><img src="/project2/Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
+                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
                               <td width="63%"><input type="search" name="search" id="search"></td>
                               <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
                             </tr>
@@ -38,11 +54,11 @@ include('../meta.php');
                   <tbody>
                     <tr style="font-size: 14px; color: #351DAF;">
                       <td width="55%" height="34" style="font-size: 9px">&nbsp;</td>
-                      <td width="4%" style="font-size: 14px"><strong><img src="/project2/Image/icon left bar/Correct.png" width="32" height="32" alt=""/></strong></td>
+                      <td width="4%" style="font-size: 14px"><strong><img src="<?=site_url()?>Image/icon left bar/Correct.png" width="32" height="32" alt=""/></strong></td>
                       <td width="8%" style="font-size: 14px"><strong style="color: #84C119">เสร็จสิ้น</strong></td>
-                      <td width="4%" style="font-size: 14px"><strong><img src="/project2/Image/icon left bar/Wait.png" width="32" height="32" alt=""/></strong></td>
+                      <td width="4%" style="font-size: 14px"><strong><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></strong></td>
                       <td width="9%" style="font-size: 14px"><strong>รอดำเนินการ</strong></td>
-                      <td width="4%" style="font-size: 14px"><strong><img src="/project2/Image/icon left bar/Close.png" width="32" height="32" alt=""/></strong></td>
+                      <td width="4%" style="font-size: 14px"><strong><img src="<?=site_url()?>Image/icon left bar/Close.png" width="32" height="32" alt=""/></strong></td>
                       <td width="16%" style="font-size: 14px"><span style="color: #FF0027"><strong>ไม่สามารดำเนินการได้</strong></span></td>
                     </tr>
                   </tbody>
@@ -52,7 +68,7 @@ include('../meta.php');
         <table width="956" border="1" cellspacing="3">
       <tbody>
         <tr align="center" bgcolor="#25B1E1" style="color: #FFFFFF; font-size: 14px;">
-          <td width="35" height="23"><strong>ลำดับที่</strong></td>
+          <td width="40" height="23"><strong>ลำดับที่</strong></td>
           <td><strong>ชื่อ</strong></td>
           
           <td><strong>วันที่</strong></td>
@@ -63,47 +79,38 @@ include('../meta.php');
           <td><strong>สถานะ</strong></td>
           <td><strong>ปัญหาที่พบ</strong></td>
           <td><strong>ผู้ดำเนินการ</strong></td>
+          <td><strong>Edit Delete</strong></td>
         </tr>
         </tbody>
 <?php
-include("../Listrepairing/connect.php");
-$result = mysql_query("SELECT * FROM `fix_db` ");
-while ($row = mysql_fetch_array($result))
+foreach ($fix_db->result as $key => $value)
 { ?>
         <tr bgcolor="#FFFFFF">
-          <td><? echo $row["fix_id"];?></td>
-          <td width="29"><? echo $row["name"];?></td>  
-          <td width="132"><? echo $row["date"];?></td>
-          <td width="113"><? echo $row["Building"];?></td>
-          <td width="110"><? echo $row["type"];?></td>
-          <td width="212"><? echo $row["detail"];?></td>
-          <td width="91"><? echo $row["phone"];?></td>
-          <td width="37" ><? echo $row[""];?><img src="/project2/Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
-          <td width="90"><? echo $row["infer"];?></td>
-          <td width="138"><? echo $row["technician"];?></td>
+          <td><? echo $value["fix_id"];?></td>
+          <td width="69"><? echo $value["name"];?></td>  
+          <td width="93"><? echo $value["date"];?></td>
+          <td width="103"><? echo $value["sector"];?></td>
+          <td width="103"><? echo $value["type"];?></td>
+          <td width="193"><? echo $value["detail"];?></td>
+          <td width="89"><? echo $value["phone"];?></td>
+          <td width="42" ><? echo $value[""];?><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
+          <td width="88"><? echo $value["infer"];?></td>
+          <td width="103"><? echo $value["technician"];?></td>
+          <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
+			  ?>
+              <a href="">Edit</a><br><a href="">Delete</a>
+              
+			  <?
+          }?></td>
         </tr>
       <? }?>
         </table></div>
-        <p>
-          <? mysql_close();?>
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-                 
-        </p>
-      <p>&nbsp;</p></td>
+     </td>
     </tr>
 </table>
 
-<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
+
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
-<script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script src="<?=site_url()?>js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>
 </html>

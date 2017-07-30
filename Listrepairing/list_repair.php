@@ -4,16 +4,7 @@ require_once("../model/m_user.php");
 require_once("../model/m_fix.php");
 $m_user = new M_user;
 $m_fix = new M_fix;
-$user_dat=$m_user->get_user_member($_SESSION['username']);
-if (isset($user_dat['username'])) {
-  $_SESSION['username']=$user_dat['username'];
-}else{
-  ?>
-        <script type="text/javascript">
-            window.open("<?echo site_url('../logout.php');?>","_self");            
-        </script>
-    <?
-}
+
 
 $fix_db = $m_fix->get_all();
 
@@ -79,6 +70,7 @@ $fix_db = $m_fix->get_all();
           <td><strong>สถานะ</strong></td>
           <td><strong>ปัญหาที่พบ</strong></td>
           <td><strong>ผู้ดำเนินการ</strong></td>
+          
         </tr>
         </tbody>
 <?php
@@ -95,6 +87,7 @@ foreach ($fix_db->result as $key => $value)
           <td width="42" ><? echo $value[""];?><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
+      
         </tr>
       <? }?>
         </table></div>
