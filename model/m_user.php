@@ -15,9 +15,17 @@
 			return $result->result[0];
 		}
 
-		public function get_user_by_usn($username){
+		public function get_user_member($username){
 			$this->where("username",$username);
-			$result=$this->get("viewdatabase");
+			$result=$this->get("member_db");
+			if (!isset($result->result[0])) {
+				$result->result[0] = array();
+			}
+			return $result->result[0];
+		}
+		public function get_user_admin($username){
+			$this->where("username",$username);
+			$result=$this->get("admin_db");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();
 			}

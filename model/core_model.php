@@ -52,6 +52,7 @@
 			$this->active_record.=$this->active_limit;
 			$tmp_record=$this->active_record;
 			try{
+				
 				$stm=$this->db->prepare($this->active_record);
 				foreach ($this->active_where_array as $key => $value) {
 					$stm->bindValue(($key+1), $value);

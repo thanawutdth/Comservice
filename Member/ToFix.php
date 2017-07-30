@@ -6,7 +6,7 @@ include('../meta.php');
           <td height="239" align="center" valign="top"><?include('../sidebar_logged.php');?></td>
           <td width="697" rowspan="2" align="center" valign="top">
           
-            <form id="Fix" name="addFixr" method="post" action="/project2/addFix.php">
+            <form id="Fix" name="addFixr" method="post" action="comservice/addFix.php">
          <div ><table width="468" height="502" border="0" align="center"   >
              <tbody >
                <tr >
