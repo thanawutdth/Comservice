@@ -1,51 +1,10 @@
+<? include('meta_admin.php');?>
 
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-</style>
+    <tr>
+      <td width="248">
+  
+<? include("sidebar_admin.php");?>
 
-
-
-<body topmargin="0" >
-
-<div id="aaa">
-<table width="841" border="2" align="center">
-<tbody>
-  <tbody>
-  <tr align="left" valign="top">
-    <th height="189" colspan="3" scope="col"><img src="../Image/header2.jpg" width="999" height="187" alt=""/></th>
-  </tr>
-  <tr align="left" valign="top">
-    <td width="248" align="center"><div id="login">
-
-
-   
-    <a href="/project2/Admin/adminlogin.php"><h1>Computerservice</h1></a> 
-
- 
- <a href="/project2/Admin/adminlogin.php"> <input  type="button" name="button1" id="button1" value="เพิ่มแอด+ช่าง"  ></a>
- <a href="/project2/Admin/Admin_Technic.php"> <input  type="button" name="button1" id="button1" value="รายชื่อแอด+ช่าง"  ></a>
-  <a href="/project2/Admin/memberlist.php"><input type="button" name="button5" id="button5" value="รายการสมาชิก"></a>
-  <a href="/project2/Admin/list_repair.php"><input type="button" name="button6" id="button6" value="รายการแจ้งซ่อม"></a>
-  <a href="/project2/Admin/Todevice.php"><input type="button" name="button7" id="button7" value="รายการเบิก-คืน"></a>
-  <a href="/project2/Admin/Webboard.php"><input type="button" name="button8" id="button8" value="กระทู้"></a>
-  <a href="/project2/Admin/regisformember.php"><input type="button" name="button9" id="button9" value="สมัครสมาชิก"></a>
-  <a href="/project2/Admin/report.php"><input type="button" name="button2" id="button3" value="รายงาน"></a>
-  <a href="/project2/Admin/Evalution.php"><input type="button" name="button2" id="button4" value="ประเมิน"></a>
-        </div>
 
         </td>
     <td width="896" align="center">

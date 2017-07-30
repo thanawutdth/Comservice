@@ -4,10 +4,6 @@
       <td width="248">
   
 <? include("sidebar_admin.php");?>
-
-
- 
-
       </td>
         
     <form id="Member" name="addMember" method="post" action="/project2/addMember.php">  
