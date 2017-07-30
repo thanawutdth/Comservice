@@ -8,7 +8,7 @@
 		public function login_user($username,$password){
 			$this->where("username",$username);
 			$this->where("password",$password);
-			$result=$this->get("nml2016_admin_user");
+			$result=$this->get("viewdatabase");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();
 			}
@@ -17,7 +17,7 @@
 
 		public function get_user_by_usn($username){
 			$this->where("username",$username);
-			$result=$this->get("nml2016_admin_user");
+			$result=$this->get("viewdatabase");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();
 			}

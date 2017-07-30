@@ -1,32 +1,12 @@
-<? session_start();?>
-<?php
-	session_start();
-	mysql_connect("localhost","root","1234");
-	mysql_select_db("project2");
-	
-	
-	
-	$strSQL = "SELECT * FROM viewdatabase WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."' 
-	and password = '".mysql_real_escape_string($_POST['txtPassword'])."'";
-	$objQuery = mysql_query($strSQL);
-	$objResult = mysql_fetch_array($objQuery);
-	
-	
-	if(!$objResult)
-	{
-	
-			
-			echo "<script type='text/javascript'>alert('username and password incorrect');history.back();</script>";
-	}
-	
-	else
-	{
-			$_SESSION["username"] = $objResult["username"];
-			$_SESSION["position"] = $objResult["position"];
-
-			session_write_close();
-			
-			if($objResult["position"] == 1)// 1 = Admin
+<?
+include('meta.php');
+require_once("model/m_user.php");
+$m_user = new M_user;
+$user_dat=$m_user->login_user($_POST['username'],$_POST['password']);
+if (isset($user_dat['username'])) {
+	$_SESSION['username']=$user_dat['username'];
+	$_SESSION['position']=$user_dat['position'];
+	if($objResult["position"] == 1)// 1 = Admin
 	   	    {
 			    echo "<meta http-equiv='refresh' content='0;url=Admin/adminlogin.php'>";
 			}
@@ -40,9 +20,12 @@
 				echo "<meta http-equiv='refresh' content='0;url=Member/firstpage_member.php'>";
 				//header("location:staff/index.php");
 			}
-
-	}
-	
-
-	mysql_close();
+}else{
+	?>
+        <script type="text/javascript">
+        		alert('username and password incorrect');
+        		window.open("<?echo site_url('admin/logout.php');?>","_self");	        	
+        </script>
+		<?
+}
 ?>
