@@ -2,7 +2,7 @@
 
 <?php
 	$host="127.0.0.1";
-	$user="root";
+	$user="comservice";
 	$password="1234";
 	$dbname="Project2";
 	$conn=mysql_connect($host,$user,$password) or die("ไม่สามารถติดต่อกับฐานข้อมูลได้");
