@@ -1,82 +1,9 @@
 
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-</style>
-
-
-
-<body topmargin="0" >
-   <script language="javascript">
-function fncSubmit()
-{
-	if(document.form1.txtUsername.value == "")
-	{
-		alert('กรุณากรอก "ชื่อผู้ใช้งาน"');
-		document.form1.txtUsername.focus();
-		return false;
-	}	
-	if(document.form1.txtPassword.value == "")
-	{
-		alert('กรุณากรอก "รหัสผ่าน"');
-		document.form1.txtPassword.focus();		
-		return false;
-	}	
-	document.form1.submit();
-}
-</script>
-<div id="aaa">
-<table width="841" border="2" align="center">
-<tbody>
-  <tbody>
+<?
+include('../meta.php');
+?>  
   <tr align="left" valign="top">
-    <th height="189" colspan="3" scope="col"><img src="../Image/header2.jpg" width="999" height="187" alt=""/></th>
-  </tr>
-  <tr align="left" valign="top">
-    <td width="248" align="center"><div id="login">
-      <h1>LOG IN</h1>
-       <form  method="post" action="/project2/checklogin.php" name="form1" onSubmit="JavaScript:return fncSubmit();" >
-        
-          <input  type="Text" placeholder="username" id="txtUsername" name="txtUsername"/>
-          <input type="password" placeholder="Password"  id="txtPassword" name="txtPassword"/>
-          <input type="submit" value="Submit"  />        
-        <p>&nbsp;
-        <div id="border">
-         <a href=""> <input onClick="myFunction()" type="button" name="button1" id="button1" value="แจ้งซ่อมออนไลน์"  ></a>
-         <script>
-				function myFunction() {
-					alert("สำหรับสมาชิกเท่านั้น กรุณา login ");
-				}
-			</script>
-     <a href="/project2/Listrepairing/list_repair.php"><input type="button" name="button6" id="button6" value="รายการแจ้งซ่อม"></a>
-     <a href="/project2/Webboard/Webboard.php"><input type="button" name="button7" id="button7" value="กระทู้-ถามตอบ">
-                </a><a href="/project2/Member/stat.php">
-                <input type="button" name="button8" id="button8" value="สถิติการแจ้งซ่อม">
-                </a>
-          <input onClick="myFunction()" type="button" name="button9" id="button9" value="ดาวน์โหลด">
-          <a href="/project2/Member/contact_indext.php"> <input type="button" name="button2" id="button2" value="ติดต่อเรา"></a>
-        </div>
-        </p>
-       
-        
-       
-      
-        
-      </form>
-    </div></td>
+    <td width="248" align="center"><?include('../sidebar.php');?></td>
     
     <td width="743" align="center">
   <?
@@ -123,7 +50,7 @@ include("connect.php");
 		print"</table>";
 
  ?>
-<form name="form1" method="post" action="/project2/postques.php">
+<form name="form1" method="post" action="<?=site_url()?>postques.php">
     <table width="477" height="313" border="2">
       <tbody>
         <tr>
