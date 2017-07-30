@@ -1,26 +1,7 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<link href="../css/registextbox.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body { 
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-</style>
-</head>
+<?
+include('../meta.php');
+?>  
 
-<body topmargin="0">
-<table width="200" border="0" align="center">
-  <tbody>
-    <tr>
-      <th colspan="2" scope="col"><img src="../Image/header2.jpg" width="911" height="212" alt=""/></th>
-    </tr>
     <tr>
       <td width="248" height="72">
         <div id="login">
