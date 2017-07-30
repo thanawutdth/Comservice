@@ -54,16 +54,20 @@
 			$where = array('user_username' => $usn);
 			$this->delete("nml2016_user",$where);	
 		}
-		public function get_all($offset=0,$limit=1000){
+		public function get_all_admin(){
 
-			$query = "SELECT * from user LIMIT $limit OFFSET $offset";
-			$stm=$this->db->query($query);
-			$stm->execute();
-			$result = $stm->fetchAll(PDO::FETCH_ASSOC);
-			//print_r($result);
+			$this->order_by("admin_id");
+			$result=$this->get("admin_db");
+			
 			return $result;
 		}
+		public function get_all_user(){
 
+			$this->order_by("member_id");
+			$result=$this->get("member_db");
+			
+			return $result;
+		}
 		
 	}
 

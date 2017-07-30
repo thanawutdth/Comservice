@@ -1,96 +1,29 @@
+<? include('meta_admin.php');
+require_once("../model/m_user.php");
+$m_user = new M_user;
 
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
+$user_dat=$m_user->get_user_admin($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+$member_db = $m_user->get_all_user();
 
-</head>
-
-
-<body topmargin="0">
-<table width="200" border="0" align="center">
-  <tbody>
-    <tr>
-      <th colspan="2" scope="col"><img src="../Image/header2.jpg" width="100%" height="212" alt=""/></th>
-    </tr>
+?>
     <tr>
       <td>      
       <td width="657" rowspan="11" align="left" valign="top"><div class="tarang" id="">
-        <a href="/project2/Admin/adminlogin.php"><p><img src="/project2/Image/icon left bar/Back.png" width="32" height="32" alt=""/></p></a>
+        <a href="<?=site_url()?>Admin/adminlogin.php"><p><img src="<?=site_url()?>Image/icon left bar/Back.png" width="32" height="32" alt=""/></p></a>
         <p>
           
 		  
-		  <?php
+<?php
 
- 		$objConnect = mysql_connect("localhost","root","1234") or die("Error Connect to Database");
-		$objDB = mysql_select_db("project2");
-  
-	//*** Add Condition ***//
-	if($_POST["hdnCmd"] == "Add")
-	{
-		$strSQL = "INSERT INTO member_db ";
-		$strSQL .="(member_id,username,password,name,lastname,phone,email,address,sector) ";
-		$strSQL .="VALUES ";
-		$strSQL .="('".$_POST["member_id"]."','".$_POST["username"]."','".$_POST["password"]."' ";
-		$strSQL .=",'".$_POST["name"]."' ";
-		$strSQL .=",'".$_POST["lastname"]."','".$_POST["phone"]."' ";
-		$strSQL .=",'".$_POST["email"]."' ";
-		$strSQL .=",'".$_POST["address"]."' ";
-		$strSQL .=",'".$_POST["sector"]."') ";
-		
-		$objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-
-}
-
-	//*** Update Condition ***//
-	if($_POST["hdnCmd"] == "Update")
-	{
- $strSQL = "UPDATE member_id SET ";
- $strSQL .="member_id= '".$_POST["member"]."' ";
- $strSQL .=",username = '".$_POST["username"]."' ";
- $strSQL .=",password = '".$_POST["password"]."' ";
- $strSQL .=",name = '".$_POST["name"]."' ";
- $strSQL .=",lastname = '".$_POST["lastname"]."' ";
- $strSQL .=",phone = '".$_POST["phone"]."' ";
- $strSQL .=",email = '".$_POST["email"]."' ";
- $strSQL .=",address = '".$_POST["address"]."' ";
- $strSQL .=",sector = '".$_POST["sector"]."' ";
- $strSQL .="WHERE member_id = '".$_POST["hdnmember"]."' ";
-		
-		$objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-	
-
-	//*** Delete Condition ***//
-	if($_GET["Action"] == "Del")
-	{
-		$strSQL = "DELETE FROM member_db ";
-		$strSQL .="WHERE member_id = '".$_GET["MemID"]."' ";
-	
-	$objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-	$strSQL = "SELECT * FROM member_db";
-$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
 ?>
         </p>
         <div id="tarang">
@@ -111,42 +44,11 @@ $objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
                 <th width="73"> <div align="center">Delete </div></th>
               </tr>
               <?
-while($objResult = mysql_fetch_array($objQuery))
+foreach ($member_db->result as $key => $objResult)
 {
 ?>
               
-              <?php
-	if($objResult["member_id"] == $_GET["MemID"] and $_GET["Action"] == "Edit")
-	{
-  ?>
-              <tr>
-                <td><div align="center">
-                  <input type="text" name="member" size="5" value="<?php echo $objResult["member_id"];?>">						     	     <input type="hidden" name="hdnmember" size="5" value="<?php echo $objResult["member_id"];?>">
-                </div></td>
-                <td>
-                  <input type="text" name="username" size="5" value="<?php echo $objResult["username"];?>">
-                </td>
-                <td><input type="text" name="password" size="20" value="<?php echo $objResult["password"];?>"></td>
-                <td><input type="text" name="name" size="20" value="<?php echo $objResult["name"];?>"></td>
-                <td><div align="center"><input type="text" name="lastname" size="2" value="<?php echo $objResult["lastname"];?>"></div></td>
-                <td align="right"><input type="text" name="phone" size="5" value="<?php echo $objResult["phone"];?>"></td>
-                <td align="right"><input type="text" name="email" size="5" value="<?php echo $objResult["email"];?>"></td>
-                <td align="right"><input type="text" name="address" size="5" value="<?php echo $objResult["address"];?>"></td>
-                <td align="right"><input type="text" name="sector" size="5" value="<?php echo $objResult["sector"];?>"></td>
-                <td colspan="2" align="right"><div align="center">
-                  
-                  <div align="center">
-                    <input name="btnAdd" type="button" id="btnUpdate" value="Update" OnClick="frmMain.hdnCmd.value='Update';frmMain.submit();">
-                    <input name="btnAdd" type="button" id="btnCancel" value="Cancel" OnClick="window.location='<?=$_SERVER["PHP_SELF"];?>';">
-                    
-                    
-                </div></td>
-              </tr>
-              <?php
-	}
-  else
-	{
-  ?>
+             
               <tr>
                 <td><div align="center"><?php echo $objResult["member_id"];?></td>
                 <td><div align="center"><?php echo $objResult["username"];?></div></td>
@@ -158,12 +60,9 @@ while($objResult = mysql_fetch_array($objQuery))
                 <td align="right"><?php echo $objResult["address"];?></td>
                 <td align="right"><?php echo $objResult["sector"];?></td>
                 
-                <<td align="center"><a href="<?=$_SERVER["PHP_SELF"];?>?Action=Edit&MemID=<?=$objResult["member_id"];?>">Edit</a></td>
-                <td align="center"><a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='<?=$_SERVER["PHP_SELF"];?>?Action=Del&MemID=<?=$objResult["member_id"];?>';}">Delete</a></td>
+                <<td align="center"><a href="">Edit</a></td>
+                <td align="center"><a href="">Delete</a></td>
               </tr>
-              <?php
-	}
-  ?>
               <?php
 }
 ?>
@@ -183,22 +82,11 @@ while($objResult = mysql_fetch_array($objQuery))
               </tr>
             </table>
           </form>
-          <?php
-mysql_close($objConnect);
-?>
+ 
       </div></td>
-    </tr>
-    <tr>
-      <td>          </tr>
-    <tr>
-      <td width="248">          </tr>
-    
-   
-      <td height="19" colspan="2">&nbsp;</td>
     </tr>
   </tbody>
 </table>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
 </body>
 </html>

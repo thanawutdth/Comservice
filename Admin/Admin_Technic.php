@@ -1,21 +1,24 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
+<? include('meta_admin.php');
+require_once("../model/m_user.php");
+$m_user = new M_user;
 
-</head>
+$user_dat=$m_user->get_user_admin($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
+$admin_db = $m_user->get_all_admin();
+
+?>
 
 
-<body topmargin="0">
-<table width="200" border="0" align="center">
-  <tbody>
     <tr>
-      <th colspan="2" scope="col"><img src="../Image/header2.jpg" width="911" height="212" alt=""/></th>
-    </tr>
-    <tr>
-      <td align="center" valign="top"><a href="/project2/Admin/adminlogin.php"><img src="/project2/Image/icon left bar/Back.png" width="32" height="32" alt=""/></a></td>
+      <td align="center" valign="top"><a href="<?=site_url()?>Admin/adminlogin.php"><img src="/project2/Image/icon left bar/Back.png" width="32" height="32" alt=""/></a></td>
     </tr>
     <tr>
       
@@ -24,72 +27,8 @@
    
         
         
-            <?
-$objConnect = mysql_connect("localhost","root","1234") or die("Error Connect to Database");
-$objDB = mysql_select_db("project2");
+<?
 
-
-//*** Add Condition ***//
-if($_POST["hdnCmd"] == "Add")
-{
- $strSQL = "INSERT INTO admin_db ";
- $strSQL .="(admin_id,username,password,name,lastname,phone,email,position) ";
- $strSQL .="VALUES ";
- $strSQL .="('".$_POST["admin_id"]."','".$_POST["username"]."' ";
- $strSQL .=",'".$_POST["password"]."' ";
- $strSQL .=",'".$_POST["name"]."','".$_POST["lastname"]."' ";
- $strSQL .=",'".$_POST["phone"]."','".$_POST["email"]."' ";
- $strSQL .=",'".$_POST["position"]."')"; 
- 
- $objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-//*** Update Condition ***//
-if($_POST["hdnCmd"] == "Update")
-{
- $strSQL = "UPDATE admin_db SET ";
- $strSQL .="admin_id = '".$_POST["fixid"]."' ";
- $strSQL .=",username = '".$_POST["username"]."' ";
- $strSQL .=",password = '".$_POST["password"]."' ";
- $strSQL .=",name = '".$_POST["name"]."' ";
- $strSQL .=",lastname = '".$_POST["lastname"]."' ";
- $strSQL .=",phone = '".$_POST["phone"]."' ";
- $strSQL .=",email = '".$_POST["email"]."' ";
- $strSQL .=",position = '".$_POST["position"]."' ";
- $strSQL .="WHERE admin_id = '".$_POST["hdnEditfixid"]."' ";
- 
- $objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Update [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-//*** Delete Condition ***//
-if($_GET["Action"] == "Del")
-{
- $strSQL = "DELETE FROM admin_db ";
- $strSQL .="WHERE admin_id = '".$_GET["FixID"]."' ";
- $objQuery = mysql_query($strSQL);
-
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-$strSQL = "SELECT * FROM admin_db";
-$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
 ?>
           </p>
           <p>&nbsp; </p>
@@ -109,46 +48,14 @@ $objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
           <td><strong>phone</strong></td>
           <td><strong>email</strong></td>
           <td><strong>position</strong></td>
+          <td><strong>position</strong></td>
          
         </tr>
         </tbody>
 <?
-while($objResult = mysql_fetch_array($objQuery))
+foreach ($admin_db->result as $key => $objResult)
 {
 ?>
-  <?
- if($objResult["admin_id"] == $_GET["FixID"] and $_GET["Action"] == "Edit")
- {
-  ?>
-  <tr>
-    <td><div align="center">
-  <input type="text" name="fixid" size="5" value="<? echo $objResult["admin_id"];?>">
-  <input type="hidden" name="hdnEditfixid"  value="<? echo $objResult["admin_id"];?>">
- </div></td>
-    <td><input type="text" name="username"  value="<? echo $objResult["username"];?>"></td>
-    <td><input type="text" name="password"  value="<? echo $objResult["password"];?>"></td>
-    <td><div align="center"><input type="text" name="name" size="2" value="<? echo $objResult["name"];?>"></div></td>
-    <td align="right"><input type="text" name="lastname" value="<? echo $objResult["lastname"];?>"></td>
-    <td align="right"><input type="text" name="phone" size="5" value="<? echo $objResult["phone"];?>"></td>
-     <td align="right"><input type="text" name="email" size="5" value="<? echo $objResult["email"];?>"></td>
-      <td align="right"><select name="position" >
-            <option>1</option>
-            <option>2</option>
-            
-          </select></td>
-     
-    <td colspan="2" align="right">
-    
-    <div align="center">
-      <input name="btnAdd" type="button" id="btnUpdate" value="Update" OnClick="frm.hdnCmd.value='Update';frm.submit();">
-   <input name="btnAdd" type="button" id="btnCancel" value="Cancel" OnClick="window.location='<?=$_SERVER["PHP_SELF"];?>';">
-    </div></td>
-  </tr>
-  <?
- }
-  else
- {
-  ?>
   <tr bgcolor="#FFFFFF">
           <td width="63"><? echo $objResult["admin_id"];?></td>  
           
@@ -167,15 +74,12 @@ while($objResult = mysql_fetch_array($objQuery))
           
           
           
-    <td align="center"><a href="<?=$_SERVER["PHP_SELF"];?>?Action=Edit&FixID=<?=$objResult["admin_id"];?>">Edit</a></td>
- <td align="center"><a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='<?=$_SERVER["PHP_SELF"];?>?Action=Del&FixID=<?=$objResult["admin_id"];?>';}">Delete</a></td>
+    <td align="center"><a href="">Edit</a></td>
+ <td align="center"><a href="">Delete</a></td>
   </tr>
   <?
  }
   ?>
-<?
-}
-?>
   <tr>
     <td><div align="center"><input type="text" name="admin_id" size="5"></div></td>
     <td><input type="text" name="username" ></td>
@@ -198,10 +102,7 @@ while($objResult = mysql_fetch_array($objQuery))
     </div></td>
   </tr>
 </table>
-</form>
-<?
-mysql_close($objConnect);
-?>       
+</form>   
      
    
 </div></td></tr>
