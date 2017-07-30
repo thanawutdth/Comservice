@@ -2,7 +2,7 @@
 include('../meta.php');
 ?>  
     <tr align="left" valign="top">
-      <td height="253" align="left"><div id="login"><?include('../sidebar_logged.php');?></td>
+      <td height="253" align="left"><?include('../sidebar_logged.php');?></td>
       <td width="655" align="center" valign="top" bgcolor="#FFFFFF"><table width="658" height="469" border="0">
         <tbody>
           <tr>

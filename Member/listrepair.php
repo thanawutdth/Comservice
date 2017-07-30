@@ -70,7 +70,7 @@ height:35px;
                       <td width="3%"><a href="/project2/Member/firstpage_member.php">
                         <input type="image" name="imageField" id="imageField" src="/project2/Image/icon left bar/Back.png">
                       </a></td>
-                      <td width="20%" height="43" style="color: #000000"><h3>BACK TO HOME</h3></td>
+                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการแจ้งซ่อม</h1></span></td>
                       <td width="25%"><table width="200" border="0">
                         <tbody>
