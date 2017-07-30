@@ -1,59 +1,6 @@
-<?php header('Content-Type: charset=utf-8'); ?>
-
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-
-#tarang {    
-    border: 1px solid #ddd;
-    text-align: center;
-	width:100%;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    padding: 0px;
-}
-#search{
-	width: 100%;
- 	height:35px;
-	font-size:15px;
-    
-	}
-#button{
-	background:#84C119;
-	font-size:100%;
-width:100%;
-height:35px;
- 
-	}
-</style>
-
-
-
-<body topmargin="0">
-
-<table width="67%" height="256" border="0" align="center">
-  
-    <tr>
-      <th height="206" colspan="2" scope="col"><img src="../Image/header2.jpg" width="955" height="204" alt=""/></th>
-    </tr>
+<?
+include('../meta.php');
+?> 
     
   
     

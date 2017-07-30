@@ -1,33 +1,6 @@
-
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-</style>
-
-
-
-<body topmargin="0" >
-
-<div id="aaa">
-<table width="841" border="2" align="center">
-<tbody>
-  <tbody>
-  <tr align="left" valign="top">
-    <th height="189" colspan="3" scope="col"><img src="../Image/header2.jpg" width="999" height="187" alt=""/></th>
-  </tr>
+<?
+include('../meta.php');
+?> 
   <tr align="left" valign="top">
     <td width="248" align="center"><div id="login">
 <a href="/project2/Member/firstpage_member.php"><h1>Computer Service</h1> </a>  
