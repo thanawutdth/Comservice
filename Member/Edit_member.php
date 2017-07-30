@@ -1,24 +1,23 @@
 <?
 include('../meta.php');
+require_once("../model/m_user.php");
+$m_user = new M_user;
+$user_dat=$m_user->get_user_by_usn($_SESSION['username']);
+$err_msg="";
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('../logout.php');?>","_self");            
+        </script>
+    <?
+}
 ?>  
 
     <tr>
       <td width="248" height="72">
-        <div id="login">
-  
- <a href="/project2/Member/firstpage_member.php"><h1>Computer Service</h1> </a>  
- 
-
-      <a href="/project2/Member/Edit_member.php"> <input type="button" name="button2" id="button2" value="แก้ไขข้อมูลส่วนตัว" ></a>
-      <a href="/project2/Member/ToFix.php"> <input type="button" name="button1" id="button1" value="แจ้งซ่อมออนไลน์" ></a>
-      <a href="/project2/Member/listrepair.php"><input type="button" name="button5" id="button5" value="รายการแจ้งซ่อม"></a>
-      <a href="/project2/Member/Webboard.php"><input type="button" name="button6" id="button6" value="กระทู้ ถาม-ตอบ"> </a>
-      <a href="/project2/Member/stat.php"><input type="button" name="button8" id="button8" value="สถิติการแจ้งซ่อม"></a>
-	  <a href="/project2/Member/download.php"><input type="button" name="button9" id="button9" value="ดาวน์โหลด"></a>
-      <a href="/project2/Member/Evaluation.php"><input type="button" name="button3" id="button3" value="ประเมิน"></a>
-      <a href="/project2/Member/contact.php"><input type="button" name="button4" id="button4" value="ติดต่อเรา"> </a>
-        </div>
-
+        <?include('../sidebar_logged.php');?>
       </td>
   
     <form id="Member" name="addMember" method="post" action="/project2/addMember.php">  
