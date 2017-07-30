@@ -90,15 +90,16 @@ CREATE TABLE `fix_db` (
   `name` varchar(100) collate utf8_unicode_ci NOT NULL,
   `lastname` varchar(100) collate utf8_unicode_ci NOT NULL,
   `date` date NOT NULL,
-  `Building` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `sector` varchar(100) collate utf8_unicode_ci NOT NULL,
   `type` varchar(100) collate utf8_unicode_ci NOT NULL,
   `detail` varchar(1000) collate utf8_unicode_ci NOT NULL,
   `phone` varchar(15) collate utf8_unicode_ci NOT NULL,
-  `status` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `status` enum('รอดำเนินการ','เสร็จสิ้น','ไม่สามารถดำเนินการได้','ยกเลิก') collate utf8_unicode_ci NOT NULL default 'รอดำเนินการ',
   `infer` varchar(500) collate utf8_unicode_ci NOT NULL default 'รอระบุ',
   `technician` varchar(100) collate utf8_unicode_ci NOT NULL default 'รอระบุ',
+  `fixuser` varchar(100) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`fix_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- 
 -- dump ตาราง `fix_db`
@@ -139,8 +140,8 @@ CREATE TABLE `member_db` (
   `lastname` varchar(100) collate utf8_unicode_ci NOT NULL,
   `phone` varchar(50) collate utf8_unicode_ci NOT NULL,
   `email` varchar(100) collate utf8_unicode_ci NOT NULL,
-  `address` varchar(1000) collate utf8_unicode_ci NOT NULL,
-  `sector` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `address` text collate utf8_unicode_ci NOT NULL,
+  `sector` varchar(50) character set utf8 NOT NULL,
   `position` int(1) NOT NULL default '3',
   PRIMARY KEY  (`member_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=65 ;
@@ -152,7 +153,7 @@ CREATE TABLE `member_db` (
 INSERT INTO `member_db` VALUES (61, 'Aungsuma', '1234', 'samagom', 'gommara', '0827837543', 'nubeemc@hotmail.com', 'talad\r\ntalad ', 'โรงเรียนเสือโก้กวิทยาสรรค์ ', 3);
 INSERT INTO `member_db` VALUES (62, 'thanawut01', '', 'somchit', '', '', '', ' ', 'หน่วยงานในสังกัด', 3);
 INSERT INTO `member_db` VALUES (63, 'admin', '1234', 'rrr', 'gommara', '0827837543', 'nubeemc@hotmail.com', 'talad\r\ntalad ', 'โรงเรียนหนองเหล็กศึกษา', 3);
-INSERT INTO `member_db` VALUES (64, 'user', '1234', 'samagom', 'gommara', '0827837543', 'nubeemc@hotmail.com', '21/ 3 หูม่ 4  ', 'โรงเรียนดอนเงินพิทยาคาร', 3);
+INSERT INTO `member_db` VALUES (64, 'user', '1234', 'สมชัย', 'เข็มกลัด', '01234567', 'aaaaa@hotmail.com', '21/ 3 หูม่ 4  aaaaa', 'โรงเรียนเวียงสะอาดพิทยาคม', 3);
 
 -- --------------------------------------------------------
 

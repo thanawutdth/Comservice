@@ -24,7 +24,8 @@ if(isset($_POST['name'])){
 		"sector" =>$_POST['sector'],
 		"type" =>$_POST['type'],
 		"detail" =>$_POST['detail'],
-		"phone" =>$_POST['phone']);
+		"phone" =>$_POST['phone'],
+		"fixuser" =>$_SESSION['username']);
 		
 		$m_fix->insert_fix($insertdata);
 		?>

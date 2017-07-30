@@ -17,8 +17,7 @@ if (isset($user_dat['username'])) {
 
 $fix_db = $m_fix->get_all();
 
-print_r($fix_db->result);
-print_r($fix_db->rowCount);
+
 
 
 ?>  
