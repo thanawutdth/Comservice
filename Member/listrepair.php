@@ -171,13 +171,15 @@ foreach ($fix_db->result as $key => $value)
           $(myform).remove();
         }
         function del_row(id){
-          myform = document.createElement("form");
-          $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
-          $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="del_fix_id" value="'+id+'">')
-          document.body.appendChild(myform);
-          myform.submit();
-          $(myform).remove();
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="del_fix_id" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
         }
 </script>
 </body>
