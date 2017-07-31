@@ -25,9 +25,8 @@ if (isset($_POST['admin_id_inp'])) {
 $m_user->update_admin($insertdata,$_POST['admin_id_inp']);
 }
 if (isset($_POST['del_admin_id'])) {
-  $insertdata = array(
-    "status" =>"ยกเลิก");
-    $m_user->update_admin($insertdata,$_POST['del_admin_id']);
+
+    $m_user->delete_admin($_POST['del_admin_id']);
 }
 $admin_db = $m_user->get_all_admin();
 ?>
@@ -85,7 +84,7 @@ foreach ($admin_db->result as $key => $objResult)
           
           </td>
                 
-              <td> <a href="javascript:save_row(<?=$objResult["admin_id"]?>);">Update</a><br><a href="">Cancel</a></td>
+              <td> <a href="javascript:save_row('<?=$objResult["admin_id"]?>');">Update</a><br><a href="">Cancel</a></td>
               </tr>
    <?
   }else{
@@ -101,7 +100,7 @@ foreach ($admin_db->result as $key => $objResult)
           <td width="42" ><? echo $objResult["position"];?></td>
          
           <td width="103">
-               <a href="javascript:edit_row(<?=$objResult["admin_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$objResult["admin_id"]?>);">Delete</a>
+               <a href="javascript:edit_row('<?=$objResult["admin_id"]?>');">Edit</a><br><a href="javascript:del_row('<?=$objResult["admin_id"]?>');">Delete</a>
 			</td>
         </tr>
       <? }}?>

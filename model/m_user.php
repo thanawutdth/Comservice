@@ -54,9 +54,9 @@
 			$where = array('admin_id' => $usn);
 			$this->update("admin_db",$data,$where);	
 		}
-		public function delete_user($usn){
-			$where = array('user_username' => $usn);
-			$this->delete("nml2016_user",$where);	
+		public function delete_admin($usn){
+			$where = array('admin_id' => $usn);
+			$this->delete("admin_db",$where);	
 		}
 		public function get_all_admin(){
 
