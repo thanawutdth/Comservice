@@ -20,11 +20,11 @@ if (isset($user_dat['username'])) {
       <td width="655" align="center" valign="top" bgcolor="#FFFFFF"><table width="658" height="469" border="0">
         <tbody>
           <tr>
-            <td height="75" colspan="4" align="center" valign="top"><a href=""><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
+            <td height="75" colspan="4" align="center" valign="top"><a href="<?=site_url()?>Member/news1.php"><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
             </tr>
           <tr>
             <td width="84" height="161">&nbsp;</td>
-            <td colspan="2"><img src="/project2/Image/ร่วมงาน.jpg" width="472" height="244" alt=""/></td>
+            <td colspan="2"><img src="<?=site_url()?>Image/ร่วมงาน.jpg" width="472" height="244" alt=""/></td>
             <td width="104">&nbsp;</td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@ if (isset($user_dat['username'])) {
             </tr>
           <tr>
             <td>&nbsp;</td>
-            <td colspan="2"><img src="/project2/Image/ดพพ.jpg" width="472" height="244" alt=""/></td>
+            <td colspan="2"><img src="<?=site_url()?>Image/ดพพ.jpg" width="472" height="244" alt=""/></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
