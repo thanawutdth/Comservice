@@ -50,6 +50,10 @@
 			$where = array('username' => $usn);
 			$this->update("member_db",$data,$where);	
 		}
+		public function update_member_username($data,$usn){
+			$where = array('member_id' => $usn);
+			$this->update("member_db",$data,$where);	
+		}
 		public function update_admin($data,$usn){
 			$where = array('admin_id' => $usn);
 			$this->update("admin_db",$data,$where);	
@@ -57,6 +61,10 @@
 		public function delete_admin($usn){
 			$where = array('admin_id' => $usn);
 			$this->delete("admin_db",$where);	
+		}
+		public function delete_member($usn){
+			$where = array('member_id' => $usn);
+			$this->delete("member_db",$where);	
 		}
 		public function get_all_admin(){
 

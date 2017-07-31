@@ -6,7 +6,7 @@
 <? include("sidebar_admin.php");?>
       </td>
         
-    <form id="Member" name="addMember" method="post" action="/project2/addMember.php">  
+    <form id="Member" name="addMember" method="post" action="<?=site_url()?>addMember.php">  
     <td width="657" rowspan="9" valign="top"><fieldset>
       <legend><h3><span style="color:#2288BB">ข้อมูลส่วนตัว</span></h3></legend>
       
