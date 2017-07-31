@@ -17,7 +17,7 @@
      <a href="<?=site_url()?>Webboard/Webboard.php"><input type="button" name="button7" id="button7" value="กระทู้-ถามตอบ">
                 </a>
          
-          <a href="<?=site_url()?>Member/contact.php"> <input type="button" name="button2" id="button2" value="ติดต่อเรา"></a>
+          <a href="<?=site_url()?>contact.php"> <input type="button" name="button2" id="button2" value="ติดต่อเรา"></a>
         </div>
         </p>
       </form>

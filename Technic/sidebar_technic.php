@@ -14,7 +14,7 @@
   <a href="<?=site_url()?>Technic/selectdevice.php"><input type="button" name="button7" id="button7" value="รายการเบิกอุปกรณ์"></a>
   <a href="<?=site_url()?>Technic/adddevice.php"><input type="button" name="button7" id="button7" value="เพิ่มอุปกรณ์"></a>
   <a href="<?=site_url()?>Webboard/Webboard.php"><input type="button" name="button8" id="button8" value="กระทู้"></a>
-  <a href="<?=site_url()?>Technic/report.php"><input type="button" name="button2" id="button3" value="รายงาน"></a>
+
 
        
         

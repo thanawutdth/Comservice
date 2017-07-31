@@ -99,7 +99,7 @@ $fpdf=new Fpdf_print;
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'อุปกรณ์ที่แจ้ง  '.$fix_db['type'].''),0,1);
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหา  '.$fix_db['detail'].''),0,1);
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
-		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'รายการบันทึกแจ้งซ่อม'),0,1,'C');
+		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'ผู้ดำเนินการ'),0,1,'C');
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ชื่อผู้ดำเนินการซ่อม  '.$fix_db['technician'].''),0,1);
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหาที่พบ  '.$fix_db['fixuser'].''),0,1);

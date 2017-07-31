@@ -9,8 +9,6 @@
       <a href="<?=site_url()?>Member/ToFix.php"> <input type="button" name="button1" id="button1" value="แจ้งซ่อมออนไลน์" ></a>
       <a href="<?=site_url()?>Member/listrepair.php"><input type="button" name="button5" id="button5" value="รายการแจ้งซ่อม"></a>
       <a href="<?=site_url()?>Webboard/Webboard.php"><input type="button" name="button6" id="button6" value="กระทู้ ถาม-ตอบ"> </a>
-	  
-      
-      <a href="<?=site_url()?>Member/contact.php"><input type="button" name="button4" id="button4" value="ติดต่อเรา"> </a>
+      <a href="<?=site_url()?>contact.php"><input type="button" name="button4" id="button4" value="ติดต่อเรา"> </a>
         
       </div>
