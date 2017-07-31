@@ -1,4 +1,4 @@
-<? include('meta_admin.php');
+<? include('meta_technic.php');
 require_once("../model/m_user.php");
 require_once("../model/m_device.php");
 $m_user = new M_user;
@@ -36,7 +36,7 @@ if(isset($_POST['select'])){
     <tr>
       <td width="248">
  
-<? include("sidebar_admin.php");?>
+<? include("sidebar_technic.php");?>
         </td>
 
       <td width="657" rowspan="9" align="center" valign="top">
@@ -51,7 +51,7 @@ if(isset($_POST['select'])){
       <table width="455" height="128" border="0">
       <td width="449" height="17">  <table width="452" height="128" border="0">
           <tbody>
-          <form name="form" method="post" action="<?=site_url()?>Admin/add_device_admintech.php">
+          <form name="form" method="post" action="<?=site_url()?>Technic/add_device_admintech.php">
             <tr align="center">
               <td width="176"><strong>จำนวน</strong></td>
               <td width="266"><input type="text" name="amount" id="amount"></td>

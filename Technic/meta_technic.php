@@ -11,6 +11,7 @@ include('../helper_func.php');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ComputerService</title>
 <link href="<?=site_url()?>css/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?=site_url()?>js/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 
 body {

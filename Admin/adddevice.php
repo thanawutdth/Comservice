@@ -15,7 +15,7 @@ if (isset($user_dat['username'])) {
     <?
 }
 
-print_r ($_POST);
+
 if(isset($_POST['type'])){
 		$insertdata = array(
 		"type" =>$_POST['type']);

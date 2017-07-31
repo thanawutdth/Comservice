@@ -14,12 +14,12 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-print_r ($_POST);
+
 if (isset($_POST['device_id_inp'])) {
   $insertdata = array(
 	"status" =>$_POST['status']);
     
-$m_device->update_device($insertdata,$_POST['device_id_inp']);
+$m_device->update_device_addtech($insertdata,$_POST['device_id_inp']);
 }
 if (isset($_POST['del_device_id'])) {
 
@@ -118,7 +118,7 @@ foreach ($device_addtech_id->result as $key => $objResult)
           
          
           <td width="103">
-               <a href="javascript:edit_row('<?=$objResult["device_addtech_id"]?>');">Edit</a><br><a href="javascript:del_row('<?=$objResult["device_addtech_id"]?>');">Delete</a>
+               <a href="javascript:edit_row('<?=$objResult["device_addtech_id"]?>');">Edit</a><br>
 			</td>
         </tr>
       <? }}?>
@@ -140,7 +140,7 @@ function save_row(id){
           myform = document.createElement("form");
           $(myform).attr("action","<?=site_url("Admin/selectdevice.php")?>");   
           $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="device_id" value="'+id+'">')
+          $(myform).html('<input type="text" name="device_addtech_id" value="'+id+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();

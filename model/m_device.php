@@ -37,6 +37,10 @@
 			$where = array('device_id' => $usn);
 			$this->update("device_db",$data,$where);	
 		}
+		public function update_device_addtech($data,$usn){
+			$where = array('device_addtech_id' => $usn);
+			$this->update("deveice_addtech",$data,$where);	
+		}
 		public function update_member_username($data,$usn){
 			$where = array('member_id' => $usn);
 			$this->update("member_db",$data,$where);	
