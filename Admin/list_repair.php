@@ -167,7 +167,7 @@ foreach ($fix_db->result as $key => $value)
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103">
-              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
+              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="<?=site_url('print_pdf.php?id='.$value["fix_id"])?>">Print</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
               
 			</td>
         </tr>
