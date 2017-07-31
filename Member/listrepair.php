@@ -111,7 +111,24 @@ foreach ($fix_db->result as $key => $value)
           <td width="103"><input type="text" id="type_inp" value="<? echo $value["type"];?>"></td>
           <td width="193"><input type="text" id="detail_inp" value="<? echo $value["detail"];?>"></td>
           <td width="89"><input type="text" id="phone_inp" value="<? echo $value["phone"];?>"></td>
-          <td width="42" ><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
+          <td width="42" ><? 
+      if($value['status']=="รอดำเนินการ"){
+        ?>
+              <img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/>
+        <?
+        }else if($value['status']=="เสร็จสิ้น")
+        {   
+         ?>
+        <img src="<?=site_url()?>Image/icon left bar/Correct.png" width="32" height="32" alt=""/>
+          <?
+        }else if($value['status']=="ไม่สามารถดำเนินการได้")
+        {   
+         ?>
+        <img src="<?=site_url()?>Image/icon left bar/Close.png" width="32" height="32" alt=""/>
+          <?
+        }
+          
+        ?></td>
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
@@ -132,12 +149,29 @@ foreach ($fix_db->result as $key => $value)
           <td width="103"><? echo $value["type"];?></td>
           <td width="193"><? echo $value["detail"];?></td>
           <td width="89"><? echo $value["phone"];?></td>
-          <td width="42" ><? echo $value[""];?><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
+          <td width="42" ><? 
+      if($value['status']=="รอดำเนินการ"){
+        ?>
+              <img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/>
+        <?
+        }else if($value['status']=="เสร็จสิ้น")
+        {   
+         ?>
+        <img src="<?=site_url()?>Image/icon left bar/Correct.png" width="32" height="32" alt=""/>
+          <?
+        }else if($value['status']=="ไม่สามารถดำเนินการได้")
+        {   
+         ?>
+        <img src="<?=site_url()?>Image/icon left bar/Close.png" width="32" height="32" alt=""/>
+          <?
+        }
+          
+        ?></td>
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
 			  ?>
-              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
+              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="<?=site_url('print_pdf.php?id='.$value["fix_id"])?>">Print</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
               
 			  <?
           }?></td>
