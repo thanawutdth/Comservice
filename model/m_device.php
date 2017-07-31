@@ -7,8 +7,8 @@
 		public $a1=0;
 	
 
-		public function get_device($type){
-			$this->where("type",$type);
+		public function get_device($id){
+			$this->where("device_id",$id);
 			$result=$this->get("device_db");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();
@@ -28,6 +28,10 @@
 		public function insert_device($data){
 
 			$this->insert("device_db",$data);	
+		}
+		public function insert_deveice_addtech($data){
+
+			$this->insert("deveice_addtech",$data);	
 		}
 		public function update_device($data,$usn){
 			$where = array('device_id' => $usn);
@@ -56,10 +60,10 @@
 			
 			return $result;
 		}
-		public function get_all_user(){
+		public function get_all_deveice_addtech(){
 
-			$this->order_by("member_id");
-			$result=$this->get("member_db");
+			$this->order_by("date");
+			$result=$this->get("deveice_addtech");
 			
 			return $result;
 		}

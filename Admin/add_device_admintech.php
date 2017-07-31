@@ -14,17 +14,21 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-
+$device_db = $m_device->get_all_device();
 print_r ($_POST);
-if(isset($_POST['type'])){
+if(isset($_POST['select'])){
 		$insertdata = array(
-		"type" =>$_POST['type']);
+		"admin_id" =>$user_dat['admin_id'],
+		"device_id" =>$_POST['select'],
+		"amount" =>$_POST['amount'],
+		"date" =>$_POST['date'],
+		"date_re" =>$_POST['date_re']);
 		
-		$m_device->insert_device($insertdata);
+		$m_device->insert_deveice_addtech($insertdata);
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-         window.open("<?echo site_url('Admin/Todevice.php');?>","_self");            
+      //   window.open("<?echo site_url('Admin/Todevice.php');?>","_self");            
         </script>
     <?
 	}
@@ -34,7 +38,7 @@ if(isset($_POST['type'])){
  
 <? include("sidebar_admin.php");?>
         </td>
-        
+
       <td width="657" rowspan="9" align="center" valign="top">
       
       <p>&nbsp;</p>
@@ -47,16 +51,24 @@ if(isset($_POST['type'])){
       <table width="455" height="128" border="0">
       <td width="449" height="17">  <table width="452" height="128" border="0">
           <tbody>
-          <form name="form" method="post" action="<?=site_url()?>Admin/adddevice.php">
+          <form name="form" method="post" action="<?=site_url()?>Admin/add_device_admintech.php">
             <tr align="center">
               <td width="176"><strong>จำนวน</strong></td>
-              <td width="266"><input type="text" name="type" id="type"></td>
-              <
+              <td width="266"><input type="text" name="amount" id="amount"></td>
+              
             </tr>
             <tr align="center">
               <td><strong>อุปกรณ์ที่เบิก</strong></td>
               <td><select name="select" id="select">
-              </select></td>
+              <? foreach($device_db->result as $key =>$value){?>
+				
+					<option value="<? echo $value['device_id'] ?>"><? echo $value['type'] ?></option>>
+					
+					
+				 <? } ?>
+              </select>
+              
+               </td>
               </tr>
             <tr align="center">
               <td><strong>วันที่เบิก</strong></td>
@@ -64,7 +76,7 @@ if(isset($_POST['type'])){
               </tr>
             <tr align="center">
               <td><strong>วันที่คืน</strong></td>
-              <td><input type="date" name="date2" id="date2"></td>
+              <td><input type="date" name="date_re" id="date2"></td>
               </tr>
             <tr align="center">
               <td>&nbsp;</td>

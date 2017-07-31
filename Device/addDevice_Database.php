@@ -6,9 +6,8 @@
 </head>
 <?PHP
 include("connect.php");
-$flname=$_POST["name"];
 $type=$_POST["type"];
-$date=$_POST["date"];
+
 
 
 $sql = "select * from device_db ";
