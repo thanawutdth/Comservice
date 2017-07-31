@@ -6,9 +6,9 @@
 		}
 		public $a1=0;
 		
-		public function get_user_admin($username){
-			$this->where("username",$username);
-			$result=$this->get("admin_db");
+		public function get_fix_by_id($fix_id){
+			$this->where("fix_id",$fix_id);
+			$result=$this->get("fix_db");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();
 			}
@@ -19,13 +19,13 @@
 
 			$this->insert("fix_db",$data);	
 		}
-		public function update_member($data,$usn){
-			$where = array('username' => $usn);
-			$this->update("member_db",$data,$where);	
+		public function update_fix($data,$fix_id){
+			$where = array('fix_id' => $fix_id);
+			$this->update("fix_db",$data,$where);	
 		}
-		public function delete_user($usn){
-			$where = array('user_username' => $usn);
-			$this->delete("nml2016_user",$where);	
+		public function delete_fix($fix_id){
+			$where = array('fix_id' => $fix_id);
+			$this->delete("fix_db",$where);	
 		}
 		public function get_all(){
 
