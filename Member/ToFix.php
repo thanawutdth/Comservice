@@ -46,19 +46,19 @@ if(isset($_POST['name'])){
              <tbody >
                <tr >
                  <td width="148" height="46" align="center" valign="middle"><p><strong>ชื่อ</strong></p></td>
-                 <td width="347" align="left" valign="middle" scope="col"><input type="text" name="name" id="textfield"></td>
+                 <td width="347" align="left" valign="middle" scope="col"><input type="text" name="name" id="textfield" value="<? echo $user_dat['name']?>" disabled></td>
                </tr>
                <tr>
                  <td height="46" align="center" valign="middle"><p><strong>นามสกุล</strong></p></td>
-                 <td align="left" valign="middle"><input type="text" name="lastname" id="textfield2"></td>
+                 <td align="left" valign="middle"><input type="text" name="lastname" id="textfield2" value="<? echo $user_dat['lastname']?>" disabled></td>
                </tr>
                <tr>
-                 <td height="46" align="center" valign="middle"><p><strong>วันที่</strong></p></td>
-                 <td align="left" valign="middle"><input type="date" name="date" id="date"></td>
+                 <td height="46" align="center" valign="middle"><p><strong>เบอร์โทรศัพท์</strong></p></td>
+                 <td align="left" valign="middle"><input type="tel" name="phone" id="tel" value="<? echo $user_dat['phone']?>" disabled ></td>
                </tr>
                <tr>
                  <td height="24" align="center" valign="middle"><strong>หน่วยงาน</strong></td>
-                 <td align="left" valign="middle"><select  name="sector" id="sector"   >
+                 <td align="left" valign="middle"><select  name="sector" id="sector" disabled  >
                 <option value="หน่วยงานในสังกัด">หน่วยงานในสังกัด</option>
                 <option value="โรงเรียนเมืองเตาวิทยาคม">โรงเรียนเมืองเตาวิทยาคม</option>
                 <option value="โรงเรียนท่าขอนยางพิทยาคม">โรงเรียนท่าขอนยางพิทยาคม</option>
@@ -81,33 +81,37 @@ if(isset($_POST['name'])){
                 <option value="โรงเรียนศรีสุขพิทยาคม">โรงเรียนศรีสุขพิทยาคม</option>
                 <option value="โรงเรียนหัวเรือพิทยาคม">โรงเรียนหัวเรือพิทยาคม</option>
                 <option value="องค์การบริหารส่วนจังหวัดมหาสารคาม">องค์การบริหารส่วนจังหวัดมหาสารคาม</option>
-              </select></td>
+              </select> 
+			  <script>
+			  $("#sector").val("<? echo $user_dat['sector']?>");
+              </script></td>
                </tr>
                <tr>
-                 <td height="24" align="center" valign="middle"><strong>ชนิด</strong></td>
+                 <td height="24" align="center" valign="middle"><strong>วันที่</strong></td>
                  <td align="left" valign="middle"><p>
-                   <select name="type" id="select">
-                     <option value="เลือกชนิดอุปกรณ์">เลือกชนิดอุปกรณ์</option>
-                     <option value="เครื่องปริ้น">เครื่องปริ้น</option>
-                     <option value="หน้าจอ">หน้าจอ</option>
-                     <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
-                  
-                   </select>
+                   <input type="date" name="date" id="date">
                  </p>
                    
                      
                    </td>
                </tr>
                <tr>
-                 <td height="24" align="center" valign="middle"><p><strong>ปัญหา</strong></p></td>
-                 <td align="left" valign="middle"><div id="aaa"><textarea name="detail" id="textarea2" ></textarea></div></td>
+                 <td height="24" align="center" valign="middle"><p><strong>ชนิด</strong></p></td>
+                 <td align="left" valign="middle"><div id="aaa">
+                   <select name="type" id="select">
+                     <option value="เลือกชนิดอุปกรณ์">เลือกชนิดอุปกรณ์</option>
+                     <option value="เครื่องปริ้น">เครื่องปริ้น</option>
+                     <option value="หน้าจอ">หน้าจอ</option>
+                     <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
+                   </select>
+                 </div></td>
                </tr>
                <tr>
                  <td height="52" colspan="2" align="left" valign="top"><table width="490" border="0">
                    <tbody>
                      <tr>
-                       <td width="143" height="46" align="center"><strong>เบอร์โทรศัพท์</strong></td>
-                       <td width="337"><input type="tel" name="phone" id="tel"></td>
+                       <td width="143" height="46" align="center"><strong>ปัญหา</strong></td>
+                       <td width="337"><textarea name="detail" id="textarea2" ></textarea></td>
                      </tr>
                    </tbody>
                  </table></td>

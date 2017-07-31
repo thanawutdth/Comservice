@@ -48,7 +48,8 @@ $admin_db = $m_user->get_all_admin();
           <td><strong>phone</strong></td>
           <td><strong>email</strong></td>
           <td><strong>position</strong></td>
-          <td><strong>position</strong></td>
+          <td><strong>Edit Delete</strong></td>
+       
          
         </tr>
         </tbody>
