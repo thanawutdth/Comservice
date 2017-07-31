@@ -21,9 +21,9 @@ if (isset($_POST['fix_id_inp'])) {
     "sector" =>$_POST['sector'],
     "type" =>$_POST['type'],
     "detail" =>$_POST['detail'],
-    "phone" =>$_POST['phone'],
-    "infer" =>$_POST['infer']);
-    $m_fix->update_fix($insertdata,$_POST['fix_id_inp'])
+    "phone" =>$_POST['phone']);
+    
+    $m_fix->update_fix($insertdata,$_POST['fix_id_inp']);
 }
 
 $fix_db = $m_fix->get_all();
@@ -38,13 +38,13 @@ $fix_db = $m_fix->get_all();
           <tbody>
             <tr>
               <td height="40" align="center" valign="top" bgcolor="#FFFFFF">
-                <table width="200" border="0">
+                <table width="890" border="0">
                   <tbody>
                     <tr>
                       <td width="3%"><a href="<?=site_url()?>index.php">
                         <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
-                      <td width="20%" height="43" style="color: #000000"><h3>BACK TO HOME</h3></td>
+                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการแจ้งซ่อม</h1></span></td>
                       <td width="25%"><table width="200" border="0">
                         <tbody>
@@ -107,7 +107,7 @@ foreach ($fix_db->result as $key => $value)
           <td width="193"><input type="text" id="detail_inp" value="<? echo $value["detail"];?>"></td>
           <td width="89"><input type="text" id="phone_inp" value="<? echo $value["phone"];?>"></td>
           <td width="42" ><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
-          <td width="88"><input type="text" id="infer_inp" value="<? echo $value["infer"];?>"></td>
+          <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
         ?>
@@ -137,7 +137,7 @@ foreach ($fix_db->result as $key => $value)
 			  <?
           }?></td>
         </tr>
-      <? }?>
+      <? }}?>
         </table></div>
      </td>
     </tr>
@@ -151,7 +151,7 @@ foreach ($fix_db->result as $key => $value)
           myform = document.createElement("form");
           $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
           $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="fix_id_inp" value="'+id+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="date" value="'+$("#date_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="detail" value="'+$("#detail_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="infer" value="'+$("#infer_inp").val()+'">')
+          $(myform).html('<input type="text" name="fix_id_inp" value="'+id+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="date" value="'+$("#date_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="detail" value="'+$("#detail_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();
