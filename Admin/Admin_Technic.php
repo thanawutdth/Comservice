@@ -12,103 +12,133 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
+print_r ($_POST);
+if (isset($_POST['admin_id_inp'])) {
+  $insertdata = array(
+    "username" =>$_POST['username'],
+    "password" =>$_POST['password'],
+    "name" =>$_POST['name'],
+    "lastname" =>$_POST['lastname'],
+    "phone" =>$_POST['phone'],
+    "email" =>$_POST['email'],
+	"position" =>$_POST['position']);
+$m_user->update_admin($insertdata,$_POST['admin_id_inp']);
+}
+if (isset($_POST['del_admin_id'])) {
+  $insertdata = array(
+    "status" =>"ยกเลิก");
+    $m_user->update_admin($insertdata,$_POST['del_admin_id']);
+}
 $admin_db = $m_user->get_all_admin();
-
 ?>
-
-
     <tr>
-      <td align="center" valign="top"><a href="<?=site_url()?>Admin/adminlogin.php"><img src="/project2/Image/icon left bar/Back.png" width="32" height="32" alt=""/></a></td>
-    </tr>
-    <tr>
-      
-        
-      <td width="657" rowspan="9" align="center" valign="top">
-   
-        
-        
-<?
-
-?>
-          </p>
-          <p>&nbsp; </p>
-        <div id="tarang"  align="center">  
-  <form  name="frm" method="post" action="<?=$_SERVER["PHP_SELF"];?>">
-<input type="hidden" name="hdnCmd" value="">
-      
-        <table width="100%" border="1" cellspacing="3">
-      <tbody>
-        <tr align="center" bgcolor="#25B1E1" style="color: #FFFFFF; font-size: 14px;">
-          <td width="29" height="25"><strong>ลำดับที่</strong></td>
-          <td><strong>username</strong></td>
+      <td>      
+      <td width="657" rowspan="11" align="left" valign="top"><div class="tarang" id="">
+        <a href="<?=site_url()?>Admin/adminlogin.php"><p><img src="<?=site_url()?>Image/icon left bar/Back.png" width="32" height="32" alt=""/></p></a>
+        <p>
           
-          <td><strong>password</strong></td>
-          <td><strong>name</strong></td>
-          <td><strong>lastname</strong></td>
-          <td><strong>phone</strong></td>
-          <td><strong>email</strong></td>
-          <td><strong>position</strong></td>
-          <td><strong>Edit Delete</strong></td>
-       
-         
-        </tr>
-        </tbody>
-<?
+		  
+<?php
+
+?>
+        </p>
+        <div id="tarang">
+          <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
+            <input type="hidden" name="hdnCmd" value="">
+            <table width="891" border="1">
+              <tr>
+                <th width="75">member_id</th>
+                <th width="75"> <div align="center">username </div></th>
+                <th width="100"> <div align="center">password</div></th>
+                <th width="100"> <div align="center">name</div></th>
+                <th width="58"> <div align="center">lastname</div></th>
+                <th width="39"> <div align="center">phone</div></th>
+                <th width="89">email</th>
+                <th width="84"> <div align="center">position</div></th>
+                <th width="42"> <div align="center">Edit Delete </div></th>
+               
+              </tr>
+ <?
 foreach ($admin_db->result as $key => $objResult)
 {
+	 if (isset($_POST['admin_id'])&&$_POST['admin_id']==$objResult["admin_id"]) {   
 ?>
-  <tr bgcolor="#FFFFFF">
-          <td width="63"><? echo $objResult["admin_id"];?></td>  
+           
+             
+              <tr>
+         		<td><? echo $objResult["admin_id"];?></td>
+                <td><input type="text" id="username_inp" value="<? echo $objResult["username"];?>"></td>
+                <td><input type="text" id="password_inp" value="<? echo $objResult["password"];?>"></td>
+                <td><input type="text" id="name_inp" value="<? echo $objResult["name"];?>"></td>
+                <td><input type="text" id="lastname_inp" value="<? echo $objResult["lastname"];?>"></td>
+                <td align="right"><input type="text" id="phone_inp" value="<? echo $objResult["phone"];?>"></td>
+                <td align="right"><input type="text" id="email_inp" value="<? echo $objResult["email"];?>"></td>
+                <td width="42" ><select id="position_inp">
+            <option value="1">1</option>
+            <option value="2">2</option>
+           
+          </select>
           
-          <td width="63"><? echo $objResult["username"];?></td>  
-          <td width="94"><? echo $objResult["password"];?></td>
-          <td width="105"><? echo $objResult["name"];?></td>
-          <td width="120"><? echo $objResult["lastname"];?></td>
-          <td width="130"><? echo $objResult["phone"];?></td>
-          <td width="89"><? echo $objResult["email"];?></td>
-      	 <td width="89"><select name="position" >
-            <option>1</option>
-            <option>2</option>
-            
-          </select></td>
+           <script>
+			  $("#sector").val("<? echo $objResult['position']?>");
+              </script>
           
-          
-          
-          
-    <td align="center"><a href="">Edit</a></td>
- <td align="center"><a href="">Delete</a></td>
-  </tr>
-  <?
- }
+          </td>
+                
+              <td> <a href="javascript:save_row(<?=$objResult["admin_id"]?>);">Update</a><br><a href="">Cancel</a></td>
+              </tr>
+   <?
+  }else{
   ?>
-  <tr>
-    <td><div align="center"><input type="text" name="admin_id" size="5"></div></td>
-    <td><input type="text" name="username" ></td>
-    <td><input type="text" name="password" size="20"></td>
-    <td align="right"><input type="text" name="name" ></td>
-    <td align="right"><input type="text" name="lastname" ></td>
-    
-    <td align="right"><input type="text" name="phone" ></td>
-     <td align="right"><input type="text" name="email" ></td>
-       <td align="center"><select name="position" >
-         <option>1</option>
-         <option>2</option>
-       
-       </select></td>
-     
-     
-     
-    <td colspan="2" align="right"><div align="center">
-      <input name="btnAdd" type="button" id="btnAdd" value="Add" OnClick="frm.hdnCmd.value='Add';frm.submit();">
-    </div></td>
-  </tr>
+        <tr bgcolor="#FFFFFF">
+          <td><? echo $objResult["admin_id"];?></td>
+          <td width="69"><? echo $objResult["username"];?></td>  
+          <td width="93"><? echo $objResult["password"];?></td>
+          <td width="103"><? echo $objResult["name"];?></td>
+          <td width="103"><? echo $objResult["lastname"];?></td>
+          <td width="193"><? echo $objResult["phone"];?></td>
+          <td width="89"><? echo $objResult["email"];?></td>
+          <td width="42" ><? echo $objResult["position"];?></td>
+         
+          <td width="103">
+               <a href="javascript:edit_row(<?=$objResult["admin_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$objResult["admin_id"]?>);">Delete</a>
+			</td>
+        </tr>
+      <? }}?>
+        </table></div>
+     </td>
+    </tr>
 </table>
-</form>   
-     
-   
-</div></td></tr>
-</table>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<script type="text/javascript">
+function save_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/Admin_Technic.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="admin_id_inp" value="'+id+'"><input type="text" name="username" value="'+$("#username_inp").val()+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="position" value="'+$("#position_inp").val()+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/Admin_Technic.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="admin_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Admin/Admin_Technic.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="del_admin_id" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>

@@ -12,6 +12,15 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
+if (isset($_POST['admin_id_inp'])) {
+  $insertdata = array(
+    "username" =>$_POST['username'],
+    "password" =>$_POST['password'],
+    "name" =>$_POST['name'],
+    "lastname" =>$_POST['lastname'],
+    "phone" =>$_POST['phone'],
+    "email" =>$_POST['email'],
+	"position" =>$_POST['select']);
 $member_db = $m_user->get_all_user();
 
 ?>
@@ -38,55 +47,92 @@ $member_db = $m_user->get_all_user();
                 <th width="58"> <div align="center">lastname</div></th>
                 <th width="39"> <div align="center">phone</div></th>
                 <th width="89">email</th>
-                <th width="86">address</th>
                 <th width="84"> <div align="center">position</div></th>
-                <th width="42"> <div align="center">Edit </div></th>
-                <th width="73"> <div align="center">Delete </div></th>
+                <th width="42"> <div align="center">Edit Delete </div></th>
+               
               </tr>
               <?
 foreach ($member_db->result as $key => $objResult)
 {
+	 if (isset($_POST['admin_id'])&&$_POST['admin_id']==$objResult["admin_id"]) {   
 ?>
-              
+           
              
               <tr>
-                <td><div align="center"><?php echo $objResult["member_id"];?></td>
-                <td><div align="center"><?php echo $objResult["username"];?></div></td>
-                <td><?php echo $objResult["password"];?></td>
-                <td><?php echo $objResult["name"];?></td>
-                <td><div align="center"><?php echo $objResult["lastname"];?></div></td>
-                <td align="right"><?php echo $objResult["phone"];?></td>
-                <td align="right"><?php echo $objResult["email"];?></td>
-                <td align="right"><?php echo $objResult["address"];?></td>
-                <td align="right"><?php echo $objResult["sector"];?></td>
+         		<td><? echo $objResult["admin_id"];?></td>
+                <td><input type="text" id="username_inp" value="<? echo $objResult["username"];?>"></td>
+                <td><input type="text" id="password_inp" value="<? echo $objResult["password"];?>"></td>
+                <td><input type="text" id="name_inp" value="<? echo $objResult["name"];?>"></td>
+                <td><input type="text" id="lastname_inp" value="<? echo $objResult["lastname"];?>"></td>
+                <td align="right"><input type="text" id="phone_inp" value="<? echo $objResult["phone"];?>"></td>
+                <td align="right"><input type="text" id="email_inp" value="<? echo $objResult["email"];?>"></td>
+                <td width="42" ><select id="position_inp">
+            <option value="1">1</option>
+            <option value="2">2</option>
+           
+          </select>
+          
+           <script>
+			  $("#sector").val("<? echo $objResult['select']?>");
+              </script>
+          
+          </td>
                 
-                <<td align="center"><a href="">Edit</a></td>
-                <td align="center"><a href="">Delete</a></td>
+                <a href="javascript:edit_row(<?=$objResult["fix_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$objResult["fix_id"]?>);">Delete</a>
               </tr>
-              <?php
-}
-?>
-              <tr>
-                <td><div align="center"><input type="text" name="member_id" size="5"></div></td>
-                <td><input type="text" name="username" size="5"></td>
-                <td><input type="text" name="password" size="20"></td>
-                <td><input type="text" name="name" size="20"></td>
-                <td><div align="center"><input type="text" name="lastname" size="2"></div></td>
-                <td align="right"><input type="text" name="phone" size="5"></td>
-                <td align="right"><input type="text" name="email" size="5"></td>
-                <td align="right"><input type="text" name="address" size="5"></td>
-                <td align="right"><input type="text" name="sector" size="5"></td>
-                <td colspan="2" align="right"><div align="center">
-                  <input name="btnAdd" type="button" id="btnAdd" value="Add" OnClick="frmMain.hdnCmd.value='Add';frmMain.submit();">
-                </div></td>
-              </tr>
-            </table>
-          </form>
- 
-      </div></td>
+   <?
+  }else{
+  ?>
+        <tr bgcolor="#FFFFFF">
+          <td><? echo $objResult["admin_id"];?></td>
+          <td width="69"><? echo $objResult["username"];?></td>  
+          <td width="93"><? echo $objResult["password"];?></td>
+          <td width="103"><? echo $objResult["name"];?></td>
+          <td width="103"><? echo $objResult["lastname"];?></td>
+          <td width="193"><? echo $objResult["phone"];?></td>
+          <td width="89"><? echo $objResult["email"];?></td>
+          <td width="42" ><? echo $objResult["position"];?></td>
+         
+          <td width="103">
+              <a href="javascript:edit_row(<?=$objResult["admin_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$objResult["admin_id"]?>);">Delete</a>
+              
+			</td>
+        </tr>
+      <? }}?>
+        </table></div>
+     </td>
     </tr>
-  </tbody>
 </table>
-
+<script type="text/javascript">
+function save_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/memberlist.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="admin_id_inp" value="'+id+'"><input type="text" name="username" value="'+$("#username_inp").val()+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="position" value="'+$("#position_inp").val()+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/memberlist.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="fix_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Admin/memberlist.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="del_fix_id" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>

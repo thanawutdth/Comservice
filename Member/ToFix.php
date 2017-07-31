@@ -16,22 +16,23 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-if(isset($_POST['name'])){
+print_r ($_POST);
+if(isset($_POST['detail'])){
 		$insertdata = array(
-		"name" =>$_POST['name'],
-		"lastname" =>$_POST['lastname'],
+		"name" =>$user_dat['name'],
+		"lastname" =>$user_dat['lastname'],
 		"date" =>$_POST['date'],
-		"sector" =>$_POST['sector'],
+		"sector" =>$user_dat['sector'],
 		"type" =>$_POST['type'],
 		"detail" =>$_POST['detail'],
-		"phone" =>$_POST['phone'],
+		"phone" =>$user_dat['phone'],
 		"fixuser" =>$_SESSION['username']);
 		
 		$m_fix->insert_fix($insertdata);
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-         window.open("<?echo site_url('Member/list_repair.php');?>","_self");            
+         window.open("<?echo site_url('Member/listrepair.php');?>","_self");            
         </script>
     <?
 	}
