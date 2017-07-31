@@ -8,7 +8,7 @@
       <td width="657" rowspan="9" align="center"><table width="658" height="469" border="0">
         <tbody>
           <tr>
-            <td height="75" colspan="4" align="center" valign="top"><a href=""><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
+            <td height="75" colspan="4" align="center" valign="top"><a href="<?=site_url()?>Member/news1.php"><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
             </tr>
           <tr>
             <td width="84" height="161">&nbsp;</td>

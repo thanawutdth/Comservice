@@ -1,6 +1,4 @@
-<?
-include('../meta.php');
-?>
+<? include('meta_technic.php');?>
 
  
   
