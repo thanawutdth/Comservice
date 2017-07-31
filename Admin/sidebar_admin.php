@@ -15,7 +15,7 @@
   <a href="<?=site_url()?>Webboard/Webboard.php"><input type="button" name="button8" id="button8" value="กระทู้"></a>
   <a href="<?=site_url()?>Admin/regisformember.php"><input type="button" name="button9" id="button9" value="สมัครสมาชิก"></a>
   <a href="<?=site_url()?>Admin/report.php"><input type="button" name="button2" id="button3" value="รายงาน"></a>
-  <a href="<?=site_url()?>Admin/Evalution.php"><input type="button" name="button2" id="button4" value="ประเมิน"></a>
+
         </div>
         
       </div>
