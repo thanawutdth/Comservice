@@ -25,6 +25,11 @@ if (isset($_POST['fix_id_inp'])) {
     "infer" =>$_POST['infer']);
     $m_fix->update_fix($insertdata,$_POST['fix_id_inp'])
 }
+if (isset($_POST['del_fix_id'])) {
+  $insertdata = array(
+    "status" =>"ยกเลิก");
+    $m_fix->update_fix($insertdata,$_POST['del_fix_id'])
+}
 
 $fix_db = $m_fix->get_all();
 
@@ -132,7 +137,7 @@ foreach ($fix_db->result as $key => $value)
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
 			  ?>
-              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="">Delete</a>
+              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
               
 			  <?
           }?></td>
@@ -161,6 +166,15 @@ foreach ($fix_db->result as $key => $value)
           $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
           $(myform).attr("method","post");
           $(myform).html('<input type="text" name="fix_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="del_fix_id" value="'+id+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();
