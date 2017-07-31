@@ -1,183 +1,141 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<title>ComputerService</title>
+<? include('meta_admin.php');
+require_once("../model/m_user.php");
+require_once("../model/m_device.php");
+$m_user = new M_user;
+$m_device = new M_device;
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
+$user_dat=$m_user->get_user_admin($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('logout.php');?>","_self");            
+        </script>
+    <?
+}
+print_r ($_POST);
+if (isset($_POST['device_id_inp'])) {
+  $insertdata = array(
+    "type" =>$_POST['type']);
+    
+$m_device->update_device($insertdata,$_POST['device_id_inp']);
+}
+if (isset($_POST['del_device_id'])) {
 
-
-<body topmargin="0">
-<table width="200" border="2" align="center">
-  <tbody>
+    $m_device->delete_device($_POST['del_device_id']);
+}
+$device_db = $m_device->get_all_device();
+?>
     <tr>
-      <th height="212" scope="col"><img src="../Image/header2.jpg" width="911" height="212" alt=""/></th>
-    </tr>
-    <tr align="left" valign="top">
-      <td height="48" align="left">
-        <div align="center">
-        
-        
-        
+      <td>      
+        <table width="200" border="0" align="center">
+          <tbody>
+            <tr>
+              <td height="40" align="center" valign="top" bgcolor="#FFFFFF">
+                <table width="890" border="0">
+                  <tbody>
+                    <tr>
+                      <td width="3%"><a href="<?=site_url()?>Admin/adminlogin.php">
+                        <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
+                      </a></td>
+                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
+                      <td width="52%" align="center"><span style="color: #4C7D9B">
+                      <h1>รายการชื่อแอดมิน,ช่าง</h1></span></td>
+                      <td width="25%"><table width="200" border="0">
+                        <tbody>
+                            <tr>
+                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
+                              <td width="63%"><input type="search" name="search" id="search"></td>
+                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                            </tr>
+                        </tbody>
+                        </table></td>
+                    </tr>
+                  </tbody>
+              </table></td> 
+            </tr> </tbody></table>
+       
+       
+       
+       
+       
+        <p>
+          
+		  
+        </p>
+        <div id="tarang">
+          <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
+            <input type="hidden" name="hdnCmd" value="">
+            <table width="891" border="1">
+              <tr>
+                <th width="75">device_id</th>
+                <th width="75"> <div align="center">type </div></th>
+                
+                <th width="42"> <div align="center">Edit Delete </div></th>
                
-          <?
-$objConnect = mysql_connect("localhost","root","1234") or die("Error Connect to Database");
-$objDB = mysql_select_db("project2");
-
-
-//*** Add Condition ***//
-if($_POST["hdnCmd"] == "Add")
+              </tr>
+ <?
+foreach ($device_db->result as $key => $objResult)
 {
- $strSQL = "INSERT INTO device_db ";
- $strSQL .="(device_id,flname,type,date) ";
- $strSQL .="VALUES ";
- $strSQL .="('".$_POST["device_id"]."','".$_POST["flname"]."' ";
- $strSQL .=",'".$_POST["type"]."' ";
- $strSQL .=",'".$_POST["dete"]."')"; 
- 
- $objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-//*** Update Condition ***//
-if($_POST["hdnCmd"] == "Update")
-{
- $strSQL = "UPDATE device_db SET ";
- $strSQL .="device_id = '".$_POST["fixid"]."' ";
- $strSQL .=",flname = '".$_POST["flname"]."' ";
- $strSQL .=",type = '".$_POST["type"]."' ";
- $strSQL .=",date = '".$_POST["date"]."' ";
- $strSQL .="WHERE device_id = '".$_POST["hdnEditfixid"]."' ";
- 
- $objQuery = mysql_query($strSQL);
- if(!$objQuery)
- {
-  echo "Error Update [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-//*** Delete Condition ***//
-if($_GET["Action"] == "Del")
-{
- $strSQL = "DELETE FROM device_db ";
- $strSQL .="WHERE device_id = '".$_GET["FixID"]."' ";
- $objQuery = mysql_query($strSQL);
-
- if(!$objQuery)
- {
-  echo "Error Save [".mysql_error()."]";
- }
- //header("location:$_SERVER[PHP_SELF]");
- //exit();
-}
-
-$strSQL = "SELECT * FROM device_db";
-$objQuery = mysql_query($strSQL) or die ("Error Query [".$strSQL."]");
+	 if (isset($_POST['device_id'])&&$_POST['device_id']==$objResult["device_id"]) {   
 ?>
-
-<div id="tarang"  >  
-<form  name="frm" method="post" action="<?=$_SERVER["PHP_SELF"];?>">
-<input type="hidden" name="hdnCmd" value="">
-      
-        <table width="95%" border="1" cellspacing="3">
-      <tbody>
-        <tr align="center" bgcolor="#25B1E1" style="color: #FFFFFF; font-size: 14px;">
-          <td width="29" height="25"><strong>ลำดับที่</strong></td>
-          <td><strong>name</strong></td>
+           
+             
+              <tr>
+         		<td><? echo $objResult["device_id"];?></td>
+                <td><input type="text" id="type_inp" value="<? echo $objResult["type"];?>"></td>
+                <
+                
+              <td> <a href="javascript:save_row('<?=$objResult["device_id"]?>');">Update</a><br><a href="">Cancel</a></td>
+              </tr>
+   <?
+  }else{
+  ?>
+        <tr bgcolor="#FFFFFF">
+          <td><? echo $objResult["device_id"];?></td>
+          <td width="69"><? echo $objResult["type"];?></td>  
           
-          <td><strong>type</strong></td>
-          <td><strong>date</strong></td>
-          </tr>
-        </tbody>
-<?
-while($objResult = mysql_fetch_array($objQuery))
-{
-?>
-  <?
- if($objResult["device_id"] == $_GET["FixID"] and $_GET["Action"] == "Edit")
- {
-  ?>
-  <tr>
-    <td><div align="center">
-  <input type="text" name="fixid" size="5" value="<? echo $objResult["device_id"];?>">
-  <input type="hidden" name="hdnEditfixid"  value="<? echo $objResult["device_id"];?>">
- </div></td>
-    <td><input type="text" name="name"  value="<? echo $objResult["flname"];?>"></td>
-    <td><input type="text" name="type"  value="<? echo $objResult["type"];?>"></td>
-    <td><input type="date" name="date"  value="<? echo $objResult["date"];?>"></td>
-    
-    <td colspan="2" align="right">
-      
-      <div align="center">
-        <input name="btnAdd" type="button" id="btnUpdate" value="Update" OnClick="frm.hdnCmd.value='Update';frm.submit();">
-        <input name="btnAdd" type="button" id="btnCancel" value="Cancel" OnClick="window.location='<?=$_SERVER["PHP_SELF"];?>';">
-      </div></td>
-  </tr>
-  <?
- }
-  else
- {
-  ?>
-  <tr bgcolor="#FFFFFF">
-          <td width="63"><? echo $objResult["admin_id"];?></td>  
-          
-          <td width="63"><? echo $objResult["flname"];?></td>  
-          <td width="94"><? echo $objResult["type"];?></td>
-          <td width="105"><? echo $objResult["date"];?></td>
-          <td align="center"><a href="<?=$_SERVER["PHP_SELF"];?>?Action=Edit&FixID=<?=$objResult["device_id"];?>">Edit</a></td>
- <td align="center"><a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='<?=$_SERVER["PHP_SELF"];?>?Action=Del&FixID=<?=$objResult["device_id"];?>';}">Delete</a></td>
-  </tr>
-  <?
- }
-  ?>
-<?
-}
-?>
-  <tr>
-    <td><div align="center"><input type="text" name="device_id" size="5"></div></td>
-    <td><input type="text" name="flname" ></td>
-    <td><input type="text" name="type" size="20"></td>
-    <td ><input type="text" name="date" ></td>
-    
-    <td colspan="2" align="right"><div align="center">
-      <input name="btnAdd" type="button" id="btnAdd" value="Add" OnClick="frm.hdnCmd.value='Add';frm.submit();">
-    </div></td>
-  </tr>
-</table>
-</form>
-<?
-mysql_close($objConnect);
-?>       
-     
-   
-</div></td></tr>
-</table></td>
+         
+          <td width="103">
+               <a href="javascript:edit_row('<?=$objResult["device_id"]?>');">Edit</a><br><a href="javascript:del_row('<?=$objResult["device_id"]?>');">Delete</a>
+			</td>
+        </tr>
+      <? }}?>
+        </table></div>
+     </td>
     </tr>
-    <tr>
-      <td height="19">&nbsp;</td>
-</tr>
-  </tbody>
 </table>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
-<script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+function save_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/Todevice.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="device_id_inp" value="'+id+'"><input type="text" name="type" value="'+$("#type_inp").val()+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Admin/Todevice.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="device_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Admin/Todevice.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="del_device_id" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>

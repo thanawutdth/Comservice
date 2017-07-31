@@ -7,7 +7,7 @@
         </td>
         
       <td width="657" rowspan="9" align="center" valign="top">
-      <form id="Admin" name="addAdmin" method="post" action="/project2/addAdmin.php">
+      <form id="Admin" name="addAdmin" method="post" action="<?=site_url()?>addAdmin.php">
         <fieldset>
           <legend> <h3><span style="color:#2288BB">แอดมิน,ช่าง</span></h3></legend>
           <table width="476" height="270" border="0" align="center" id="regis"  >
