@@ -44,7 +44,7 @@
 		public function get_reply_by_board_id($id){
 
 			$this->order_by("date_a","desc");
-			$where = array('id_question' => $id);
+			$this->where("id_question",$id);
 			$result=$this->get("webboard_ans");
 			
 			return $result;
