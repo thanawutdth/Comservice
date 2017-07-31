@@ -1,27 +1,45 @@
 <? include('meta_technic.php');
 require_once("../model/m_user.php");
 $m_user = new M_user;
+if(isset($_POST['username'])){
+		$insertdata = array(
+		"username" =>$_POST['username'],
+		"password" =>$_POST['password'],
+		"name" =>$_POST['name'],
+		"lastname" =>$_POST['lastname'],
+		"phone" =>$_POST['phone'],
+		"email" =>$_POST['email']);
+		
+		$m_user->update_technic($insertdata,$_SESSION['username']);
+		?>
+        <script type="text/javascript">
+			alert("บันทึกข้อมูลเรียบร้อย");
+           // window.open("<?echo site_url('Technic/techniclogin.php');?>","_self");            
+        </script>
+    <?
+	}
 $user_dat=$m_user->get_user_admin($_SESSION['username']);
 $err_msg="";
 if (isset($user_dat['username'])) {
   $_SESSION['username']=$user_dat['username'];
 }else{
-?>
+  ?>
         <script type="text/javascript">
             window.open("<?echo site_url('../logout.php');?>","_self");            
         </script>
     <?
 }
-?>
 
-?>
+?>  
+
+
 
     <tr valign="top">
       <td width="248">
 	  <? include("sidebar_technic.php");?>
       </td>
         
-        <form id="Member" name="addMember" method="post" action="/project2/addMember.php">  
+        <form id="Member" name="addMember" method="post" action="<?=site_url()?>Technic/editdatatech.php">  
     <td width="657" rowspan="9" valign="top"><fieldset>
       <legend><h3><span style="color:#2288BB">ข้อมูลส่วนตัว</span></h3></legend>
       
@@ -38,17 +56,17 @@ if (isset($user_dat['username'])) {
             </tr>
           <tr>
             <td height="34" align="center"><strong>ชื่อ</strong></td>
-            <td><input type="text" name="flname"  placeholder="ชื่อ" value="<? echo $user_dat['name'];?>"></td>
+            <td><input type="text" name="name"  placeholder="ชื่อ" value="<? echo $user_dat['name'];?>"></td>
           </tr>
           <tr>
             <td height="34" align="center"><label><strong> นามสกุล</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input name="lastname" type="text" id="textfield" placeholder="นามสกุล" value="<? echo $user_dat['lastname'];?>"></td>
+            <td><input name="lastname" type="text" id="lastname" placeholder="นามสกุล" value="<? echo $user_dat['lastname'];?>"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>เบอร์โทรศัพท์</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input type="tel" name="tel" id="tel" placeholder="เบอร์โทรศัพท์" value="<? echo $user_dat['phone'];?>"></td>
+            <td><input type="tel" name="phone" id="tel" placeholder="เบอร์โทรศัพท์" value="<? echo $user_dat['phone'];?>"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>อีเมลล์</strong></label>

@@ -14,7 +14,7 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-print_r ($_POST);
+
 if (isset($_POST['device_id_inp'])) {
   $insertdata = array(
 	"status" =>$_POST['status']);

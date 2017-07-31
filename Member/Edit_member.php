@@ -1,5 +1,4 @@
-<?
-include('../meta.php');
+<? include('../meta.php');
 require_once("../model/m_user.php");
 $m_user = new M_user;
 if(isset($_POST['flname'])){

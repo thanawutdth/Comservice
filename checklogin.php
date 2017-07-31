@@ -25,7 +25,7 @@ if (isset($user_dat['username'])) {
 	?>
         <script type="text/javascript">
         		alert('username and password incorrect');
-        		//window.open("<?echo site_url('logout.php');?>","_self");	        	
+        		window.open("<?echo site_url('logout.php');?>","_self");	        	
         </script>
 		<?
 }

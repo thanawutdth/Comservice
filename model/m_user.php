@@ -50,6 +50,10 @@
 			$where = array('username' => $usn);
 			$this->update("member_db",$data,$where);	
 		}
+		public function update_technic($data,$usn){
+			$where = array('username' => $usn);
+			$this->update("admin_db",$data,$where);	
+		}
 		public function update_member_username($data,$usn){
 			$where = array('member_id' => $usn);
 			$this->update("member_db",$data,$where);	
