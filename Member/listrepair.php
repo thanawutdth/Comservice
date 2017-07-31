@@ -14,6 +14,17 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
+if (isset($_POST['fix_id_inp'])) {
+  $insertdata = array(
+    "name" =>$_POST['name'],
+    "date" =>$_POST['date'],
+    "sector" =>$_POST['sector'],
+    "type" =>$_POST['type'],
+    "detail" =>$_POST['detail'],
+    "phone" =>$_POST['phone'],
+    "infer" =>$_POST['infer']);
+    $m_fix->update_fix($insertdata,$_POST['fix_id_inp'])
+}
 
 $fix_db = $m_fix->get_all();
 
@@ -84,7 +95,30 @@ $fix_db = $m_fix->get_all();
         </tbody>
 <?php
 foreach ($fix_db->result as $key => $value)
-{ ?>
+{ 
+  if (isset($_POST['fix_id'])&&$_POST['fix_id']==$value["fix_id"]) {
+    ?>
+        <tr bgcolor="#FFFFFF">
+          <td><? echo $value["fix_id"];?></td>
+          <td width="69"><input type="text" id="name_inp" value="<? echo $value["name"];?>"></td>  
+          <td width="93"><input type="text" id="date_inp" value="<? echo $value["date"];?>"></td>
+          <td width="103"><input type="text" id="sector_inp" value="<? echo $value["sector"];?>"></td>
+          <td width="103"><input type="text" id="type_inp" value="<? echo $value["type"];?>"></td>
+          <td width="193"><input type="text" id="detail_inp" value="<? echo $value["detail"];?>"></td>
+          <td width="89"><input type="text" id="phone_inp" value="<? echo $value["phone"];?>"></td>
+          <td width="42" ><img src="<?=site_url()?>Image/icon left bar/Wait.png" width="32" height="32" alt=""/></td>
+          <td width="88"><input type="text" id="infer_inp" value="<? echo $value["infer"];?>"></td>
+          <td width="103"><? echo $value["technician"];?></td>
+          <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
+        ?>
+              <a href="javascript:save_row(<?=$value["fix_id"]?>);">Update</a><br><a href="">Cancel</a>
+              
+        <?
+          }?></td>
+        </tr>
+      <?
+  }else{
+  ?>
         <tr bgcolor="#FFFFFF">
           <td><? echo $value["fix_id"];?></td>
           <td width="69"><? echo $value["name"];?></td>  
@@ -98,7 +132,7 @@ foreach ($fix_db->result as $key => $value)
           <td width="103"><? echo $value["technician"];?></td>
           <td width="103"><? if($value["fixuser"]==$_SESSION['username']){
 			  ?>
-              <a href="">Edit</a><br><a href="">Delete</a>
+              <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="">Delete</a>
               
 			  <?
           }?></td>
@@ -112,5 +146,25 @@ foreach ($fix_db->result as $key => $value)
 
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
 <script src="<?=site_url()?>js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+  function save_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="fix_id_inp" value="'+id+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="date" value="'+$("#date_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="detail" value="'+$("#detail_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="infer" value="'+$("#infer_inp").val()+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Member/listrepair.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="fix_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+</script>
 </body>
 </html>
