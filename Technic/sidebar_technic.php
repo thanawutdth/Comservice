@@ -6,7 +6,7 @@
 
  
   <a href="<?=site_url()?>Technic/editdatatech.php"> <input  type="button" name="button1" id="button1" value="แก้ไขข้อมูลส่วนตัว"  ></a>
- <a href="<?=site_url()?>Technic/list_technician.php"> <input  type="button" name="button1" id="button1" value="รายชื่อช่างซ่อม"  ></a>
+ 
   
   <a href="<?=site_url()?>Technic/list_repair.php"><input type="button" name="button6" id="button6" value="รายการแจ้งซ่อม"></a>
    <a href="<?=site_url()?>Technic/Todevice.php"><input type="button" name="button7" id="button7" value="รายการอุปกรณ์"></a>
