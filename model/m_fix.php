@@ -30,6 +30,7 @@
 		public function get_all(){
 
 			$this->order_by("date");
+			$this->where("status","ยกเลิก","!=");
 			$result=$this->get("fix_db");
 			
 			return $result;
