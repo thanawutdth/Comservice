@@ -33,15 +33,32 @@ $admin_db = $m_user->get_all_user();
 ?>
     <tr>
       <td>      
-      <td width="657" rowspan="11" align="left" valign="top"><div class="tarang" id="">
-        <a href="<?=site_url()?>Admin/adminlogin.php"><p><img src="<?=site_url()?>Image/icon left bar/Back.png" width="32" height="32" alt=""/></p></a>
-        <p>
-          
-		  
-<?php
-
-?>
-        </p>
+      <table width="200" border="0" align="center">
+          <tbody>
+            <tr>
+              <td height="40" align="center" valign="top" bgcolor="#FFFFFF">
+                <table width="890" border="0">
+                  <tbody>
+                    <tr>
+                      <td width="3%"><a href="<?=site_url()?>Admin/adminlogin.php">
+                        <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
+                      </a></td>
+                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
+                      <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการสมาชิก</h1></span></td>
+                      <td width="25%"><table width="200" border="0">
+                        <tbody>
+                            <tr>
+                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
+                              <td width="63%"><input type="search" name="search" id="search"></td>
+                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                            </tr>
+                        </tbody>
+                        </table></td>
+                    </tr>
+                  </tbody>
+              </table></td> 
+            </tr> </tbody></table>
+       
         <div id="tarang">
           <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="hdnCmd" value="">
