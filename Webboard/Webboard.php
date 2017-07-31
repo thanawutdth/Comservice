@@ -1,56 +1,65 @@
-
 <?
 include('../meta.php');
+date_default_timezone_set('Asia/Bangkok');
+require_once("../model/m_user.php");
+$m_user = new M_user;
+require_once("../model/m_board.php");
+$m_board = new M_board;
+if(isset($_POST['title'])){
+    $insertdata = array(
+    "title" =>$_POST['title'],
+    "message" =>$_POST['message'],
+    "name" =>$_POST['name'],
+    "email" =>$_POST['email'],
+    "date_q" =>date("Y-m-d H:i:s"),
+    "count_q" =>0,
+    );
+    
+    $m_board->insert_post($insertdata);
+    ?>
+        <script type="text/javascript">
+      alert("บันทึกข้อมูลเรียบร้อย");
+            //window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
+        </script>
+    <?
+  }
+$topic=$m_board->get_all_web_quiz();
+
 ?>  
   <tr align="left" valign="top">
-    <td width="248" align="center"><?include('../sidebar.php');?></td>
+    <td width="248" align="center"><?include('../sidebar_logged.php');?></td>
     
     <td width="743" align="center">
-  <?
-  
-   print"<table width=456 height=59 border=2>";
-   print"<tr>";
-   print"<td width=703>";
-   print"  <table width=532 align=center>";
-      print"<tr bgcolor=#6AC2EF>";
-         print"<td>รหัสกระทู้</td>";
-          print" <td>หัวข้อกระทู้</td>";
-          print" <td>ผู้ตั้งคำถาม</td>";
-          print" <td>วันที่ตั้งคำถาม</td>";
-       print" </tr>";
-        
-include("connect.php");
-	$sql = "select * from webboard_quiz order by id_question desc";
-	$dbquery = mysql_db_query($dbname,$sql);
-	$num_row = mysql_num_rows($dbquery);
-	$i=0;
-		while($i < $num_row)
-		{
-			$result = mysql_fetch_array($dbquery);
-			$id_question = $result["id_question"];
-			$title = $result["title"];
-			$name = $result["name"];
-			$message = $result["message"];
-			$email = $result["email"];
-			$date_q = $result["date_q"];
-			$count_q = $result["count_q"];
-			print "<tr bgcolor=#FFFFFF>";
-			print"<td>".$id_question."</td>";
-			print"<td><a href=\"webboard_ans.php?id_question=$id_question\" target=\"$id_question\">$title</a></td>";
-			print"<td>".$name."</td>";
-			print"<td>".$date_q."</td>";
-				print"</tr>";	
-			$i++;
-			}
-			
-			print"</table>";
-			mysql_close();
-		print"</td>";
-		print"</tr>";
-		print"</table>";
-
- ?>
-<form name="form1" method="post" action="<?=site_url()?>postques.php">
+    <table width=456 height=59 border=2>
+      <tr>
+        <td width=703>
+          <table width=532 align=center>
+          <tr bgcolor=#6AC2EF>
+          <td>รหัสกระทู้</td>
+          <td>หัวข้อกระทู้</td>
+          <td>ผู้ตั้งคำถาม</td>
+          <td>วันที่ตั้งคำถาม</td>
+          <td>จำนวนที่ตอบ</td>
+          </tr>
+          <?
+          foreach ($topic->result as $key => $value) {
+          
+          ?>
+          <tr bgcolor=#FFFFFF>
+            <td><?=$value['id_question']?></td>
+            <td><a href="<?=site_url()?>Webboard/webboard_ans.php?id_question=<?=$value['id_question']?>" ><?=$value['title']?></a></td>
+            <td><?=$value['name']?></td>
+            <td><?=$value['date_q']?></td>
+            <td><?=$value['count_q']?></td>
+          </tr>
+          <?
+        }
+          ?>
+          </table>
+        </td>
+      </tr>
+    </table>
+<form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard.php">
     <table width="477" height="313" border="2">
       <tbody>
         <tr>
@@ -97,7 +106,6 @@ include("connect.php");
 </table></div>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>

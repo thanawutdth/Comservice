@@ -1,148 +1,67 @@
 
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComputerService</title>
-<link href="../css/login.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	background-image: url(Image/images
-%20(1).jpg);
-	background-image: url(../Image/white-wallpaper-18.jpg);
-}
-</style>
+<?
+include('../meta.php');
+date_default_timezone_set('Asia/Bangkok');
+require_once("../model/m_user.php");
+$m_user = new M_user;
+require_once("../model/m_board.php");
+$m_board = new M_board;
+if(isset($_POST['title'])){
+    $insertdata = array(
+    "name" =>$_POST['title'],
+    "message" =>$_POST['message'],
+    "email" =>$_POST['email'],
+    "date_a" =>date("Y-m-d H:i:s"),
+    "id_question" =>$_GET['id_question'],
+    );
+    
+    $m_board->insert_reply($insertdata);
 
+    ?>
+        <script type="text/javascript">
+      alert("บันทึกข้อมูลเรียบร้อย");
+            //window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
+        </script>
+    <?
+  }
 
+$reply=$m_board->get_reply_by_board_id($_GET['id_question']);
+$count_update=array("count_q"=>$reply->rowCount);
+$m_board->update_post($count_update,$_GET['id_question']);
+$topic=$m_board->get_board_by_id($_GET['id_question']);
 
-<body topmargin="0" >
-
-
-<table width="841" border="2" align="center">
-<tbody>
-  <tbody>
+?>  
   <tr align="left" valign="top">
-    <th height="189" colspan="3" scope="col"><img src="../Image/header2.jpg" width="999" height="187" alt=""/></th>
-  </tr>
-  <tr align="left" valign="top">
-    <td width="248" align="center"><div id="login">
-      <h1>LOG IN</h1>
-      <form name="home" method="post" action="/Project2/checklogin.php" >
-        <p>
-          <input  type="Text" placeholder="username" id="username" name="username"/>
-          <input type="password" placeholder="Password"  id="password" name="password"/>
-          <input type="submit" value="Submit" />        
-        <p>&nbsp;
-        <div id="border">
-          <input type="button" name="button1" id="button1" value="แจ้งซ่อมออนไลน์"  >
-          <a href="/project2/Device/Todevice.php">
-          <input type="button" name="button5" id="button5" value="การเบิกอุปกรณ์">
-            </a><a href="../Repairing/repairing.html">
-              <input type="button" name="button6" id="button6" value="รายการแจ้งซ่อม">
-              </a><a href="webboard.html">
-                <input type="button" name="button7" id="button7" value="กระทู้-ถามตอบ">
-                </a><a href="../Stat/stat.html">
-                <input type="button" name="button8" id="button8" value="สถานะการแจ้งซ่อม">
-                </a>
-          <input type="button" name="button9" id="button9" value="ดาวน์โหลด">
-          <input type="button" name="button2" id="button2" value="ติดต่อเรา">
-        </div>
-        </p>
-       
-        
-        
-        <p>
-        
-        </p>
-        <p>
-          
-        </p>
-        
-      </form>
-    </div></td>
+    <td width="248" align="center"><?include('../sidebar_logged.php');?></td>
+    <td width="50px;"></td>
+    <td>
   
-    <td width="743" align="center">
-     <div align="center">
-      <p>
-      <?
-      include("connect.php");
-	  	$sql = "select * from webboard_quiz where id_question=$id_question";
-		$dbquery = mysql_db_query($dbname,$sql);
-		$result = mysql_fetch_array($dbquery);
-	
-			$id_question = $result["id_question"];
-			$title = $result["title"];
-			$name = $result["name"];
-			$message = $result["message"];
-			$email = $result["email"];
-			$date_q = $result["date_q"];
-	  
-	  	  print"<table width=456 height=59 border=2>";
-		   print"<tr>";
-		   print"<td width=703>";
-		   print"  <table width=532 align=center>";
-     		 print"<tr bgcolor=#6AC2EF>";
-      	   print"<td>หัวข้อกระทู้</td>";
-          print" <td>".$title."</td>";
-            print"<td>รายละเอียด</td>";
-          print" <td>".$message."</td>";
-		     print"<td>ผู้ตั้งกระทู้</td>";
-          print" <td>".$name."</td>";
-      	 print" </tr>";
-	  print" </table>";
-	  print" </td>";
-	  print" </tr>";
-	  print" </table>";
-	  
-	  	$sql = "select * from webboard_ans where id_question = $id_question order by id_ans";
-		$dbquery = mysql_db_query($dbname,$sql);
-		$num_row = mysql_num_rows($dbquery);
-		if($num_row=="")
-		{
-			print"ยังไม่มีผู้แสดงความคิดเห็น"	;
-		}
-		$i=0;
-		while($i<$num_row)
-		{
-			$result = mysql_fetch_array($dbquery);
-			$id_ans = $result["id_ans"];
-			$id_question = $result["id_question"];
-			$name = $result["name"];
-			$message = $result["message"];
-			$email = $result["email"];
-			$date_a = $result["date_a"];
-			$i++;
-			
-			print"<br>";
-			print"<table width=532 border=1 align=center cellpadding=1 cellspacing=1 >";
-			print"<tr>";
-			print"<td width=703>";
-			print"<tr bgcolor=#FFFFFF><div align=center><b>ความคิดเห็นที่ $n</b></div></tr>";
-			print"<tr bgcolor=#CCCCCC>";
-			print"<td width=97><b>รายละเอียด</b></td>";
-			print"<td width=417>".$message."</td>";
-			print"</tr>";
-			print"<tr bgcolor=#CCCCCC>";
-			print"<td width=97><b>จากคุณ</b></td>";
-			print"<td width=417>".$name."</td>";
-			print"</tr>";
-			print"</table>";
-			print"</td>";
-			print"</tr>";
-			print"</table>";
-			$i++;
-		}
-		mysql_close();
-			 
-      ?>
-     </p></div>
-    <form name="form1" method="post" action="/project2/Webboard/reply.php">
-    <table width="477" height="313" border="2">
+    <form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard_ans.php?id_question=<?=$_GET['id_question']?>">
+    <table width="100%" height="ฟีะน" border="2">
       <tbody>
+        <tr>
+          <td colspan="2">
+            <h2><?=$topic['title']?></h2>
+            <p>E-Mail: <?=$topic['email']?> Name: <?=$topic['name']?> Date: <?=$topic['date_q']?></p>
+            <br>
+            <p style="font-size: 26px;"><?=$topic['message']?></p>
+            <br>
+          </td>
+        </tr>
+        <?
+        foreach ($reply->result as $key => $value) {
+          ?>
+          <tr>
+          <td colspan="2">
+            <p>E-Mail: <?=$value['email']?> Name: <?=$value['name']?> Date: <?=$value['date_a']?></p>
+            <br>
+            <p><?=$value['message']?></p>
+            <br>
+          </td>
+        </tr>
+          <?
+        }
+        ?>
         <tr>
           <td colspan="2" align="center">แสดงความคิดเห็น</td>
           </tr>
@@ -155,10 +74,6 @@ body {
           <td><textarea name="message" id="message" wrap="virtual"></textarea></td>
         </tr>
         <tr>
-          <td>ชื่อผู้โพสต์:</td>
-          <td><input type="text" name="name" id="name"></td>
-        </tr>
-        <tr>
           <td>อีเมล์:</td>
           <td><input type="email" name="email" id="email"></td>
         </tr>
@@ -167,7 +82,7 @@ body {
           <td><table width="200" border="2">
             <tbody>
               <tr>
-                <td width="100"><input type="button" name="button" id="button" value="ตั้งคำถาม"></td>
+                <td width="100"><input type="submit" name="button" id="button" value="ตั้งคำถาม"></td>
                 <td width="82"><input type="button" name="button3" id="button3" value="ยกเลิก"></td>
               </tr>
             </tbody>
@@ -176,12 +91,13 @@ body {
       </tbody>
     </table>
   </form>
+  </td>
   </tr>
-  <tr>
-  <td width="248" align="center" valign="top">&nbsp;</td>
-  <td width="743" align="center" valign="top"><p>&nbsp;</p></td>
-</tr>
-<div class="banner"> </div>
+
+
+
+
+</tbody>
 </table></div>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
