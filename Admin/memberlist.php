@@ -30,6 +30,17 @@ if (isset($_POST['del_member_id'])) {
     $m_user->delete_member($_POST['del_member_id']);
 }
 $admin_db = $m_user->get_all_user();
+
+//if (isset($_POST['del_fix_id'])) {
+//  $insertdata = array(
+  //  "status" =>"ยกเลิก");
+   // $m_user->update_fix($insertdata,$_POST['del_fix_id']);
+//}
+$admin_db = $m_user->get_all_user();
+print_r($_POST);
+if (isset($_POST['search'])) {
+  $admin_db = $m_user->search_member($_POST['search']);
+}
 ?>
     <tr>
       <td>      
@@ -45,15 +56,15 @@ $admin_db = $m_user->get_all_user();
                       </a></td>
                       <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการสมาชิก</h1></span></td>
-                      <td width="25%"><table width="200" border="0">
+                      <td width="25%"><td width="25%"><form method="post" action="<?=site_url("Admin/memberlist.php")?>"><table width="200" border="0">
                         <tbody>
                             <tr>
                               <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
                               <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                              <td width="24%"><input type="submit" name="button" id="button" value="Search"></td>
                             </tr>
                         </tbody>
-                        </table></td>
+                        </table></form></td>
                     </tr>
                   </tbody>
               </table></td> 

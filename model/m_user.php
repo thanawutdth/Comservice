@@ -88,6 +88,44 @@
 			
 			return $result;
 		}
+		public function get_all(){
+
+			$this->order_by("admin_id");
+			$this->where("status","ยกเลิก","!=");
+			$result=$this->get("admin_db");
+			
+			return $result;
+		}
+		public function search($txt){
+			$result = new stdClass();
+			$result->result = array();
+			$result->rowCount=0;
+			try{
+			$stm=$this->db->prepare("SELECT * from admin_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%')");
+			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
+			$stm->execute();
+			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
+			$result->rowCount=$stm->rowCount();
+			}catch(PDOException $ex){
+					echo "PDO ERR ".$ex->getMessage().'<br>';
+				}
+			return $result;
+		}
+public function search_member($txt){
+			$result = new stdClass();
+			$result->result = array();
+			$result->rowCount=0;
+			try{
+			$stm=$this->db->prepare("SELECT * from member_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%')");
+			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
+			$stm->execute();
+			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
+			$result->rowCount=$stm->rowCount();
+			}catch(PDOException $ex){
+					echo "PDO ERR ".$ex->getMessage().'<br>';
+				}
+			return $result;
+		}
 		
 	}
 

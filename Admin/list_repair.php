@@ -36,6 +36,10 @@ if (isset($_POST['del_fix_id'])) {
     $m_fix->update_fix($insertdata,$_POST['del_fix_id']);
 }
 $fix_db = $m_fix->get_all();
+print_r($_POST);
+if (isset($_POST['search'])) {
+  $fix_db = $m_fix->search($_POST['search']);
+}
 
 
 
@@ -55,15 +59,15 @@ $fix_db = $m_fix->get_all();
                       </a></td>
                       <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการแจ้งซ่อม</h1></span></td>
-                      <td width="25%"><table width="200" border="0">
+                      <td width="25%"><form method="post" action="<?=site_url("Admin/list_repair.php")?>"><table width="200" border="0">
                         <tbody>
                             <tr>
                               <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
                               <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                              <td width="24%"><input type="submit" name="button" id="button" value="Search"></td>
                             </tr>
                         </tbody>
-                        </table></td>
+                        </table></form></td>
                     </tr>
                   </tbody>
               </table></td> 
@@ -119,6 +123,7 @@ foreach ($fix_db->result as $key => $value)
             <option value="รอดำเนินการ">รอดำเนินการ</option>
             <option value="เสร็จสิ้น">เสร็จสิ้น</option>
             <option value="ไม่สามารถดำเนินการได้">ไม่สามารถดำเนินการได้</option>
+            <option value="ยกเลิก">ยกเลิก</option>
           </select>
           
            <script>
@@ -160,6 +165,10 @@ foreach ($fix_db->result as $key => $value)
 			 	 ?>
 				<img src="<?=site_url()?>Image/icon left bar/Close.png" width="32" height="32" alt=""/>
 				  <?
+			  }else if($value['status']=="ยกเลิก")
+			  {		
+			 	 
+				  echo "ยกเลิก";
 			  }
 				  
 			  ?>

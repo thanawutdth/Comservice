@@ -35,7 +35,7 @@ if (isset($user_dat['username'])) {
 
     <tr>
       <td width="248" height="72">
-        <?include('../sidebar_logged.php');?>
+        <? include('../sidebar_logged.php');?>
       </td>
   
     <form id="Member" name="addMember" method="post" action="<?=site_url()?>Member/Edit_member.php">  

@@ -29,6 +29,7 @@ if (isset($_POST['del_fix_id'])) {
   $insertdata = array(
     "status" =>"ยกเลิก");
     $m_fix->update_fix($insertdata,$_POST['del_fix_id']);
+	
 }
 
 $fix_db = $m_fix->get_all();
