@@ -40,7 +40,7 @@ if (isset($_POST['del_admin_id'])) {
 }
 
 $admin_db = $m_user->get_all();
-print_r($_POST);
+//print_r($_POST);
 if (isset($_POST['search'])) {
   $admin_db = $m_user->search($_POST['search']);
 }
@@ -51,16 +51,16 @@ if (isset($_POST['search'])) {
           <tbody>
             <tr>
               <td height="40" align="center" valign="top" bgcolor="#FFFFFF">
-                <table width="890" border="0">
+                <table width="944" border="0">
                   <tbody>
                     <tr>
-                      <td width="3%"><a href="<?=site_url()?>Admin/adminlogin.php">
+                      <td width="4%"><a href="<?=site_url()?>Admin/adminlogin.php">
                         <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
-                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
-                      <td width="52%" align="center"><span style="color: #4C7D9B">
-                      <h1>รายการชื่อแอดมิน,ช่าง</h1></span></td>
-                      <td width="25%"><td width="25%"><form method="post" action="<?=site_url("Admin/Admin_Technic.php")?>"><table width="200" border="0">
+                      <td width="7%" height="43" style="color: #000000"><h3>BACK </h3></td>
+                      <td width="60%" align="center"><span style="color: #4C7D9B; font-size: 16px;">
+                      <h1>รายการชื่อผู้ดูแลระบบและช่างซ่อม</h1></span></td>
+                      <td width="1%"><td width="28%"><form method="post" action="<?=site_url("Admin/Admin_Technic.php")?>"><table width="200" border="0">
                         <tbody>
                             <tr>
                               <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
@@ -82,8 +82,8 @@ if (isset($_POST['search'])) {
           
 		  
         </p>
-        <div id="tarang">
-          <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
+        <div id="tarang" align="center">
+          <form  name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?> ">
             <input type="hidden" name="hdnCmd" value="">
             <table width="891" border="1">
               <tr>
@@ -106,7 +106,7 @@ foreach ($admin_db->result as $key => $objResult)
 ?>
            
              
-              <tr>
+              <tr align="center">
          		<td><? echo $objResult["admin_id"];?></td>
                 <td><input type="text" id="username_inp" value="<? echo $objResult["username"];?>"></td>
                 <td><input type="text" id="password_inp" value="<? echo $objResult["password"];?>"></td>
@@ -114,7 +114,7 @@ foreach ($admin_db->result as $key => $objResult)
                 <td><input type="text" id="lastname_inp" value="<? echo $objResult["lastname"];?>"></td>
                 <td align="right"><input type="text" id="phone_inp" value="<? echo $objResult["phone"];?>"></td>
                 <td align="right"><input type="text" id="email_inp" value="<? echo $objResult["email"];?>"></td>
-                <td width="42" ><select id="position_inp">
+                <td width="42"  align="center"><select id="position_inp">
             <option value="1">1</option>
             <option value="2">2</option>
            
@@ -139,7 +139,7 @@ foreach ($admin_db->result as $key => $objResult)
    <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $objResult["admin_id"];?></td>
           <td width="69"><? echo $objResult["username"];?></td>  
           <td width="93"><? echo $objResult["password"];?></td>

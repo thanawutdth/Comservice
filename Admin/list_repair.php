@@ -36,7 +36,7 @@ if (isset($_POST['del_fix_id'])) {
     $m_fix->update_fix($insertdata,$_POST['del_fix_id']);
 }
 $fix_db = $m_fix->get_all();
-print_r($_POST);
+
 if (isset($_POST['search'])) {
   $fix_db = $m_fix->search($_POST['search']);
 }
@@ -142,7 +142,7 @@ foreach ($fix_db->result as $key => $value)
       <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $value["fix_id"];?></td>
           <td width="69"><? echo $value["name"];?></td>  
           <td width="93"><? echo $value["date"];?></td>

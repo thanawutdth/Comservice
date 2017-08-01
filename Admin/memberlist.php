@@ -25,19 +25,20 @@ if (isset($_POST['member_id_inp'])) {
 	"sector" =>$_POST['sector']);
 $m_user->update_member_username($insertdata,$_POST['member_id_inp']);
 }
-if (isset($_POST['del_member_id'])) {
+/*if (isset($_POST['del_member_id'])) {
 
     $m_user->delete_member($_POST['del_member_id']);
-}
+}*/
 $admin_db = $m_user->get_all_user();
 
-//if (isset($_POST['del_fix_id'])) {
-//  $insertdata = array(
-  //  "status" =>"ยกเลิก");
-   // $m_user->update_fix($insertdata,$_POST['del_fix_id']);
-//}
-$admin_db = $m_user->get_all_user();
-print_r($_POST);
+if (isset($_POST['del_member_id'])) {
+  $insertdata = array(
+    "status" =>"ยกเลิก");
+    $m_user->update_member_username($insertdata,$_POST['del_member_id']);
+	
+}
+$admin_db = $m_user->get_all_member();
+
 if (isset($_POST['search'])) {
   $admin_db = $m_user->search_member($_POST['search']);
 }
@@ -48,15 +49,15 @@ if (isset($_POST['search'])) {
           <tbody>
             <tr>
               <td height="40" align="center" valign="top" bgcolor="#FFFFFF">
-                <table width="890" border="0">
+                <table width="967" border="0">
                   <tbody>
                     <tr>
-                      <td width="3%"><a href="<?=site_url()?>Admin/adminlogin.php">
+                      <td width="4%"><a href="<?=site_url()?>Admin/adminlogin.php">
                         <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
-                      <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
-                      <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการสมาชิก</h1></span></td>
-                      <td width="25%"><td width="25%"><form method="post" action="<?=site_url("Admin/memberlist.php")?>"><table width="200" border="0">
+                      <td width="13%" height="43" style="color: #000000"><h3>BACK </h3></td>
+                      <td width="57%" align="center"><span style="color: #4C7D9B"><h1>รายการสมาชิก</h1></span></td>
+                      <td width="0%"><td width="26%"><form method="post" action="<?=site_url("Admin/memberlist.php")?>"><table width="200" border="0">
                         <tbody>
                             <tr>
                               <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
@@ -70,7 +71,7 @@ if (isset($_POST['search'])) {
               </table></td> 
             </tr> </tbody></table>
        
-        <div id="tarang">
+        <div id="tarang" align="center">
           <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="hdnCmd" value="">
             <table width="891" border="1">
@@ -84,6 +85,7 @@ if (isset($_POST['search'])) {
                 <th width="89"><div align="center">email</div></th>
                 <th width="89"><div align="center">address</div></th>
                 <th width="84"> <div align="center">sector</div></th>
+                <th width="84"> <div align="center">status</div></th>
                 <th width="42"> <div align="center">Edit Delete </div></th>
                
               </tr>
@@ -133,13 +135,22 @@ foreach ($admin_db->result as $key => $objResult)
               </script>
           
           </td>
+              <td width="42" >  <select  name="status" id="status_inp"   >
+              <option value="ใช้งาน">ใช้งาน</option>
+                <option value="ยกเลิก">ยกเลิก</option>
+                 
+				 <script>
+			  $("#status").val("<? echo $objResult['status']?>");
+              </script>
+                </select>
                 
+                </td>
               <td> <a href="javascript:save_row('<?=$objResult["member_id"]?>');">Update</a><br><a href="">Cancel</a></td>
               </tr>
    <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $objResult["member_id"];?></td>
           <td width="69"><? echo $objResult["username"];?></td>  
           <td width="93"><? echo $objResult["password"];?></td>
@@ -149,6 +160,7 @@ foreach ($admin_db->result as $key => $objResult)
           <td width="89"><? echo $objResult["email"];?></td>
            <td width="89"><? echo $objResult["address"];?></td>
           <td width="42" ><? echo $objResult["sector"];?></td>
+          <td width="42" ><? echo $objResult["status"];?></td>
          
           <td width="103">
                <a href="javascript:edit_row('<?=$objResult["member_id"]?>');">Edit</a><br><a href="javascript:del_row('<?=$objResult["member_id"]?>');">Delete</a>
@@ -164,7 +176,7 @@ function save_row(id){
           myform = document.createElement("form");
           $(myform).attr("action","<?=site_url("Admin/memberlist.php")?>");   
           $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="member_id_inp" value="'+id+'"><input type="text" name="username" value="'+$("#username_inp").val()+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="address" value="'+$("#address_inp").val()+'"><input type="select" name="sector" value="'+$("#sector_inp").val()+'">')
+          $(myform).html('<input type="text" name="member_id_inp" value="'+id+'"><input type="text" name="username" value="'+$("#username_inp").val()+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="address" value="'+$("#address_inp").val()+'"><input type="select" name="sector" value="'+$("#sector_inp").val()+'"><input type="select" name="status" value="'+$("#status_inp").val()+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();

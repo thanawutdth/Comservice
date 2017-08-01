@@ -34,7 +34,7 @@ if (isset($user_dat['username'])) {
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="4" align="center" valign="top"><a href="">
+            <td colspan="4" align="center" valign="top"><a href="<?=site_url()?>Member/news1.php">
               <h3>ดร.คมคายอุดรพิมพ์นายกองค์การบริหารส่วนจังหวัดมหาสารคามพร้อมด้วยสมาชิกสภาองค์การบริหารส่วนจังหวัดมหาสารคาม และผู้บริหารองค์การบริหารส่วนจังหวัดมหาสารคาม ร่วมบันทึกเทปถวายพระพร </h3></a></td>
             </tr>
           <tr>

@@ -92,9 +92,7 @@ if(isset($_POST['username'])){
                   <input type="submit" name="button" id="button" value="Submit">
                 </p>
                   &nbsp;
-                  <p>
-                    <input type="reset" name="reset" id="reset" value="Reset">
-                  </p></td>
+                  <p>&nbsp;</p></td>
                 </tr>
               </tbody>
           </table>

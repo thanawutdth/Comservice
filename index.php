@@ -6,7 +6,7 @@ include('meta.php');
     <td width="743" align="left"><table width="658" height="469" border="0">
         <tbody>
           <tr>
-            <td height="75" colspan="4" align="center" valign="top"><a href=""><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
+            <td height="75" colspan="4" align="center" valign="top"><a href="<?=site_url()?>news1.php"><h3>ร่วมพิธีเปิดการฝึกภาคปกตินักศึกษาวิชาทหารสังกัดองค์การบริหารส่วนจังหวัดมหาสารคาม หน่วยฝึกนักศึกษาวิชาทหาร มณฑลทหารบกที่ 26 ประจำปีการศึกษา 2560 </h3></a></td>
             </tr>
           <tr>
             <td width="85" height="161">&nbsp;</td>
@@ -20,7 +20,7 @@ include('meta.php');
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="4" align="center" valign="top"><a href="">
+            <td colspan="4" align="center" valign="top"><a href="<?=site_url()?>news1.php">
               <h3>ดร.คมคายอุดรพิมพ์นายกองค์การบริหารส่วนจังหวัดมหาสารคามพร้อมด้วยสมาชิกสภาองค์การบริหารส่วนจังหวัดมหาสารคาม และผู้บริหารองค์การบริหารส่วนจังหวัดมหาสารคาม ร่วมบันทึกเทปถวายพระพร </h3></a></td>
             </tr>
           <tr>

@@ -30,7 +30,7 @@ $topic=$m_board->get_all_web_quiz();
     <td width="248" align="center"><?include('../sidebar_logged.php');?></td>
     
     <td width="743" align="center">
-    <table width=456 height=59 border=2>
+    <table width=456 height=59 border=0>
       <tr>
         <td width=703>
           <table width=532 align=center>
@@ -45,7 +45,7 @@ $topic=$m_board->get_all_web_quiz();
           foreach ($topic->result as $key => $value) {
           
           ?>
-          <tr bgcolor=#FFFFFF>
+          <tr bgcolor=#FFFFFF align="center">
             <td><?=$value['id_question']?></td>
             <td><a href="<?=site_url()?>Webboard/webboard_ans.php?id_question=<?=$value['id_question']?>" ><?=$value['title']?></a></td>
             <td><?=$value['name']?></td>
@@ -60,14 +60,14 @@ $topic=$m_board->get_all_web_quiz();
       </tr>
     </table>
 <form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard.php">
-    <table width="477" height="313" border="2">
+    <table width="513" height="313" border="0">
       <tbody>
         <tr>
           <td colspan="2" align="center">ตั้งกระทู้ใหม่</td>
           </tr>
         <tr>
-          <td width="52" height="21">หัวข้อกระทู้:</td>
-          <td width="331"><input type="text" name="title" id="title"></td>
+          <td width="129" height="21">หัวข้อกระทู้:</td>
+          <td width="374"><input type="text" name="title" id="title"></td>
         </tr>
         <tr>
           <td>รายละเอียด:</td>
@@ -83,11 +83,11 @@ $topic=$m_board->get_all_web_quiz();
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td><table width="200" border="2">
+          <td><table width="200" border="0">
             <tbody>
               <tr>
-                <td width="100"><input type="submit" name="submit" id="submit" value="ตั้งคำถาม"></td>
-                <td width="82"><input type="button" name="button3" id="button3" value="ยกเลิก"></td>
+                <td width="100"><input type="submit" name="submit" id="submit" value="ตั้งกระทู้"></td>
+                
               </tr>
             </tbody>
           </table></td>

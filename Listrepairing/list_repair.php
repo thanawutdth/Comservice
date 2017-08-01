@@ -9,7 +9,7 @@ if (isset($user_dat['username'])) {
   $_SESSION['username']=$user_dat['username'];
 }else{
 }
-print_r ($_POST);
+
 if (isset($_POST['fix_id_inp'])) {
   $insertdata = array(
     "name" =>$_POST['name'],
@@ -34,6 +34,10 @@ $fix_db = $m_fix->get_all();
 
 
 
+if (isset($_POST['search'])) {
+  $fix_db = $m_fix->search($_POST['search']);
+
+}
 
 ?>  
     <tr>
@@ -50,15 +54,15 @@ $fix_db = $m_fix->get_all();
                       </a></td>
                       <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
                       <td width="52%" align="center"><span style="color: #4C7D9B"><h1>รายการแจ้งซ่อม</h1></span></td>
-                      <td width="25%"><table width="200" border="0">
+                      <td width="25%"><td width="25%"><form method="post" action="<?=site_url("Listrepairing/list_repair.php")?>"><table width="200" border="0">
                         <tbody>
                             <tr>
                               <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
                               <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                              <td width="24%"><input type="submit" name="button" id="button" value="Search"></td>
                             </tr>
                         </tbody>
-                        </table></td>
+                        </table></form></td>
                     </tr>
                   </tbody>
               </table></td> 
@@ -156,15 +160,19 @@ foreach ($fix_db->result as $key => $value)
 				<img src="<?=site_url()?>Image/icon left bar/Close.png" width="32" height="32" alt=""/>
 				  <?
 			  }
+			  else if($value['status']=="ยกเลิก")
+			  {		
+			 	 echo "ยกเลิก";
+			  }
 				  
 			  ?>
 		 </td>
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
-          <td width="103">
+          <!--<td width="103">
               <a href="<?=site_url('print_pdf.php?id='.$value["fix_id"])?>">Print</a>
               
-			</td>
+			</td>-->
         </tr>
       <? }}?>
         </table></div>

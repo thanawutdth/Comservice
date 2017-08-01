@@ -27,7 +27,7 @@ if (isset($_POST['del_device_id'])) {
 }
 $device_addtech_id = $m_device->get_all_deveice_addtech();
 ?>
-    <tr>
+    <tr align="center">
       <td>      
         <table width="200" border="0" align="center">
           <tbody>
@@ -45,9 +45,9 @@ $device_addtech_id = $m_device->get_all_deveice_addtech();
                       <td width="25%"><table width="200" border="0">
                         <tbody>
                             <tr>
-                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
-                              <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                              <td width="13%">&nbsp;</td>
+                              <td width="63%">&nbsp;</td>
+                              <td width="24%">&nbsp;</td>
                             </tr>
                         </tbody>
                         </table></td>
@@ -67,7 +67,7 @@ $device_addtech_id = $m_device->get_all_deveice_addtech();
         <div id="tarang">
           <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="hdnCmd" value="">
-            <table width="891" border="1">
+            <table width="891" border="1" align="center">
               <tr>
                 <th width="75">device_id</th>
                 <th width="75">จำนวน</th>
@@ -109,7 +109,7 @@ foreach ($device_addtech_id->result as $key => $objResult)
    <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $getdevice['type'];?></td>
           <td width="69"><? echo $objResult["amount"];?></td>
           <td width="69"><? echo $objResult["date"];?></td>

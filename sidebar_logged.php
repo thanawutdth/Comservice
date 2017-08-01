@@ -1,8 +1,8 @@
 <div id="login">
  
 
-
- <h1>สวัสดีคุณ : <? echo @$user_dat['name'];?></h1> 
+<h1>สวัสดีคุณ : <? echo @$user_dat['name'];?></h1> 
+ 
  
 		
    <a href="<?=site_url()?>Member/Edit_member.php"> <input type="button" name="button2" id="button2" value="แก้ไขข้อมูลส่วนตัว" ></a>

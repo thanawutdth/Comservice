@@ -27,7 +27,7 @@ if (isset($_POST['del_device_id'])) {
 }
 $device_db = $m_device->get_all_device();
 ?>
-    <tr>
+    <tr align="center">
       <td>      
         <table width="200" border="0" align="center">
           <tbody>
@@ -45,9 +45,9 @@ $device_db = $m_device->get_all_device();
                       <td width="25%"><table width="200" border="0">
                         <tbody>
                             <tr>
-                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
-                              <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
+                              <td width="13%">&nbsp;</td>
+                              <td width="63%">&nbsp;</td>
+                              <td width="24%">&nbsp;</td>
                             </tr>
                         </tbody>
                         </table></td>
@@ -67,12 +67,12 @@ $device_db = $m_device->get_all_device();
         <div id="tarang">
           <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="hdnCmd" value="">
-            <table width="891" border="1">
+            <table width="891" border="1" align="center">
               <tr>
-                <th width="75">device_id</th>
-                <th width="75"> <div align="center">type </div></th>
+                <th width="63">device_id</th>
+                <th width="757"> <div align="center">type </div></th>
                 
-                <th width="42"> <div align="center">Edit Delete </div></th>
+                <th width="49"> <div align="center">Edit Delete </div></th>
                
               </tr>
  <?
@@ -92,12 +92,12 @@ foreach ($device_db->result as $key => $objResult)
    <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $objResult["device_id"];?></td>
-          <td width="69"><? echo $objResult["type"];?></td>  
+          <td width="757"><? echo $objResult["type"];?></td>  
           
          
-          <td width="103">
+          <td width="49">
                <a href="javascript:edit_row('<?=$objResult["device_id"]?>');">Edit</a><br><a href="javascript:del_row('<?=$objResult["device_id"]?>');">Delete</a>
 			</td>
         </tr>

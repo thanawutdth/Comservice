@@ -101,7 +101,7 @@
 			$result->result = array();
 			$result->rowCount=0;
 			try{
-			$stm=$this->db->prepare("SELECT * from admin_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%')");
+			$stm=$this->db->prepare("SELECT * from admin_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%'OR status LIKE '%".$txt."%')");
 			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
 			$stm->execute();
 			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -116,7 +116,7 @@ public function search_member($txt){
 			$result->result = array();
 			$result->rowCount=0;
 			try{
-			$stm=$this->db->prepare("SELECT * from member_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%')");
+			$stm=$this->db->prepare("SELECT * from member_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%'OR status LIKE '%".$txt."%')");
 			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
 			$stm->execute();
 			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -126,7 +126,14 @@ public function search_member($txt){
 				}
 			return $result;
 		}
-		
+		public function get_all_member(){
+
+			$this->order_by("member_id");
+			$this->where("status","ยกเลิก","!=");
+			$result=$this->get("member_db");
+			
+			return $result;
+		}
 	}
 
 ?>

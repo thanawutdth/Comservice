@@ -36,7 +36,7 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
     <td>
   
     <form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard_ans.php?id_question=<?=$_GET['id_question']?>">
-    <table width="100%" height="ฟีะน" border="2">
+    <table width="100%" height="ฟีะน" border="1">
       <tbody>
         <tr>
           <td colspan="2">
@@ -65,8 +65,8 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
           <td colspan="2" align="center">แสดงความคิดเห็น</td>
           </tr>
         <tr>
-          <td width="52" height="21">ชื่อผู้ตอบ :</td>
-          <td width="331"><input type="text" name="title" id="title"></td>
+          <td width="228" height="21">ชื่อผู้ตอบ :</td>
+          <td width="808"><input type="text" name="title" id="title"></td>
         </tr>
         <tr>
           <td>รายละเอียด:</td>
@@ -78,11 +78,11 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td><table width="200" border="2">
+          <td><table width="200" border="0">
             <tbody>
               <tr>
                 <td width="100"><input type="submit" name="button" id="button" value="ตอบกระทู้"></td>
-                <td width="82"><input type="button" name="button3" id="button3" value="ยกเลิก"></td>
+                <td width="82">&nbsp;</td>
               </tr>
             </tbody>
           </table></td>

@@ -112,8 +112,8 @@ if (isset($user_dat['username'])) {
               <p>&nbsp;</p></td>
             </tr>
           <tr>
-            <td align="center"><input type="submit" name="submit" id="submit" value="Submit"></td>
-            <td align="center"><input type="reset" name="reset" id="reset" value="Reset"></td>
+            <td align="center">&nbsp;</td>
+            <td align="center"><input type="submit" name="submit" id="submit" value="ตกลง"></td>
             </tr>
           </tbody>
       </table>

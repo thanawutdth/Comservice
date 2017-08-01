@@ -36,21 +36,13 @@ $device_addtech_id = $m_device->get_all_deveice_addtech();
                 <table width="890" border="0">
                   <tbody>
                     <tr>
-                      <td width="3%"><a href="<?=site_url()?>Admin/adminlogin.php">
+                      <td width="4%"><a href="<?=site_url()?>Admin/adminlogin.php">
                         <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
                       <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>
-                      <td width="52%" align="center"><span style="color: #4C7D9B">
+                      <td width="63%" align="center"><span style="color: #4C7D9B">
                       <h1>รายการเบิกอุปกรณ์</h1></span></td>
-                      <td width="25%"><table width="200" border="0">
-                        <tbody>
-                            <tr>
-                              <td width="13%"><img src="<?=site_url()?>Image/icon left bar/Search.png" width="32" height="32" alt=""/></td>
-                              <td width="63%"><input type="search" name="search" id="search"></td>
-                              <td width="24%"><input type="button" name="button" id="button" value="Search"></td>
-                            </tr>
-                        </tbody>
-                        </table></td>
+                      <td width="13%">&nbsp;</td>
                     </tr>
                   </tbody>
               </table></td> 
@@ -64,10 +56,10 @@ $device_addtech_id = $m_device->get_all_deveice_addtech();
           
 		  
         </p>
-        <div id="tarang">
+        <div id="tarang" align="center">
           <form name="frmMain" method="post" action="<?php $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="hdnCmd" value="">
-            <table width="891" border="1">
+            <table width="891" border="1" align="center">
               <tr>
                 <th width="75">device_id</th>
                 <th width="75">จำนวน</th>
@@ -109,7 +101,7 @@ foreach ($device_addtech_id->result as $key => $objResult)
    <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $getdevice['type'];?></td>
           <td width="69"><? echo $objResult["amount"];?></td>
           <td width="69"><? echo $objResult["date"];?></td>

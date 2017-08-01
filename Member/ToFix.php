@@ -120,17 +120,17 @@ if(isset($_POST['detail'])){
                <tr>
                  <td height="134" colspan="2" valign="top"><p><strong> &nbsp;
                    </strong></p>
-                   <table width="503" border="2">
+                   <table width="380" border="0">
                      <tbody>
                        <tr>
-                         <td width="233"><strong>
+                         <td width="233">&nbsp;</td>
+                         <td width="252"><strong>
                            <input type="submit" name="submit" id="submit" value="แจ้งซ่อม">
                          </strong></td>
-                         <td width="252"><input type="reset" name="reset" id="reset" value="Reset"></td>
                        </tr>
                      </tbody>
                    </table>
-                   <p>&nbsp;</p></td>
+                 <p>&nbsp;</p></td>
                </tr>
              </tbody>
            </table>

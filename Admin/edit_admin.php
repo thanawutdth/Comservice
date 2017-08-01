@@ -1,11 +1,11 @@
-<? include('meta_technic.php');
+<? include('meta_admin.php');
 require_once("../model/m_user.php");
 $m_user = new M_user;
-if(isset($_POST['name'])){
+if(isset($_POST['username'])){
 		$insertdata = array(
-		"name" =>$_POST['name'],
+		"username" =>$_POST['username'],
 		"password" =>$_POST['password'],
-		//"name" =>$_POST['name'],
+		"name" =>$_POST['name'],
 		"lastname" =>$_POST['lastname'],
 		"phone" =>$_POST['phone'],
 		"email" =>$_POST['email']);
@@ -14,11 +14,11 @@ if(isset($_POST['name'])){
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-            window.open("<?echo site_url('Technic/editdatatech.php');?>","_self");            
+            window.open("<?echo site_url('Admin/edit_admin.php');?>","_self");            
         </script>
     <?
 	}
-	
+	//print_r ($_POST);
 $user_dat=$m_user->get_user_admin($_SESSION['username']);
 $err_msg="";
 if (isset($user_dat['username'])) {
@@ -32,15 +32,13 @@ if (isset($user_dat['username'])) {
 }
 
 ?>  
-
-
-
-     <tr>
-      <td width="248" height="72">
-        <? include("sidebar_technic.php");?>
-      </td>
+    <tr>
+      <td width="248">
   
-    <form id="Member" name="addMember" method="post" action="<?=site_url()?>Technic/editdatatech.php">  
+<? include("sidebar_admin.php");?>
+        </td>
+ 
+  <form id="Member" name="addMember" method="post" action="<?=site_url()?>Admin/edit_admin.php">  
     <td width="657" rowspan="9" valign="top"><fieldset>
       <legend><h3><span style="color:#2288BB">ข้อมูลส่วนตัว</span></h3></legend>
       
@@ -49,7 +47,7 @@ if (isset($user_dat['username'])) {
           <tr>
             <th width="232" height="49" scope="col" align="center"><label>ชื่อผู้ใช้งาน</label>&nbsp;</th>
             <th width="234" scope="col" align="left"><label for="textfield"></label>
-              <input disabled type="text" name="username" id="username" placeholder="ชื่่อผู้ใช้งาน" value="<? echo $user_dat['username'];?>" ></th>
+              <input  type="text" name="username" id="username" placeholder="ชื่่อผู้ใช้งาน" value="<? echo $user_dat['username'];?>" ></th>
             </tr>
           <tr>
             <td height="19" align="center"><strong>พาสเวิร์ด&nbsp;</strong></td>
@@ -81,19 +79,6 @@ if (isset($user_dat['username'])) {
           </tbody>
       </table>
     </fieldset></td></form>
-    </tr>
-    
-   
-    <tr>
-      <td height="19" colspan="2">
       
-      
-      
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-</body>
+      </body>
 </html>

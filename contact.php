@@ -4,7 +4,7 @@ include('./meta.php');
 
 
     <tr align="left" valign="top">
-      <td height="253" align="left"><?include('sidebar_logged.php');?></td>
+      <td height="253" align="left"><? include('sidebar_logged.php');?></td>
       <td width="655" align="center" valign="top"><table width="464" border="0">
         <tbody>
           <tr>
@@ -42,7 +42,7 @@ include('./meta.php');
             <td><table width="280" border="0">
               <tbody>
                 <tr>
-                  <td width="108"><a href="Member/www.facebook.com"><img src="<?=site_url()?>Image/icon left bar/Facebook.png" width="48" height="48" alt=""/></a></td>
+                  <td width="108"><a href="www.facebook.com"><img src="<?=site_url()?>Image/icon left bar/Facebook.png" width="48" height="48" alt=""/></a></td>
                   <td width="95"><a href="Member/www.google.com"><img src="<?=site_url()?>Image/icon left bar/Line.png" width="48" height="48" alt=""/></a></td>
                   <td width="50"><img src="<?=site_url()?>Image/icon left bar/Google.png" width="50" height="48" alt=""/></td>
                 </tr>
