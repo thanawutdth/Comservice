@@ -35,6 +35,21 @@
 			
 			return $result;
 		}
+		public function search($txt){
+			$result = new stdClass();
+			$result->result = array();
+			$result->rowCount=0;
+			try{
+			$stm=$this->db->prepare("SELECT * from fix_db WHERE (name LIKE '%".$txt."%' OR sector LIKE '%".$txt."%' OR type LIKE '%".$txt."%' OR detail LIKE '%".$txt."%' OR phone LIKE '%".$txt."%')");
+			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
+			$stm->execute();
+			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
+			$result->rowCount=$stm->rowCount();
+			}catch(PDOException $ex){
+					echo "PDO ERR ".$ex->getMessage().'<br>';
+				}
+			return $result;
+		}
 
 		
 	}
