@@ -1,12 +1,47 @@
-<? include('meta_admin.php');?>
+<? include('meta_admin.php');
+require_once("../model/m_user.php");
+$m_user = new M_user;
 
+
+$user_dat=$m_user->get_user_admin($_SESSION['username']);
+if (isset($user_dat['username'])) {
+  $_SESSION['username']=$user_dat['username'];
+}else{
+  ?>
+        <script type="text/javascript">
+            window.open("<?echo site_url('logout.php');?>","_self");            
+        </script>
+    <?
+}
+//print_r ($_POST);
+
+if(isset($_POST['username'])){
+		$insertdata = array(
+		"username" =>$_POST['username'],
+		"password" =>$_POST['password'],
+		"name" =>$_POST['name'],
+		"lastname" =>$_POST['lastname'],
+		"phone" =>$_POST['phone'],
+		"email" =>$_POST['email'],
+		"address" =>$_POST['address'],
+		"sector" =>$_POST['sector']);
+		
+		$m_user->insert_member($insertdata);
+		?>
+        <script type="text/javascript">
+			alert("บันทึกข้อมูลเรียบร้อย");
+         window.open("<?echo site_url('Admin/memberlist.php');?>","_self");            
+        </script>
+    <?
+	}
+?>  
     <tr>
       <td width="248">
   
 <? include("sidebar_admin.php");?>
       </td>
         
-    <form id="Member" name="addMember" method="post" action="<?=site_url()?>addMember.php">  
+    <form id="Member" name="addMember" method="post" action="<?=site_url()?>Admin/regisformember.php">  
     <td width="657" rowspan="9" valign="top"><fieldset>
       <legend><h3><span style="color:#2288BB">ข้อมูลส่วนตัว</span></h3></legend>
       
@@ -23,17 +58,17 @@
             </tr>
           <tr>
             <td height="34" align="center"><strong>ชื่อ</strong></td>
-            <td><input type="text" name="flname"  placeholder="ชื่อ"></td>
+            <td><input type="text" name="name"  placeholder="ชื่อ"></td>
           </tr>
           <tr>
             <td height="34" align="center"><label><strong> นามสกุล</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input name="lastname" type="text" id="textfield" placeholder="นามสกุล"></td>
+            <td><input name="lastname" type="text" id="lastname" placeholder="นามสกุล"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>เบอร์โทรศัพท์</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input type="tel" name="tel" id="tel" placeholder="เบอร์โทรศัพท์"></td>
+            <td><input type="tel" name="phone" id="phone" placeholder="เบอร์โทรศัพท์"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>อีเมลล์</strong></label>
@@ -48,7 +83,7 @@
             <td align="center"><label><strong>โรงเรียน/ตำแหน่ง</strong></label>
               <strong>&nbsp;</strong></td>
             <td><p>
-              <select  name="select" id="select"   >
+              <select  name="sector" id="sector"   >
                 <option>หน่วยงานในสังกัด</option>
                 <option>โรงเรียนเมืองเตาวิทยาคม</option>
                 <option>โรงเรียนท่าขอนยางพิทยาคม</option>

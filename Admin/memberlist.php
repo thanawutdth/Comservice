@@ -12,7 +12,7 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-print_r ($_POST);
+
 if (isset($_POST['member_id_inp'])) {
   $insertdata = array(
     "username" =>$_POST['username'],

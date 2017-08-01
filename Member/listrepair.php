@@ -46,7 +46,7 @@ $fix_db = $m_fix->get_all();
                 <table width="890" border="0">
                   <tbody>
                     <tr>
-                      <td width="3%"><a href="<?=site_url()?>index.php">
+                      <td width="3%"><a href="<?=site_url()?>Member/firstpage_member.php">
                         <input type="image" name="imageField" id="imageField" src="<?=site_url()?>Image/icon left bar/Back.png">
                       </a></td>
                       <td width="20%" height="43" style="color: #000000"><h3>BACK </h3></td>

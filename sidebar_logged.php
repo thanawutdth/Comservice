@@ -10,5 +10,5 @@
       <a href="<?=site_url()?>Member/listrepair.php"><input type="button" name="button5" id="button5" value="รายการแจ้งซ่อม"></a>
       <a href="<?=site_url()?>Webboard/Webboard.php"><input type="button" name="button6" id="button6" value="กระทู้ ถาม-ตอบ"> </a>
       <a href="<?=site_url()?>contact.php"><input type="button" name="button4" id="button4" value="ติดต่อเรา"> </a>
-        
+        <a href="<?=site_url()?>index.php"><input type="button" name="button9" id="button9" value="ออกจากระบบ"></a>
       </div>

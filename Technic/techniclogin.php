@@ -12,7 +12,7 @@
             </tr>
           <tr>
             <td width="84" height="161">&nbsp;</td>
-            <td colspan="2"><img src="/project2/Image/ร่วมงาน.jpg" width="472" height="244" alt=""/></td>
+            <td colspan="2"><img src="<?=site_url()?>Image/ร่วมงาน.jpg" width="472" height="244" alt=""/></td>
             <td width="104">&nbsp;</td>
           </tr>
           <tr>
@@ -27,7 +27,7 @@
             </tr>
           <tr>
             <td>&nbsp;</td>
-            <td colspan="2"><img src="/project2/Image/ดพพ.jpg" width="472" height="244" alt=""/></td>
+            <td colspan="2"><img src="<?=site_url()?>Image/ดพพ.jpg" width="472" height="244" alt=""/></td>
             <td>&nbsp;</td>
           </tr>
           <tr>

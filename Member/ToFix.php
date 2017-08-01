@@ -16,7 +16,7 @@ if (isset($user_dat['username'])) {
         </script>
     <?
 }
-print_r ($_POST);
+
 if(isset($_POST['detail'])){
 		$insertdata = array(
 		"name" =>$user_dat['name'],

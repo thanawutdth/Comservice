@@ -42,9 +42,13 @@
 			$result=$this->get("nml2016_user");
 			return $result->result;
 		}
-		public function insert_user($data){
+		public function insert_admin_technic($data){
 
-			$this->insert("nml2016_user",$data);	
+			$this->insert("admin_db",$data);	
+		}
+		public function insert_member($data){
+
+			$this->insert("member_db",$data);	
 		}
 		public function update_member($data,$usn){
 			$where = array('username' => $usn);

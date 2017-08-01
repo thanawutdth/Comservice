@@ -8,11 +8,11 @@ if (isset($user_dat['username'])) {
 }else{
   ?>
         <script type="text/javascript">
-            window.open("<?echo site_url('../logout.php');?>","_self");            
+            window.open("<?echo site_url('logout.php');?>","_self");            
         </script>
     <?
 }
-print_r ($_POST);
+
 if (isset($_POST['admin_id_inp'])) {
   $insertdata = array(
     "username" =>$_POST['username'],
