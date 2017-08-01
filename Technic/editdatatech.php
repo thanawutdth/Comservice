@@ -14,10 +14,11 @@ if(isset($_POST['username'])){
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-           // window.open("<?echo site_url('Technic/techniclogin.php');?>","_self");            
+          //  window.open("<?echo site_url('Technic/editdatatech.php');?>","_self");            
         </script>
     <?
 	}
+	print_r ($_POST);
 $user_dat=$m_user->get_user_admin($_SESSION['username']);
 $err_msg="";
 if (isset($user_dat['username'])) {
@@ -25,7 +26,7 @@ if (isset($user_dat['username'])) {
 }else{
   ?>
         <script type="text/javascript">
-            window.open("<?echo site_url('../logout.php');?>","_self");            
+            window.open("<?echo site_url('logout.php');?>","_self");            
         </script>
     <?
 }
@@ -36,7 +37,7 @@ if (isset($user_dat['username'])) {
 
     <tr valign="top">
       <td width="248">
-	  <? include("sidebar_technic.php");?>
+	  <?include("sidebar_technic.php");?>
       </td>
         
         <form id="Member" name="addMember" method="post" action="<?=site_url()?>Technic/editdatatech.php">  
@@ -48,30 +49,30 @@ if (isset($user_dat['username'])) {
           <tr>
             <th width="232" height="49" scope="col" align="center"><label>ชื่อผู้ใช้งาน</label>&nbsp;</th>
             <th width="234" scope="col" align="left"><label for="textfield"></label>
-              <input type="text" name="username" id="username" placeholder="ชื่่อผู้ใช้งาน" value="<? echo $user_dat['username'];?>" ></th>
+              <input type="text" name="username" id="username"  value="<? echo $user_dat['username'];?>" ></th>
             </tr>
           <tr>
             <td height="19" align="center"><strong>พาสเวิร์ด&nbsp;</strong></td>
-            <td ><input name="password" type="password"  placeholder="รหัสผ่าน" value="<? echo $user_dat['password'];?>"></td>
+            <td ><input name="password" type="password"  value="<? echo $user_dat['password'];?>"></td>
             </tr>
           <tr>
             <td height="34" align="center"><strong>ชื่อ</strong></td>
-            <td><input type="text" name="name"  placeholder="ชื่อ" value="<? echo $user_dat['name'];?>"></td>
+            <td><input type="text" name="name"   value="<? echo $user_dat['name'];?>"></td>
           </tr>
           <tr>
             <td height="34" align="center"><label><strong> นามสกุล</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input name="lastname" type="text" id="lastname" placeholder="นามสกุล" value="<? echo $user_dat['lastname'];?>"></td>
+            <td><input name="lastname" type="text" id="lastname" value="<? echo $user_dat['lastname'];?>"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>เบอร์โทรศัพท์</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input type="tel" name="phone" id="tel" placeholder="เบอร์โทรศัพท์" value="<? echo $user_dat['phone'];?>"></td>
+            <td><input type="tel" name="phone" id="tel"  value="<? echo $user_dat['phone'];?>"></td>
             </tr>
           <tr>
             <td align="center"><label><strong>อีเมลล์</strong></label>
               <strong>&nbsp;</strong></td>
-            <td><input type="email" name="email" id="email" placeholder="อีเมลล์" value="<? echo $user_dat['email'];?>"></td>
+            <td><input type="email" name="email" id="email" value="<? echo $user_dat['email'];?>"></td>
           </tr>
          
        

@@ -81,7 +81,7 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
           <td><table width="200" border="2">
             <tbody>
               <tr>
-                <td width="100"><input type="submit" name="button" id="button" value="ตั้งคำถาม"></td>
+                <td width="100"><input type="submit" name="button" id="button" value="ตอบกระทู้"></td>
                 <td width="82"><input type="button" name="button3" id="button3" value="ยกเลิก"></td>
               </tr>
             </tbody>
