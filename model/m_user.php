@@ -23,8 +23,11 @@
 			}
 			return $result->result[0];
 		}
-		public function get_user_admin($username){
+		public function get_user_admin($username,$pos="no"){
 			$this->where("username",$username);
+			if ($pos!="no") {
+				$this->where("position",$pos);
+			}
 			$result=$this->get("admin_db");
 			if (!isset($result->result[0])) {
 				$result->result[0] = array();

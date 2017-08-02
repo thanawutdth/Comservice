@@ -5,6 +5,7 @@ require_once("../model/m_user.php");
 $m_user = new M_user;
 require_once("../model/m_board.php");
 $m_board = new M_board;
+$edit_board=false;
 if(isset($_POST['title'])){
     $insertdata = array(
     "title" =>$_POST['title'],
@@ -19,11 +20,45 @@ if(isset($_POST['title'])){
     ?>
         <script type="text/javascript">
       alert("บันทึกข้อมูลเรียบร้อย");
-            //window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
+            window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
         </script>
     <?
   }
+  $topic_edit=null;
+if (isset($_POST['edit_id'])) {
+    $topic_edit=$m_board->get_board_by_id($_POST['edit_id']);
+    $edit_board=true;
+  }
+if (isset($_POST['id_question_edit'])) {
+      $insertdata = array(
+    "title" =>$_POST['title_edit'],
+    "message" =>$_POST['message_edit'],
+    "name" =>$_POST['name_edit'],
+    "email" =>$_POST['email_edit'],
+    );
+      $m_board->update_post($insertdata,$_POST['id_question_edit']);
+      ?>
+        <script type="text/javascript">
+      alert("แก้ใขข้อมูลเรียบร้อย");
+            //window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
+        </script>
+    <?
+}    
+if (isset($_POST['delete_post'])) {
+  $m_board->delete_post($_POST['delete_post']);
+  ?>
+        <script type="text/javascript">
+          alert("ลบข้อมูลเรียบร้อย");
+          window.open("<?echo site_url('Webboard/Webboard.php');?>","_self");            
+        </script>
+    <?
+}
+
 $topic=$m_board->get_all_web_quiz();
+$user_dat=$m_user->get_user_admin($_SESSION['username'],1);
+if (isset($user_dat['username'])) {
+  $_SESSION['user_admin']=$user_dat['username'];
+}
 
 ?>  
   <tr align="left" valign="top">
@@ -40,6 +75,13 @@ $topic=$m_board->get_all_web_quiz();
           <td>ผู้ตั้งคำถาม</td>
           <td>วันที่ตั้งคำถาม</td>
           <td>จำนวนที่ตอบ</td>
+          <?
+          if (isset($_SESSION['user_admin'])&&$_SESSION['user_admin']!="") {
+            ?>
+            <td>Control</td>
+            <?
+          }
+          ?>
           </tr>
           <?
           foreach ($topic->result as $key => $value) {
@@ -51,6 +93,13 @@ $topic=$m_board->get_all_web_quiz();
             <td><?=$value['name']?></td>
             <td><?=$value['date_q']?></td>
             <td><?=$value['count_q']?></td>
+            <?
+          if (isset($_SESSION['user_admin'])&&$_SESSION['user_admin']!="") {
+            ?>
+            <td><a href="javascript:edit_row('<?=$value['id_question']?>');">Edit</a><br><a href="javascript:del_row('<?=$value['id_question']?>');">Delete</a></td>
+            <?
+          }
+          ?>
           </tr>
           <?
         }
@@ -62,6 +111,43 @@ $topic=$m_board->get_all_web_quiz();
 <form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard.php">
     <table width="513" height="313" border="0">
       <tbody>
+      <?
+      if ($edit_board) {
+        ?>
+        <tr>
+          <td colspan="2" align="center">แก้ใข กระทู้</td>
+          <input type="hidden" name="id_question_edit" value="<?=$topic_edit['id_question']?>"></input>
+          </tr>
+        <tr>
+          <td width="129" height="21">หัวข้อกระทู้:</td>
+          <td width="374"><input type="text" name="title_edit" id="title" value="<?=$topic_edit['title']?>"></td>
+        </tr>
+        <tr>
+          <td>รายละเอียด:</td>
+          <td><textarea name="message_edit" id="message" wrap="virtual"><?=$topic_edit['message']?></textarea></td>
+        </tr>
+        <tr>
+          <td>ชื่อผู้โพสต์:</td>
+          <td><input type="text" name="name_edit" id="name" value="<?=$topic_edit['name']?>"></td>
+        </tr>
+        <tr>
+          <td>อีเมล์:</td>
+          <td><input type="email" name="email_edit" id="email" value="<?=$topic_edit['email']?>"></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><table width="200" border="0">
+            <tbody>
+              <tr>
+                <td width="100"><input type="submit" name="submit" id="submit" value="แก้ใข"></td>
+                
+              </tr>
+            </tbody>
+          </table></td>
+        </tr>
+        <?
+      }else{
+      ?>
         <tr>
           <td colspan="2" align="center">ตั้งกระทู้ใหม่</td>
           </tr>
@@ -92,6 +178,7 @@ $topic=$m_board->get_all_web_quiz();
             </tbody>
           </table></td>
         </tr>
+        <?}?>
       </tbody>
     </table></form>
     
@@ -108,5 +195,27 @@ $topic=$m_board->get_all_web_quiz();
 <p>&nbsp;</p>
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="edit_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="delete_post" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>
