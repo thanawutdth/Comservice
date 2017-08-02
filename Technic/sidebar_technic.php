@@ -10,7 +10,7 @@
   
   <a href="<?=site_url()?>Technic/list_repair.php"><input type="button" name="button6" id="button6" value="รายการแจ้งซ่อม"></a>
   <a href="<?=site_url()?>Technic/To_fix.php"><input type="button" name="button6" id="button6" value="แจ้งซ่อม"></a>
-   <a href="<?=site_url()?>Technic/Todevice.php"><input type="button" name="button7" id="button7" value="รายการอุปกรณ์"></a>
+   
   <a href="<?=site_url()?>Technic/add_device_admintech.php"><input type="button" name="button7" id="button7" value="เบิกอุปกรณ์"></a>
   <a href="<?=site_url()?>Technic/selectdevice.php"><input type="button" name="button7" id="button7" value="รายการเบิกอุปกรณ์"></a>
   

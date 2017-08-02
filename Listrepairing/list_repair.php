@@ -136,7 +136,7 @@ foreach ($fix_db->result as $key => $value)
       <?
   }else{
   ?>
-        <tr bgcolor="#FFFFFF">
+        <tr bgcolor="#FFFFFF" align="center">
           <td><? echo $value["fix_id"];?></td>
           <td width="69"><? echo $value["name"];?></td>  
           <td width="93"><? echo $value["date"];?></td>

@@ -70,7 +70,8 @@ require_once("./model/m_fix.php");
 $m_fix = new M_fix;
 $fix_db = $m_fix->get_fix_by_id($_GET['id']);
 $fpdf=new Fpdf_print;
-		
+
+	
 
 		// เพิ่มฟอนต์ภาษาไทยเข้ามา ตัวธรรมดา กำหนด ชื่อ เป็น angsana
 		$fpdf->AddFont('angsana','','angsa.php');
@@ -93,17 +94,26 @@ $fpdf=new Fpdf_print;
 
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
 		$fpdf->set_bold_font();
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ชื่อ  '.$fix_db['name'].'  นามสกุล  '.$fix_db['lastname'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'หน่วยงาน/องค์กร  '.$fix_db['sector'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'เบอร์โทรศัพท์  '.$fix_db['phone'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'อุปกรณ์ที่แจ้ง  '.$fix_db['type'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหา  '.$fix_db['detail'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ชื่อ     '.$fix_db['name'].'  นามสกุล     '.$fix_db['lastname'].''),0,1);
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'หน่วยงาน/องค์กร   '.$fix_db['sector'].''),0,1);
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'เบอร์โทรศัพท์   '.$fix_db['phone'].''),0,1);
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'อุปกรณ์ที่แจ้ง   '.$fix_db['type'].''),0,1);
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหา      '.$fix_db['detail'].''),0,1);
+		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'วันที่แจ้ง     '.$fix_db['date'].''),0,1);
+		//$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
 		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'ผู้ดำเนินการ'),0,1,'C');
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
+		//$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
 		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ชื่อผู้ดำเนินการซ่อม  '.$fix_db['technician'].''),0,1);
-		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหาที่พบ  '.$fix_db['fixuser'].''),0,1);
-
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ปัญหาที่พบ   '.$fix_db['infer'].''),0,1);
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'สถานะ     '.$fix_db['status'].''),0,1);
+		//$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
+		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'อุปกรณ์ที่เบิก'),0,1,'C');
+		//$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , ''),0,1,'C');// space
+		$fpdf->Cell(0,10,iconv( 'UTF-8','cp874' , 'ชนิดอุปกรณ์  '.$fix_db['type_device'].' จำนวน '.$fix_db['amount'].''),0,1);
+		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'วันที่เบิก     '.$fix_db['date_pre'].''),0,1);
+		$fpdf->Cell(0,15,iconv( 'UTF-8','cp874' , 'วันที่คืน      '.$fix_db['date_pos'].''),0,1);
+		
+		
 		$fpdf->set_bold_font();
 		$fpdf->Cell(10,7,iconv( 'UTF-8','cp874' , ''),0,0);
 		$fpdf->Cell(35,7,iconv( 'UTF-8','cp874' , ''),0,0);

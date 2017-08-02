@@ -101,9 +101,9 @@ if(isset($_POST['detail'])){
                  <td align="left" valign="middle"><div id="aaa">
                    <select name="type" id="select">
                      <option value="เลือกชนิดอุปกรณ์">เลือกชนิดอุปกรณ์</option>
-                     <option value="เครื่องปริ้น">เครื่องปริ้น</option>
-                     <option value="หน้าจอ">หน้าจอ</option>
-                     <option value="คอมพิวเตอร์">คอมพิวเตอร์</option>
+                     <option value="คอมพิวเตอร์ pc">คอมพิวเตอร์ pc</option>
+                     <option value="คอมพิวเตอร์โน๊ตบุ๊ค">คอมพิวเตอร์โน๊ตบุ๊ค</option>
+                     <option value="เครื่องปริ้นเตอร์">เครื่องปริ้นเตอร์</option>
                    </select>
                  </div></td>
                </tr>
