@@ -47,11 +47,11 @@ if(isset($_POST['detail'])){
              <tbody >
                <tr >
                  <td width="148" height="46" align="center" valign="middle"><p><strong>ชื่อ</strong></p></td>
-                 <td width="347" align="left" valign="middle" scope="col"><input type="text" name="name" id="textfield" value="<? echo $user_dat['name']?>" disabled></td>
+                 <td width="347" align="left" valign="middle" scope="col"><input type="tel" name="name" id="tel" value="<? echo $user_dat['name']?>" disabled></td>
                </tr>
                <tr>
                  <td height="46" align="center" valign="middle"><p><strong>นามสกุล</strong></p></td>
-                 <td align="left" valign="middle"><input type="text" name="lastname" id="textfield2" value="<? echo $user_dat['lastname']?>" disabled></td>
+                 <td align="left" valign="middle"><input type="tel" name="lastname" id="tel" value="<? echo $user_dat['lastname']?>" disabled></td>
                </tr>
                <tr>
                  <td height="46" align="center" valign="middle"><p><strong>เบอร์โทรศัพท์</strong></p></td>

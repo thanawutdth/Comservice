@@ -37,7 +37,14 @@
 		public function get_all_web_quiz(){
 
 			$this->order_by("date_q");
-			$result=$this->get("webboard_quiz");
+			$result=$this->get("webboard_quiz"); //เอามาจากกระดานตอบกระทู้
+			
+			return $result;
+		}
+		public function delete_topic(){
+
+			$this->order_by("date_q");
+			$result=$this->get("webboard_quiz"); //เอามาจากกระดานตอบกระทู้
 			
 			return $result;
 		}

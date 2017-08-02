@@ -26,11 +26,11 @@ if (isset($_POST['fix_id_inp'])) {
     "phone" =>$_POST['phone'],
 	"status" =>$_POST['select'],
 	"infer" =>$_POST['infer'],
-	"technician" =>$_POST['technician'],
-	"type_device" =>$_POST['type_device'],
-	"amount" =>$_POST['amount'],
-	"date_pre" =>$_POST['date_pre'],
-	"date_pos" =>$_POST['date_pos']);
+	"technician" =>$_POST['technician']);
+	//"type_device" =>$_POST['type_device'],
+	//"amount" =>$_POST['amount'],
+	//"date_pre" =>$_POST['date_pre'],
+	//"date_pos" =>$_POST['date_pos']
 	
     
     $m_fix->update_fix($insertdata,$_POST['fix_id_inp']);
@@ -143,7 +143,7 @@ foreach ($fix_db->result as $key => $value)
           </td>
           <td width="88" ><input type="text" id="infer_inp" value="<? echo $value["infer"];?>"></td>
           <td width="103"><input type="text" id="technician_inp" value="<? echo $value["technician"];?>"></td>
-          <td width="42" ><select id="type_device_inp">
+         <!-- <td width="42" ><select id="type_device_inp">
             <option value="ชุดอุปกรณ์ไขควง">ชุดอุปกรณ์ไขควง</option>
             <option value="power supply">power supply</option>
             <option value="ชุดลงโปรแกรมและwindows">ชุดลงโปรแกรมและwindows</option>
@@ -159,8 +159,8 @@ foreach ($fix_db->result as $key => $value)
           
           </td>
           <td width="103"><input type="text" id="amount_inp" value="<? echo $value["amount"];?>"></td>
-          <td width="103"><input type="date" id="date_pre_inp" value="<? echo $value["date_pre"];?>"></td>
-          <td width="103"><input type="date" id="date_pos_inp" value="<? echo $value["date_pos"];?>"></td>
+          <td width="103"><input type="text" id="date_pre_inp" value="<? echo $value["date"];?>"></td>
+          <td width="103"><input type="text" id="date_pos_inp" value="<? echo $value["date"];?>"></td>-->
           <td width="103">
         
               <a href="javascript:save_row(<?=$value["fix_id"]?>);">Update</a><br><a href="">Cancel</a>
@@ -199,10 +199,10 @@ foreach ($fix_db->result as $key => $value)
 		 </td>
           <td width="88"><? echo $value["infer"];?></td>
           <td width="103"><? echo $value["technician"];?></td>
-          <td width="103"><? echo $value['type_device'];?></td>
+         <!-- <td width="103"><? echo $value['type_device'];?></td>
           <td width="103"><? echo $value["amount"];?></td>
           <td width="103"><? echo $value["date_pre"];?></td>
-          <td width="103"><? echo $value["date_pos"];?></td>
+          <td width="103"><? echo $value["date_pos"];?></td>-->
           <td width="103">
               <a href="javascript:edit_row(<?=$value["fix_id"]?>);">Edit</a><br><a href="<?=site_url('print_pdf.php?id='.$value["fix_id"])?>">Print</a><br><a href="javascript:del_row(<?=$value["fix_id"]?>);">Delete</a>
               
@@ -222,7 +222,7 @@ foreach ($fix_db->result as $key => $value)
           myform = document.createElement("form");
           $(myform).attr("action","<?=site_url("Technic/list_repair.php")?>");   
           $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="fix_id_inp" value="'+id+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="date" value="'+$("#date_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="detail" value="'+$("#detail_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="select" name="select" value="'+$("#status_inp").val()+'"><input type="text" name="infer" value="'+$("#infer_inp").val()+'"><input type="text" name="technician" value="'+$("#technician_inp").val()+'"><input type="text" name="type_device" value="'+$("#type_device_inp").val()+'"><input type="text" name="amount" value="'+$("#amount_inp").val()+'"><input type="date" name="date_pre" value="'+$("#date_pre_inp").val()+'"><input type="date" name="date_pos" value="'+$("#date_pos_inp").val()+'">')
+          $(myform).html('<input type="text" name="fix_id_inp" value="'+id+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="date" value="'+$("#date_inp").val()+'"><input type="text" name="sector" value="'+$("#sector_inp").val()+'"><input type="text" name="type" value="'+$("#type_inp").val()+'"><input type="text" name="detail" value="'+$("#detail_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="select" name="select" value="'+$("#status_inp").val()+'"><input type="text" name="infer" value="'+$("#infer_inp").val()+'"><input type="text" name="technician" value="'+$("#technician_inp").val()+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();

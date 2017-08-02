@@ -23,9 +23,15 @@ if(isset($_POST['title'])){
         </script>
     <?
   }
+  print_r($_POST);
 $topic=$m_board->get_all_web_quiz();
 
+if (isset($_POST['del_fix_id'])) {
+
+    $m_board->get_all_web_quiz($_POST['del_fix_id']);
+}
 ?>  
+<div id="tarang" > 
   <tr align="left" valign="top">
     <td width="248" align="center"><?include('../sidebar_logged.php');?></td>
     
@@ -40,25 +46,46 @@ $topic=$m_board->get_all_web_quiz();
           <td>ผู้ตั้งคำถาม</td>
           <td>วันที่ตั้งคำถาม</td>
           <td>จำนวนที่ตอบ</td>
+           <td>ลบ:แก้ไข</td>
           </tr>
           <?
-          foreach ($topic->result as $key => $value) {
-          
-          ?>
+ foreach ($topic->result as $key => $value) 
+ {
+       if (isset($_POST['id_question'])&&$_POST['id_question']==$value["id_question"]) {
+     ?>
           <tr bgcolor=#FFFFFF align="center">
-            <td><?=$value['id_question']?></td>
-            <td><a href="<?=site_url()?>Webboard/webboard_ans.php?id_question=<?=$value['id_question']?>" ><?=$value['title']?></a></td>
+            <td><?=  $value['id_question']?></td>
+   <td> <a href="<?=site_url()?>Webboard/webboard_ans.php?id_question=<?=$value['id_question']?>"><input type="text" id="topic"  value="<?=$value[	'title']?>"></a></td>
+            <td><input type="text" id="name" value="<?=$value['name']?>"></td>
+            <td><?=$value['date_q']?></td>
+            <td><?=$value['count_q']?></td>
+            <td><a href="javascript:save_row(<?=$value["id_question"]?>);">Update</a><br><a href="">Cancel</a></td>
+             
+          </tr>
+          <?
+        }else {
+      ?>
+          <tr bgcolor=#FFFFFF align="center">
+            <td><?=  $value['id_question']?></td><td><a href="<?=site_url()?>Webboard/webboard_ans.php?id_question=<?=$value[			'id_question']?>" ><?=$value['title']?></a></td>
             <td><?=$value['name']?></td>
             <td><?=$value['date_q']?></td>
             <td><?=$value['count_q']?></td>
+            <td><a href="javascript:edit_row(<?=$value["id_question"]?>);">Edit</a><br><a href="javascript:del_row(<?=$value["id_question"]?>);">Delete</a>
+            </td>
+             
           </tr>
-          <?
-        }
-          ?>
-          </table>
+          
+          
+           <? }}?>
+          
+          </table></div>
+           
         </td>
       </tr>
     </table>
+    
+    
+    
 <form name="form1" method="post" action="<?=site_url()?>Webboard/Webboard.php">
     <table width="513" height="313" border="0">
       <tbody>
@@ -108,5 +135,36 @@ $topic=$m_board->get_all_web_quiz();
 <p>&nbsp;</p>
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+  function save_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="title" value="'+id+'"><input type="text" name="topic" value="'+$("#topic").val()+'"><input type="text" name="name" value="'+$("#name").val()+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="fix_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="del_fix_id" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>

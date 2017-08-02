@@ -1,6 +1,6 @@
 <?php 
 	require_once("core_model.php");
-	class M_user extends Core_model{
+	class M_image extends Core_model{
 		public function __construct(){
 			parent::__construct();
 		}
@@ -112,29 +112,70 @@
 				}
 			return $result;
 		}
-public function search_member($txt){
-			$result = new stdClass();
-			$result->result = array();
-			$result->rowCount=0;
-			try{
-			$stm=$this->db->prepare("SELECT * from member_db WHERE (name LIKE '%".$txt."%' OR username LIKE '%".$txt."%' OR position LIKE '%".$txt."%' OR phone LIKE '%".$txt."%'OR status LIKE '%".$txt."%')");
-			//$stm->bindParam(':txt', "'%".$txt."%'", PDO::PARAM_STR);
-			$stm->execute();
-			$result->result = $stm->fetchAll(PDO::FETCH_ASSOC);
-			$result->rowCount=$stm->rowCount();
-			}catch(PDOException $ex){
-					echo "PDO ERR ".$ex->getMessage().'<br>';
+			public function add_image($txt){
+											
+				$query = "SELECT * FROM uploadfile" or die("Error:" . mysqli_error()); 
+				//3.เก็บข้อมูลที่ query ออกมาไว้ในตัวแปร result . 
+				$result = mysqli_query($con, $query); 
+				//4 . แสดงข้อมูลที่ query ออกมา โดยใช้ตารางในการจัดข้อมูล: 
+				echo "<table border='1' align='center' width='500'>";
+				//หัวข้อตาราง
+				echo "<tr align='center' bgcolor='#CCCCCC'><td>filename</td><td> img </td></tr>";
+				while($row = mysqli_fetch_array($result)) { 
+				  echo "<tr>";
+				  echo "<td>" .$row["fileupload"] .  "</td> ";
+				  echo "<td>"."<img src='fileupload/".$row[fileupload]."' width='100'>"."</td>";
+				  echo "</tr>";
 				}
-			return $result;
+				echo "</table>";
+				//5. close connection
+				mysqli_close($con);
+		
 		}
-		public function get_all_member(){
-
-			$this->order_by("member_id");
-			$this->where("status","ยกเลิก","!=");
-			$result=$this->get("member_db");
+		public function add_uploadfile($txt){
 			
-			return $result;
+						$fileupload = $_REQUEST['fileupload']; //รับค่าไฟล์จากฟอร์ม		
+				$date = date("d-m-Y"); //กำหนดวันที่และเวลา
+				//เพิ่มไฟล์
+				$upload=$_FILES['fileupload'];
+				if($upload <> '') {   //not select file
+				//โฟลเดอร์ที่จะ upload file เข้าไป 
+				$path="fileupload/";  
+				
+				//เอาชื่อไฟล์ที่มีอักขระแปลกๆออก
+					$remove_these = array(' ','`','"','\'','\\','/','_');
+					$newname = str_replace($remove_these, '', $_FILES['fileupload']['name']);
+				 
+					//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+					$newname = time().'-'.$newname;
+				$path_copy=$path.$newname;
+				$path_link="fileupload/".$newname;
+				
+				//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
+				move_uploaded_file($_FILES['fileupload']['tmp_name'],$path_copy);  	
+					}
+					// เพิ่มไฟล์เข้าไปในตาราง uploadfile
+					
+						$sql = "INSERT INTO uploadfile (fileupload) 
+						VALUES('$newname')";
+						
+						$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
+					
+					mysqli_close($con);
+					// javascript แสดงการ upload file
+					
+					if($result){
+					echo "<script type='text/javascript'>";
+					echo "alert('Upload File Succesfuly');";
+					echo "window.location = 'uploadfile.php'; ";
+					echo "</script>";
+					}
+					else{
+					echo "<script type='text/javascript'>";
+					echo "alert('Error back to upload again');";
+					echo "</script>";
+				}
 		}
 	}
-
-?>
+	?>			
+				

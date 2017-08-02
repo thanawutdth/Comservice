@@ -4,7 +4,7 @@ require_once("../model/m_user.php");
 require_once("../model/m_fix.php");
 $m_user = new M_user;
 $m_fix = new M_fix;
-$user_dat=$m_user->get_user_admin($_SESSION['username']);
+/*$user_dat=$m_user->get_user_admin($_SESSION['username']);
 if (isset($user_dat['username'])) {
   $_SESSION['username']=$user_dat['username'];
 }else{
@@ -29,7 +29,7 @@ if (isset($_POST['del_fix_id'])) {
   $insertdata = array(
     "status" =>"ยกเลิก");
     $m_fix->update_fix($insertdata,$_POST['del_fix_id']);
-}
+}*/
 $fix_db = $m_fix->get_all();
 
 

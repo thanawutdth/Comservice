@@ -9,13 +9,18 @@ if (isset($user_dat['username'])) {
 }else{
   ?>
         <script type="text/javascript">
-            window.open("<?echo site_url('logout.php');?>","_self");            
+           // window.open("<?echo site_url('logout.php');?>","_self");            
         </script>
     <?
 }
 
-
+print_r ($_POST);
 if(isset($_POST['username'])){
+	
+		
+		
+		
+		
 		$insertdata = array(
 		"username" =>$_POST['username'],
 		"password" =>$_POST['password'],
@@ -23,13 +28,30 @@ if(isset($_POST['username'])){
 		"lastname" =>$_POST['lastname'],
 		"phone" =>$_POST['phone'],
 		"email" =>$_POST['email'],
-		"position" =>$_POST['position']);
+		"position" =>$_POST['position'],
+
+		"photo" =>$newPictureName);
+		
+		
+		$fileName = $_FILES[$_POST['photo1']]["name"];
+		$fileType = $_FILES[$_POST['photo1']]["type"];
+		$newPictureName = "img/".$_POST['username'].".jpg";
+		
+		if($fileType=="image/jpg"||$fileType=="image/jpeg"||$fileType=="image/png"){
+		move_uploaded_file($_FILES[$_POST['photo1']]["tmp_name"],$newPictureName);
+		}
+		
+		
+		
+		
+		
+		
 		
 		$m_user->insert_admin_technic($insertdata);
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-         window.open("<?echo site_url('Admin/Admin_Technic.php');?>","_self");            
+        // window.open("<?echo site_url('Admin/Admin_Technic.php');?>","_self");            
         </script>
     <?
 	}
@@ -87,11 +109,14 @@ if(isset($_POST['username'])){
                 <td><input type="email" name="email" id="email"></td>
                 </tr>
               <tr>
+                <td><strong>เพิ่มรูปภาพ</strong></td>
+                <td><input type="file" name="photo1" id="photo1"></td>
+              </tr>
+              <tr>
                 <td>&nbsp;</td>
-                <td><p>
-                  <input type="submit" name="button" id="button" value="Submit">
-                </p>
+                <td><p>&nbsp;</p>
                   &nbsp;
+                  <input type="submit" name="button" id="button" value="Submit">
                   <p>&nbsp;</p></td>
                 </tr>
               </tbody>
