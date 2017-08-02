@@ -1,5 +1,5 @@
 <?
 function site_url($str=""){
-return "http://localhost/comservice/".$str;
+return "http://computerservice.hopto.org/".$str;
 }
 ?>
