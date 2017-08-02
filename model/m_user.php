@@ -63,9 +63,10 @@
 			$this->update("member_db",$data,$where);	
 		}
 		public function update_admin($data,$usn){
-			$where = array('admin_id' => $usn);
+			$where = array('username' => $usn);
 			$this->update("admin_db",$data,$where);	
 		}
+	
 		public function delete_admin($usn){
 			$where = array('admin_id' => $usn);
 			$this->delete("admin_db",$where);	

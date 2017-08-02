@@ -4,14 +4,14 @@ require_once("../model/m_fix.php");
 $m_user = new M_user;
 $m_fix = new M_fix;
 
-
+print_r ($_POST);
 $user_dat=$m_user->get_user_admin($_SESSION['username']);
 if (isset($user_dat['username'])) {
   $_SESSION['username']=$user_dat['username'];
 }else{
   ?>
         <script type="text/javascript">
-            window.open("<?echo site_url('logout.php');?>","_self");            
+        //    window.open("<?echo site_url('logout.php');?>","_self");            
         </script>
     <?
 }
@@ -31,7 +31,7 @@ if(isset($_POST['detail'])){
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-         window.open("<?echo site_url('Technic/list_repair.php');?>","_self");            
+        // window.open("<?echo site_url('Technic/list_repair.php');?>","_self");            
         </script>
     <?
 	}

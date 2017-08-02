@@ -1,24 +1,24 @@
 <? include('meta_admin.php');
 require_once("../model/m_user.php");
 $m_user = new M_user;
-if(isset($_POST['username'])){
+if(isset($_POST['name'])){
 		$insertdata = array(
-		"username" =>$_POST['username'],
+		//"username" =>$_POST['username'],
 		"password" =>$_POST['password'],
 		"name" =>$_POST['name'],
 		"lastname" =>$_POST['lastname'],
 		"phone" =>$_POST['phone'],
 		"email" =>$_POST['email']);
 		
-		$m_user->update_technic($insertdata,$_SESSION['username']);
+		$m_user->update_admin($insertdata,$_SESSION['username']);
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-            window.open("<?echo site_url('Admin/edit_admin.php');?>","_self");            
+           // window.open("<?echo site_url('Admin/edit_admin.php');?>","_self");            
         </script>
     <?
 	}
-	//print_r ($_POST);
+	print_r ($_POST);
 $user_dat=$m_user->get_user_admin($_SESSION['username']);
 $err_msg="";
 if (isset($user_dat['username'])) {
