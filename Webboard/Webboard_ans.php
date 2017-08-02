@@ -23,11 +23,23 @@ if(isset($_POST['title'])){
         </script>
     <?
   }
-
+if (isset($_POST['delete_reply'])) {
+  $m_board->delete_reply($_POST['delete_reply']);
+  ?>
+        <script type="text/javascript">
+          alert("ลบข้อมูลเรียบร้อย");        
+        </script>
+    <?
+}
 $reply=$m_board->get_reply_by_board_id($_GET['id_question']);
 $count_update=array("count_q"=>$reply->rowCount);
 $m_board->update_post($count_update,$_GET['id_question']);
 $topic=$m_board->get_board_by_id($_GET['id_question']);
+
+$user_dat=$m_user->get_user_admin($_SESSION['username'],1);
+if (isset($user_dat['username'])) {
+  $_SESSION['user_admin']=$user_dat['username'];
+}
 
 ?>  
   <tr align="left" valign="top">
@@ -55,6 +67,14 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
             <p>E-Mail: <?=$value['email']?> Name: <?=$value['name']?> Date: <?=$value['date_a']?></p>
             <br>
             <p><?=$value['message']?></p>
+            <br><br>
+            <?
+            if (isset($_SESSION['user_admin'])&&$_SESSION['user_admin']!="") {
+              ?>
+              <p><a href="javascript:del_row('<?=$value['id_ans']?>');">Delete</a></p>
+              <?
+            }
+            ?>
             <br>
           </td>
         </tr>
@@ -103,5 +123,27 @@ $topic=$m_board->get_board_by_id($_GET['id_question']);
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <!-- <script src="js/bootstrap.js" type="text/javascript"></script> -->
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script type="text/javascript">
+        function edit_row(id){
+          myform = document.createElement("form");
+          $(myform).attr("action","<?=site_url("Webboard/Webboard.php")?>");   
+          $(myform).attr("method","post");
+          $(myform).html('<input type="text" name="edit_id" value="'+id+'">')
+          document.body.appendChild(myform);
+          myform.submit();
+          $(myform).remove();
+        }
+        function del_row(id){
+          if (confirm("Confirm Delete")) {
+            myform = document.createElement("form");
+            $(myform).attr("action","<?=site_url()?>Webboard/Webboard_ans.php?id_question=<?=$_GET['id_question']?>");   
+            $(myform).attr("method","post");
+            $(myform).html('<input type="text" name="delete_reply" value="'+id+'">')
+            document.body.appendChild(myform);
+            myform.submit();
+            $(myform).remove();
+          }
+        }
+</script>
 </body>
 </html>

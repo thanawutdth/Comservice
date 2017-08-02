@@ -30,9 +30,18 @@
 			$where = array('id_question' => $id_question);
 			$this->update("webboard_quiz",$data,$where);	
 		}
-		public function delete_member($usn){
-			$where = array('member_id' => $usn);
-			$this->delete("member_db",$where);	
+		public function delete_post($id_question){
+			$where = array('id_question' => $id_question);
+			$this->delete_reply_by_post_id($id_question);
+			$this->delete("webboard_quiz",$where);	
+		}
+		public function delete_reply($id_ans){
+			$where = array('id_ans' => $id_ans);
+			$this->delete("webboard_ans",$where);	
+		}
+		public function delete_reply_by_post_id($id_question){
+			$where = array('id_question' => $id_question);
+			$this->delete("webboard_ans",$where);	
 		}
 		public function get_all_web_quiz(){
 
