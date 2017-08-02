@@ -2,6 +2,7 @@
 require_once("../model/m_user.php");
 $m_user = new M_user;
 if(isset($_POST['flname'])){
+  $user_dat=$m_user->get_user_member($_SESSION['username']);
 		$insertdata = array(
 		"name" =>$_POST['flname'],
 		"password" =>$_POST['password'],
@@ -10,12 +11,31 @@ if(isset($_POST['flname'])){
 		"email" =>$_POST['email'],
 		"address" =>$_POST['address'],
 		"sector" =>$_POST['sector']);
+    if (isset($_POST['file_name'])&&$_POST['file_name']!="") {
+                        //echo "in here 1 ";
+       @unlink("../files/profile/".$user_dat['picture']);
+                        $ext=explode(".", $_POST['file_name']);
+                        $new_ext=$ext[count($ext)-1];
+                        $new_filename=$_SESSION['username']."_".time().".".$new_ext;
+                        $file = '../files/'.$_POST['file_name'];
+                        $newfile = '../files/profile/'.$new_filename;                        
+                        if (!copy($file, $newfile)) {
+                            echo "failed to copy $file...\n".$file." to ".$newfile;
+                            @unlink("../files/".$_POST['file_name']);
+                            @unlink("../files/thumbnail/".$_POST['file_name']);
+                        }else{
+                            $insertdata['picture']=$new_filename;
+                            @unlink("../files/".$_POST['file_name']);
+                            @unlink("../files/thumbnail/".$_POST['file_name']);
+                            
+                        }                
+            }
 		
 		$m_user->update_member($insertdata,$_SESSION['username']);
 		?>
         <script type="text/javascript">
 			alert("บันทึกข้อมูลเรียบร้อย");
-            window.open("<?echo site_url('Member/firstpage_member.php');?>","_self");            
+            //window.open("<?echo site_url('Member/firstpage_member.php');?>","_self");            
         </script>
     <?
 	}
@@ -26,14 +46,14 @@ if (isset($user_dat['username'])) {
 }else{
   ?>
         <script type="text/javascript">
-            window.open("<?echo site_url('../logout.php');?>","_self");            
+            window.open("<?echo site_url('logout.php');?>","_self");            
         </script>
     <?
 }
 
 ?>  
 
-    <tr>
+    <tr valign="top">
       <td width="248" height="72">
         <? include('../sidebar_logged.php');?>
       </td>
@@ -112,8 +132,37 @@ if (isset($user_dat['username'])) {
               <p>&nbsp;</p></td>
             </tr>
           <tr>
-            <td align="center">&nbsp;</td>
-            <td align="center"><input type="submit" name="submit" id="submit" value="ตกลง"></td>
+            <td align="center" colspan="2">
+            <!-- BOOTSTRAP STYLES-->
+    <link href="<?=site_url()?>assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="<?=site_url()?>assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- MORRIS CHART STYLES-->
+    <link href="<?=site_url()?>assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="<?=site_url()?>assets/css/custom.css" rel="stylesheet" />
+            <div class="control-group">
+                        <span class="btn btn-success fileinput-button">
+                                                            <i class="glyphicon glyphicon-plus"></i>
+                                                            <span>เลือกไฟล์</span>
+                        <!-- The file input field used as target for the file upload widget -->
+                        <input id="fileupload_oc" type="file" name="files">
+                        <input id="oc_temp_f_name" name="file_name" type="hidden">
+                        </span>
+                        <br>
+                        <br>
+                        <!-- The global progress bar -->
+                        <div id="progress_oc" class="progress">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+                    </div>
+                    <div>
+                      <img id="profile_pic" src="<?=site_url("files/profile/".$user_dat['picture'])?>" style="max-width: 400px;">
+                    </div>
+                    </td>
+                    </tr>
+                    <tr>
+            <td align="center" colspan="2"><input type="submit" name="submit" id="submit" value="ตกลง"></td>
             </tr>
           </tbody>
       </table>
@@ -132,5 +181,74 @@ if (isset($user_dat['username'])) {
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="<?=site_url()?>assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="<?=site_url()?>assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="<?=site_url()?>assets/js/jquery.metisMenu.js"></script>
+    <link rel="stylesheet" href="<?=site_url()?>css/jquery.fileupload.css">
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="<?=site_url()?>js/upload/vendor/jquery.ui.widget.js"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="<?=site_url()?>js/upload/jquery.iframe-transport.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="<?=site_url()?>js/upload/jquery.fileupload.js"></script>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+    // for OC
+    var url = '<?=site_url()?>server/php/index.php';
+    $('#fileupload_oc').fileupload({
+            previewThumbnail: false,
+            url: url,
+            dataType: 'json',
+            beforeSend: function() {
+                $('#progress_oc .progress-bar').css(
+                    'width',
+                    '10%'
+                );
+            },
+            done: function(e, data) {
+                //console.log(data);
+
+                $.each(data.result.files, function(index, file) {
+                    console.log(file);
+                    if (file.error == "File is too big") {
+                        alert("File is too big exceed 100 MB");
+                        $("#oc_temp_f_name").val("");
+                        $('#progress_oc .progress-bar').css(
+                            'width',
+                            '0%'
+                        );
+                    } else if (file.error == "Filetype not allowed") {
+                        alert("Filetype not allowed xls and xlsx only");
+                        $("#oc_temp_f_name").val("");
+                        $('#progress_oc .progress-bar').css(
+                            'width',
+                            '0%'
+                        );
+                    } else {
+                        alert("Upload Complete file " + file.name);
+                        $("#oc_temp_f_name").val(file.name);
+                        $("#profile_pic").attr("src","<?=site_url("files")?>/"+file.name);
+                    }
+                });
+
+            },
+            progressall: function(e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_oc .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }
+        }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+});
+</script>
 </body>
 </html>

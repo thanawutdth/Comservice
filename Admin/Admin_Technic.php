@@ -15,7 +15,7 @@ if (isset($user_dat['username'])) {
 
 if (isset($_POST['admin_id_inp'])) {
   $insertdata = array(
-    "username" =>$_POST['username'],
+    //"username" =>$_POST['username'],
     "password" =>$_POST['password'],
     "name" =>$_POST['name'],
     "lastname" =>$_POST['lastname'],
@@ -108,7 +108,7 @@ foreach ($admin_db->result as $key => $objResult)
              
               <tr align="center">
          		<td><? echo $objResult["admin_id"];?></td>
-                <td><input type="text" id="username_inp" value="<? echo $objResult["username"];?>"></td>
+                <td><? echo $objResult["username"];?></td>
                 <td><input type="text" id="password_inp" value="<? echo $objResult["password"];?>"></td>
                 <td><input type="text" id="name_inp" value="<? echo $objResult["name"];?>"></td>
                 <td><input type="text" id="lastname_inp" value="<? echo $objResult["lastname"];?>"></td>
@@ -134,7 +134,7 @@ foreach ($admin_db->result as $key => $objResult)
 			  $("#sector").val("<? echo $objResult['status']?>");
               </script></td>
                 
-              <td> <a href="javascript:save_row('<?=$objResult["admin_id"]?>');">Update</a><br><a href="">Cancel</a></td>
+              <td> <a href="javascript:save_row('<?=$objResult["username"]?>');">Update</a><br><a href="">Cancel</a></td>
               </tr>
    <?
   }else{
@@ -163,7 +163,7 @@ function save_row(id){
           myform = document.createElement("form");
           $(myform).attr("action","<?=site_url("Admin/Admin_Technic.php")?>");   
           $(myform).attr("method","post");
-          $(myform).html('<input type="text" name="admin_id_inp" value="'+id+'"><input type="text" name="username" value="'+$("#username_inp").val()+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="position" value="'+$("#position_inp").val()+'"><input type="text" name="status" value="'+$("#status_inp").val()+'">')
+          $(myform).html('<input type="text" name="admin_id_inp" value="'+id+'"><input type="text" name="password" value="'+$("#password_inp").val()+'"><input type="text" name="name" value="'+$("#name_inp").val()+'"><input type="text" name="lastname" value="'+$("#lastname_inp").val()+'"><input type="text" name="phone" value="'+$("#phone_inp").val()+'"><input type="text" name="email" value="'+$("#email_inp").val()+'"><input type="text" name="position" value="'+$("#position_inp").val()+'"><input type="text" name="status" value="'+$("#status_inp").val()+'">')
           document.body.appendChild(myform);
           myform.submit();
           $(myform).remove();

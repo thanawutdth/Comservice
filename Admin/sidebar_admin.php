@@ -3,6 +3,15 @@
 
 
   <a href="<?=site_url()?>Admin/adminlogin.php"><h1>Computerservice</h1></a> 
+  <h1>สวัสดีคุณ : <? echo @$user_dat['name'];?></h1> 
+  <?
+if (isset($user_dat['picture'])) {
+  ?>
+  <div><img  src="<?=site_url("files/profile/".$user_dat['picture'])?>" style="max-width: 220px;"></div>
+  <br>
+  <?
+}
+?>
 
  <a href="<?=site_url()?>Admin/edit_admin.php"> <input  type="button" name="button1" id="button1" value="แก้ไขข้อมูลส่วนตัว">
  <a href="<?=site_url()?>Admin/adminlogin.php"> <input  type="button" name="button1" id="button1" value="เพิ่มผู้ดูแลระบบและช่างซ่อม"  ></a>

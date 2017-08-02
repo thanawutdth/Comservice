@@ -2,6 +2,15 @@
  
 
 <h1>สวัสดีคุณ : <? echo @$user_dat['name'];?></h1> 
+<?
+if (isset($user_dat['picture'])) {
+	?>
+	<div><img src="<?=site_url("files/profile/".$user_dat['picture'])?>" style="max-width: 220px;"></div>
+	<br>
+	<?
+}
+?>
+
  
  
 		
