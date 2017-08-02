@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : comservice
-Source Server Version : 50718
+Source Server         : root
+Source Server Version : 50713
 Source Host           : localhost:3306
 Source Database       : project2
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 50713
 File Encoding         : 65001
 
-Date: 2017-08-02 20:25:36
+Date: 2017-08-02 22:05:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,19 +28,21 @@ CREATE TABLE `admin_db` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `position` int(5) NOT NULL,
   `status` enum('ยกเลิก','ใช้งาน') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ใช้งาน',
+  `picture` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of admin_db
 -- ----------------------------
-INSERT INTO `admin_db` VALUES ('1', 'admin', '1234', 'ธนาวุฒิ ', 'เดชหาญaaaa', '0886723932a', 'welove_9@hotmail.com', '1', 'ใช้งาน');
-INSERT INTO `admin_db` VALUES ('2', 'admin1', '1234', 'ผู้ดูแลระบบคนที่1', 'ผู้ดูแลระบบคนที่1', '081111111', 'admin1@gmail.com', '1', 'ใช้งาน');
-INSERT INTO `admin_db` VALUES ('3', 'Technic1', '1234', 'ช่างคนที่1', 'ช่างคนที่1', '081111111', 'Technic1@gmail.com', '2', 'ใช้งาน');
-INSERT INTO `admin_db` VALUES ('4', 'Technic2', '1234', 'ช่างคนที่2', 'ช่างคนที่2', '082222222', 'Technic2@gmail.com', '2', 'ใช้งาน');
-INSERT INTO `admin_db` VALUES ('5', 'Technic3', '1234', 'ช่างคนที่3', 'ช่างคนที่3', '0833333333', 'Technic3@gmail.com', '2', 'ใช้งาน');
-INSERT INTO `admin_db` VALUES ('6', 'Technic4', '1234', 'ช่างคนที่4', 'ช่างคนที่4', '0844444444', 'Technic4@gmail.com', '1', 'ยกเลิก');
-INSERT INTO `admin_db` VALUES ('7', 'Technic5', '1234', 'ช่างคนที่5', 'ช่างคนที่5', '08123456123', 'thanawut.dth@gmail.com', '1', 'ใช้งาน');
+INSERT INTO `admin_db` VALUES ('1', 'admin', '1234', 'ธนาวุฒิ d', 'เดชหาญaaaa', '0886723932a', 'welove_9@hotmail.com', '1', 'ใช้งาน', 'admin_1501686062.png');
+INSERT INTO `admin_db` VALUES ('2', 'admin1', '1234', 'ผู้ดูแลระบบคนที่1', 'ผู้ดูแลระบบคนที่1', '081111111', 'admin1@gmail.com', '1', 'ใช้งาน', null);
+INSERT INTO `admin_db` VALUES ('3', 'Technic1', '1234', 'ช่างคนที่1', 'ช่างคนที่1', '081111111', 'Technic1@gmail.com', '2', 'ใช้งาน', 'Technic1_1501685573.png');
+INSERT INTO `admin_db` VALUES ('4', 'Technic2', '1234', 'ช่างคนที่2', 'ช่างคนที่2', '082222222', 'Technic2@gmail.com', '2', 'ใช้งาน', null);
+INSERT INTO `admin_db` VALUES ('5', 'Technic3', '1234', 'ช่างคนที่3', 'ช่างคนที่3', '0833333333', 'Technic3@gmail.com', '2', 'ใช้งาน', null);
+INSERT INTO `admin_db` VALUES ('6', 'Technic4', '1234', 'ช่างคนที่4', 'ช่างคนที่4', '0844444444', 'Technic4@gmail.com', '1', 'ยกเลิก', null);
+INSERT INTO `admin_db` VALUES ('7', 'Technic5', '1234', 'ช่างคนที่5', 'ช่างคนที่5', '08123456123', 'thanawut.dth@gmail.com', '1', 'ใช้งาน', null);
+INSERT INTO `admin_db` VALUES ('8', 'atom', '1234', 'atom', 'atomd', '0804032819', 'sereepap2029@hotmail.com', '1', 'ใช้งาน', 'admin_1501685709.png');
 
 -- ----------------------------
 -- Table structure for `deveice_addtech`
@@ -85,6 +87,20 @@ INSERT INTO `device_db` VALUES ('6', 'ชุดอุปกรณ์ Network');
 INSERT INTO `device_db` VALUES ('7', 'สาย VGA');
 INSERT INTO `device_db` VALUES ('8', 'Debug card');
 INSERT INTO `device_db` VALUES ('9', 'คีย์บอร์ด');
+
+-- ----------------------------
+-- Table structure for `files`
+-- ----------------------------
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE `files` (
+  `FilesID` int(10) NOT NULL,
+  `FilesName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`FilesID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of files
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `fix_db`
@@ -162,17 +178,18 @@ CREATE TABLE `member_db` (
   `sector` varchar(50) CHARACTER SET utf8 NOT NULL,
   `position` int(1) NOT NULL DEFAULT '3',
   `status` enum('ใช้งาน','ยกเลิก') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ใช้งาน',
+  `picture` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of member_db
 -- ----------------------------
-INSERT INTO `member_db` VALUES ('1', 'member', '1234', 'สมาชิก0', 'สมาชิก9', '080000000', 'member@hotmail.com', '222/1 mahasarakhamo', 'โรงเรียนหนองบัวปิยนิมิตร', '3', 'ใช้งาน');
-INSERT INTO `member_db` VALUES ('2', 'member1', '1234', 'สมาชิกคนที่1', 'สมาชิกคนที่1', '0811111111', 'member1@gmail.com', '111/1 มหาสารคาม ', 'โรงเรียนหนองโพธิ์วิทยาคม', '3', 'ใช้งาน');
-INSERT INTO `member_db` VALUES ('3', 'member2', '1234', 'สมาชิกคนที่2', 'สมาชิกคนที่2', '0822222222', 'member2@gmail.com', '222/2 มหาสารคาม ', 'โรงเรียนเวียงสะอาดพิทยาคม', '3', 'ใช้งาน');
-INSERT INTO `member_db` VALUES ('4', 'member3', '1234', 'สมาชิกคนที่3', 'สมาชิกคนที่3', '0833333333', 'member3@gmail.com', '333/3 มหาสารคาม', 'โรงเรียนมะค่าพิทยาคม', '3', 'ยกเลิก');
-INSERT INTO `member_db` VALUES ('5', 'member4', '1234', 'สมาชิกคนที่4', 'สมาชิกคนที่4', '0844444444', 'member4@gmail.com', '444/4 มหาสารคาม', 'โรงเรียนนาสีนวนพิทยาสรรค์', '3', 'ยกเลิก');
+INSERT INTO `member_db` VALUES ('1', 'member', '1234', 'สมาชิก0', 'สมาชิก9', '080000000', 'member@hotmail.com', '222/1 mahasarakhamo', 'โรงเรียนหนองบัวปิยนิมิตร', '3', 'ใช้งาน', 'member_1501685356.png');
+INSERT INTO `member_db` VALUES ('2', 'member1', '1234', 'สมาชิกคนที่1', 'สมาชิกคนที่1', '0811111111', 'member1@gmail.com', '111/1 มหาสารคาม ', 'โรงเรียนหนองโพธิ์วิทยาคม', '3', 'ใช้งาน', null);
+INSERT INTO `member_db` VALUES ('3', 'member2', '1234', 'สมาชิกคนที่2', 'สมาชิกคนที่2', '0822222222', 'member2@gmail.com', '222/2 มหาสารคาม ', 'โรงเรียนเวียงสะอาดพิทยาคม', '3', 'ใช้งาน', null);
+INSERT INTO `member_db` VALUES ('4', 'member3', '1234', 'สมาชิกคนที่3', 'สมาชิกคนที่3', '0833333333', 'member3@gmail.com', '333/3 มหาสารคาม', 'โรงเรียนมะค่าพิทยาคม', '3', 'ยกเลิก', null);
+INSERT INTO `member_db` VALUES ('5', 'member4', '1234', 'สมาชิกคนที่4', 'สมาชิกคนที่4', '0844444444', 'member4@gmail.com', '444/4 มหาสารคาม', 'โรงเรียนนาสีนวนพิทยาสรรค์', '3', 'ยกเลิก', null);
 
 -- ----------------------------
 -- Table structure for `webboard_ans`
@@ -186,14 +203,11 @@ CREATE TABLE `webboard_ans` (
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_a` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_ans`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of webboard_ans
 -- ----------------------------
-INSERT INTO `webboard_ans` VALUES ('1', '2', 'sdasd', 'wewqe', 'sereepap2029@gmail.com', '2017-08-02 11:56:45');
-INSERT INTO `webboard_ans` VALUES ('2', '2', 'dsadas', 'sdsad', 'sereepap2029@hotmail.com', '2017-08-02 11:57:00');
-INSERT INTO `webboard_ans` VALUES ('3', '2', 'ลงตอบ', 'ฟฟ', 'welove_9@hotmail.com', '2017-08-02 12:17:21');
 
 -- ----------------------------
 -- Table structure for `webboard_quiz`
@@ -208,13 +222,12 @@ CREATE TABLE `webboard_quiz` (
   `date_q` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `count_q` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of webboard_quiz
 -- ----------------------------
-INSERT INTO `webboard_quiz` VALUES ('1', 'อยากลงวินโดวส์ครับ', 'สมชัย', 'ขอรายละเอียดขั้นตอนการลงวินโดวส์ด้วยครับ', 'somchai@hotmail.com', '2017-08-02 10:41:19', '0');
-INSERT INTO `webboard_quiz` VALUES ('2', 'ASDSDS', 'ASDSSA', 'sadasd', 'ASSD@hh.ss', '2017-08-02 11:55:40', '3');
+INSERT INTO `webboard_quiz` VALUES ('3', 'sdasd', 'aasdasdwqesadzxczx', 'asdasdqwe4qwewq', 'sereepap2029@hotmail.com', '2017-08-02 21:08:43', '0');
 
 -- ----------------------------
 -- View structure for `viewcheck`
